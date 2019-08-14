@@ -25,7 +25,7 @@ void Game::setup(){
 
     //getting initial data from database to program
 
-   // playersVec = playersDao->getPlayers();
+    playersVec = playersDao->getPlayers();
     clubsVec = clubsDao->getClubs();
     leaguesVec = leaguesDao->getLeagues();
     seasonsVec = seasonsDao->getSeasons();

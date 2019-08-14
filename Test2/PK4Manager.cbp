@@ -5,7 +5,7 @@
 		<Option title="Test2" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
-		<Option virtualFolders="Model\;Model\include\;Model\src\;Controller\;Controller\include\;Controller\src\;Model\include\databaseClasses\;Model\src\databaseClasses\;Libraries\;View\;View\include\;View\src\;Controller\include\Helpers\;Controller\src\Helpers\;Dao\;Dao\Include\;Dao\src\;" />
+		<Option virtualFolders="Model\;Model\include\;Model\src\;Controller\;Controller\include\;Controller\src\;Model\include\databaseClasses\;Model\src\databaseClasses\;Libraries\;View\;View\include\;View\src\;Dao\;Dao\Include\;Dao\src\;Helper\;Helper\include\;Helper\src\;" />
 		<Build>
 			<Script file="lib_finder.script" />
 			<Target title="Debug">
@@ -57,7 +57,7 @@
 			<Option virtualFolder="Dao/Include/" />
 		</Unit>
 		<Unit filename="include/DatabaseHelper.h">
-			<Option virtualFolder="Controller/include/Helpers/" />
+			<Option virtualFolder="Helper/include/" />
 		</Unit>
 		<Unit filename="include/Game.h">
 			<Option virtualFolder="Controller/include/" />
@@ -80,6 +80,9 @@
 		<Unit filename="include/PlayersDao.h">
 			<Option virtualFolder="Dao/Include/" />
 		</Unit>
+		<Unit filename="include/PlayersHelper.h">
+			<Option virtualFolder="Helper/include/" />
+		</Unit>
 		<Unit filename="include/Season.h">
 			<Option virtualFolder="Model/include/databaseClasses/" />
 		</Unit>
@@ -93,7 +96,7 @@
 			<Option virtualFolder="Dao/Include/" />
 		</Unit>
 		<Unit filename="include/TimetableHelper.h">
-			<Option virtualFolder="Controller/include/Helpers/" />
+			<Option virtualFolder="Helper/include/" />
 		</Unit>
 		<Unit filename="include/TimetableView.h">
 			<Option virtualFolder="View/include/" />
@@ -111,7 +114,7 @@
 			<Option virtualFolder="Dao/src/" />
 		</Unit>
 		<Unit filename="src/DatabaseHelper.cpp">
-			<Option virtualFolder="Controller/src/Helpers/" />
+			<Option virtualFolder="Helper/src/" />
 		</Unit>
 		<Unit filename="src/Game.cpp">
 			<Option virtualFolder="Controller/src/" />
@@ -131,6 +134,9 @@
 		<Unit filename="src/PlayersDao.cpp">
 			<Option virtualFolder="Dao/src/" />
 		</Unit>
+		<Unit filename="src/PlayersHelper.cpp">
+			<Option virtualFolder="Helper/src/" />
+		</Unit>
 		<Unit filename="src/Season.cpp">
 			<Option virtualFolder="Model/src/databaseClasses/" />
 		</Unit>
@@ -144,7 +150,7 @@
 			<Option virtualFolder="Dao/src/" />
 		</Unit>
 		<Unit filename="src/TimetableHelper.cpp">
-			<Option virtualFolder="Controller/src/Helpers/" />
+			<Option virtualFolder="Helper/src/" />
 		</Unit>
 		<Unit filename="src/TimetableView.cpp">
 			<Option virtualFolder="View/src/" />
