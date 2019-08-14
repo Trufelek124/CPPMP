@@ -1,0 +1,242 @@
+# depslib dependency file v1.0
+1555448770 source:c:\users\user\documents\studia\pk\sqlite-amalgamation-3280000\sqlite3.c
+	"config.h"
+	<vxWorks.h>
+	<pthread.h>
+	"mingw.h"
+	"_mingw.h"
+	<stdarg.h>
+	<stdint.h>
+	<inttypes.h>
+	<intrin.h>
+	<cmnintrin.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<assert.h>
+	<stddef.h>
+	<TargetConditionals.h>
+	<ctype.h>
+	<time.h>
+	<sys/sysctl.h>
+	<malloc/malloc.h>
+	<libkern/OSAtomic.h>
+	<malloc.h>
+	<pthread.h>
+	"windows.h"
+	<sys/cygwin.h>
+	<errno.h>
+	<process.h>
+	<math.h>
+	<sys/types.h>
+	<sys/stat.h>
+	<fcntl.h>
+	<sys/ioctl.h>
+	<unistd.h>
+	<sys/time.h>
+	<errno.h>
+	<sys/mman.h>
+	<sys/file.h>
+	<sys/param.h>
+	<semaphore.h>
+	<limits.h>
+	<sys/mount.h>
+	<utime.h>
+	<sys/dcmd_blk.h>
+	<sys/statvfs.h>
+	<dlfcn.h>
+	"sqlite_tcl.h"
+	"tcl.h"
+	<ctype.h>
+	"sqlite3rtree.h"
+	<ctype.h>
+	<unicode/utypes.h>
+	<unicode/uregex.h>
+	<unicode/ustring.h>
+	<unicode/ucol.h>
+	<unicode/ubrk.h>
+	<unicode/utf16.h>
+	<math.h>
+
+1564947056 source:c:\users\user\documents\cpp\test2\test2\main.cpp
+	<iostream>
+	<sqlite3.h>
+	"Game.h"
+
+1565774048 c:\users\user\documents\cpp\test2\test2\include\player.h
+	<string>
+
+1564851719 c:\users\user\documents\cpp\test2\test2\include\goalkeeper.h
+	<Player.h>
+
+1564851916 c:\users\user\documents\cpp\test2\test2\include\defender.h
+	<Player.h>
+
+1564852187 c:\users\user\documents\cpp\test2\test2\include\midfielder.h
+	<Player.h>
+
+1564852128 c:\users\user\documents\cpp\test2\test2\include\striker.h
+	<Player.h>
+
+1565268545 c:\users\user\documents\cpp\test2\test2\include\club.h
+	<string>
+	<vector>
+	"Player.h"
+
+1565268556 c:\users\user\documents\cpp\test2\test2\include\league.h
+	<vector>
+	"Club.h"
+
+1564939255 c:\users\user\documents\cpp\test2\test2\include\databasehelper.h
+	<sqlite3.h>
+	<iostream>
+
+1564848399 source:c:\users\user\documents\cpp\test2\test2\src\club.cpp
+	"Club.h"
+
+1564851921 source:c:\users\user\documents\cpp\test2\test2\src\defender.cpp
+	"Defender.h"
+
+1564851727 source:c:\users\user\documents\cpp\test2\test2\src\goalkeeper.cpp
+	"Goalkeeper.h"
+
+1564850448 source:c:\users\user\documents\cpp\test2\test2\src\league.cpp
+	"League.h"
+
+1564852088 source:c:\users\user\documents\cpp\test2\test2\src\midfielder.cpp
+	"Midfielder.h"
+
+1564848664 source:c:\users\user\documents\cpp\test2\test2\src\player.cpp
+	"Player.h"
+
+1564852133 source:c:\users\user\documents\cpp\test2\test2\src\striker.cpp
+	"Striker.h"
+
+1564941249 source:c:\users\user\documents\cpp\test2\test2\src\timetable.cpp
+	"Timetable.h"
+
+1565271504 c:\users\user\documents\cpp\test2\test2\include\timetable.h
+
+1565773423 source:c:\users\user\documents\cpp\test2\test2\src\databasehelper.cpp
+	"DatabaseHelper.h"
+
+1564942523 source:c:\users\user\documents\cpp\test2\test2\src\season.cpp
+	"Season.h"
+
+1565271733 c:\users\user\documents\cpp\test2\test2\include\season.h
+	<vector>
+	"Timetable.h"
+
+1565774841 source:c:\users\user\documents\cpp\test2\test2\cpp\mainview.cpp
+	"MainView.h"
+
+1565276429 c:\users\user\documents\cpp\test2\test2\include\mainview.h
+	<iostream>
+
+1565704782 c:\users\user\documents\cpp\test2\test2\include\game.h
+	"Player.h"
+	"Club.h"
+	"League.h"
+	"DatabaseHelper.h"
+	"PlayersDao.h"
+	"LeaguesDao.h"
+	"ClubsDao.h"
+	"SeasonsDao.h"
+	"TimetableDao.h"
+	"PlayerView.h"
+	"MainView.h"
+	<vector>
+	"PlayerView.h"
+	"ClubView.h"
+	"Timetable.h"
+	"TimetableHelper.h"
+	"TimetableView.h"
+
+1565704752 source:c:\users\user\documents\cpp\test2\test2\src\game.cpp
+	"Game.h"
+
+1565773486 c:\users\user\documents\cpp\test2\test2\include\playersdao.h
+	"Player.h"
+	<vector>
+	<sqlite3.h>
+	<iostream>
+
+1565774332 source:c:\users\user\documents\cpp\test2\test2\src\playersdao.cpp
+	"PlayersDao.h"
+
+1565103602 source:c:\users\user\documents\cpp\test2\test2\src\playerview.cpp
+	"PlayerView.h"
+
+1565103458 c:\users\user\documents\cpp\test2\test2\include\playerview.h
+	<iostream>
+	"Player.h"
+	<vector>
+
+1565276663 source:c:\users\user\documents\cpp\test2\test2\src\leaguesdao.cpp
+	"LeaguesDao.h"
+
+1565265018 c:\users\user\documents\cpp\test2\test2\include\leaguesdao.h
+	"League.h"
+	<vector>
+	<sqlite3.h>
+	<iostream>
+	<string>
+
+1565276638 source:c:\users\user\documents\cpp\test2\test2\src\seasonsdao.cpp
+	"SeasonsDao.h"
+
+1565190811 c:\users\user\documents\cpp\test2\test2\include\seasonsdao.h
+	"Season.h"
+	<vector>
+	<sqlite3.h>
+	<iostream>
+
+1565702923 source:c:\users\user\documents\cpp\test2\test2\src\timetabledao.cpp
+	"TimetableDao.h"
+
+1565597371 c:\users\user\documents\cpp\test2\test2\include\timetabledao.h
+	"Timetable.h"
+	<vector>
+	<sqlite3.h>
+	<iostream>
+
+1565705665 source:c:\users\user\documents\cpp\test2\test2\src\clubsdao.cpp
+	"ClubsDao.h"
+
+1565705557 c:\users\user\documents\cpp\test2\test2\include\clubsdao.h
+	"Club.h"
+	<vector>
+	<sqlite3.h>
+	<iostream>
+	<string>
+
+1565279253 c:\users\user\documents\cpp\test2\test2\include\clubview.h
+	<vector>
+	"Club.h"
+	"PlayerView.h"
+	<string>
+
+1565279099 source:c:\users\user\documents\cpp\test2\test2\src\clubview.cpp
+	"ClubView.h"
+
+1565704699 source:c:\users\user\documents\cpp\test2\test2\src\timetablehelper.cpp
+	"TimetableHelper.h"
+
+1565704732 c:\users\user\documents\cpp\test2\test2\include\timetablehelper.h
+	"Club.h"
+	<vector>
+	<stdlib.h>
+	<ctime>
+	"Timetable.h"
+	<algorithm>
+	<cstdlib>
+	"TimetableDao.h"
+
+1565691772 c:\users\user\documents\cpp\test2\test2\include\timetableview.h
+	<iostream>
+	"Timetable.h"
+	<vector>
+
+1565703891 source:c:\users\user\documents\cpp\test2\test2\src\timetableview.cpp
+	"TimetableView.h"
+
