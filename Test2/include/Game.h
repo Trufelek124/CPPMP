@@ -18,6 +18,7 @@
 #include "Timetable.h"
 #include "TimetableHelper.h"
 #include "TimetableView.h"
+#include "PlayersHelper.h"
 
 class Game
 {
@@ -41,6 +42,7 @@ class Game
     private:
         DatabaseHelper* databaseHelperVar;
         TimetableHelper* timetableHelperVar;
+        PlayersHelper* playersHelperVar;
 
         PlayersDao* playersDao;
         LeaguesDao* leaguesDao;
@@ -60,6 +62,9 @@ class Game
         Player playerVar3;
 
         int submenuOption;
+
+        Club clubTestVar;
+        std::vector<Player> players;
 };
 
 #endif // GAME_H

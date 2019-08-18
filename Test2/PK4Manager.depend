@@ -240,3 +240,181 @@
 1565703891 source:c:\users\user\documents\cpp\test2\test2\src\timetableview.cpp
 	"TimetableView.h"
 
+1566116169 source:c:\users\user\documents\studia\pk\menager2019\test2\cpp\mainview.cpp
+	"MainView.h"
+
+1565793522 c:\users\user\documents\studia\pk\menager2019\test2\include\mainview.h
+	<iostream>
+
+1565793523 source:c:\users\user\documents\studia\pk\menager2019\test2\main.cpp
+	<iostream>
+	<sqlite3.h>
+	"Game.h"
+
+1566116087 c:\users\user\documents\studia\pk\menager2019\test2\include\game.h
+	"Player.h"
+	"Club.h"
+	"League.h"
+	"DatabaseHelper.h"
+	"PlayersDao.h"
+	"LeaguesDao.h"
+	"ClubsDao.h"
+	"SeasonsDao.h"
+	"TimetableDao.h"
+	"PlayerView.h"
+	"MainView.h"
+	<vector>
+	"PlayerView.h"
+	"ClubView.h"
+	"Timetable.h"
+	"TimetableHelper.h"
+	"TimetableView.h"
+	"PlayersHelper.h"
+
+1566113511 c:\users\user\documents\studia\pk\menager2019\test2\include\player.h
+	<string>
+
+1565793522 c:\users\user\documents\studia\pk\menager2019\test2\include\club.h
+	<string>
+	<vector>
+	"Player.h"
+
+1565793522 c:\users\user\documents\studia\pk\menager2019\test2\include\league.h
+	<vector>
+	"Club.h"
+
+1565793522 c:\users\user\documents\studia\pk\menager2019\test2\include\databasehelper.h
+	<sqlite3.h>
+	<iostream>
+
+1565793523 c:\users\user\documents\studia\pk\menager2019\test2\include\playersdao.h
+	"Player.h"
+	<vector>
+	<sqlite3.h>
+	<iostream>
+
+1565793522 c:\users\user\documents\studia\pk\menager2019\test2\include\leaguesdao.h
+	"League.h"
+	<vector>
+	<sqlite3.h>
+	<iostream>
+	<string>
+
+1565793522 c:\users\user\documents\studia\pk\menager2019\test2\include\clubsdao.h
+	"Club.h"
+	<vector>
+	<sqlite3.h>
+	<iostream>
+	<string>
+
+1565793523 c:\users\user\documents\studia\pk\menager2019\test2\include\seasonsdao.h
+	"Season.h"
+	<vector>
+	<sqlite3.h>
+	<iostream>
+
+1565793523 c:\users\user\documents\studia\pk\menager2019\test2\include\season.h
+	<vector>
+	"Timetable.h"
+
+1565793523 c:\users\user\documents\studia\pk\menager2019\test2\include\timetable.h
+
+1565793523 c:\users\user\documents\studia\pk\menager2019\test2\include\timetabledao.h
+	"Timetable.h"
+	<vector>
+	<sqlite3.h>
+	<iostream>
+
+1565793523 c:\users\user\documents\studia\pk\menager2019\test2\include\playerview.h
+	<iostream>
+	"Player.h"
+	<vector>
+
+1565793522 c:\users\user\documents\studia\pk\menager2019\test2\include\clubview.h
+	<vector>
+	"Club.h"
+	"PlayerView.h"
+	<string>
+
+1565793523 c:\users\user\documents\studia\pk\menager2019\test2\include\timetablehelper.h
+	"Club.h"
+	<vector>
+	<stdlib.h>
+	<ctime>
+	"Timetable.h"
+	<algorithm>
+	<cstdlib>
+	"TimetableDao.h"
+
+1565793523 c:\users\user\documents\studia\pk\menager2019\test2\include\timetableview.h
+	<iostream>
+	"Timetable.h"
+	<vector>
+
+1565793523 source:c:\users\user\documents\studia\pk\menager2019\test2\src\club.cpp
+	"Club.h"
+
+1565793523 source:c:\users\user\documents\studia\pk\menager2019\test2\src\clubsdao.cpp
+	"ClubsDao.h"
+
+1566117428 source:c:\users\user\documents\studia\pk\menager2019\test2\src\clubview.cpp
+	"ClubView.h"
+
+1565793523 source:c:\users\user\documents\studia\pk\menager2019\test2\src\databasehelper.cpp
+	"DatabaseHelper.h"
+
+1566116690 source:c:\users\user\documents\studia\pk\menager2019\test2\src\game.cpp
+	"Game.h"
+
+1565793523 source:c:\users\user\documents\studia\pk\menager2019\test2\src\league.cpp
+	"League.h"
+
+1565793523 source:c:\users\user\documents\studia\pk\menager2019\test2\src\leaguesdao.cpp
+	"LeaguesDao.h"
+
+1565793523 source:c:\users\user\documents\studia\pk\menager2019\test2\src\player.cpp
+	"Player.h"
+
+1566116563 source:c:\users\user\documents\studia\pk\menager2019\test2\src\playersdao.cpp
+	"PlayersDao.h"
+
+1566116774 source:c:\users\user\documents\studia\pk\menager2019\test2\src\playerview.cpp
+	"PlayerView.h"
+
+1565793523 source:c:\users\user\documents\studia\pk\menager2019\test2\src\season.cpp
+	"Season.h"
+
+1565793523 source:c:\users\user\documents\studia\pk\menager2019\test2\src\seasonsdao.cpp
+	"SeasonsDao.h"
+
+1565793523 source:c:\users\user\documents\studia\pk\menager2019\test2\src\timetable.cpp
+	"Timetable.h"
+
+1565793523 source:c:\users\user\documents\studia\pk\menager2019\test2\src\timetabledao.cpp
+	"TimetableDao.h"
+
+1565793523 source:c:\users\user\documents\studia\pk\menager2019\test2\src\timetablehelper.cpp
+	"TimetableHelper.h"
+
+1565793523 source:c:\users\user\documents\studia\pk\menager2019\test2\src\timetableview.cpp
+	"TimetableView.h"
+
+1566113385 c:\users\user\documents\studia\pk\menager2019\test2\include\playershelper.h
+	"Player.h"
+	"Club.h"
+	<vector>
+	"PlayersDao.h"
+	"ClubsDao.h"
+	<stdlib.h>
+	<ctime>
+	<algorithm>
+	<cstdlib>
+
+1566117044 source:c:\users\user\documents\studia\pk\menager2019\test2\src\playershelper.cpp
+	"PlayersHelper.h"
+
+1566115439 source:c:\users\user\documents\studia\pk\menager2019\test2\src\clubhelper.cpp
+	"ClubHelper.h"
+
+1566115438 c:\users\user\documents\studia\pk\menager2019\test2\include\clubhelper.h
+

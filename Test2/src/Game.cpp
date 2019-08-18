@@ -13,11 +13,14 @@ Game::~Game()
 void Game::setup(){
     databaseHelperVar = new DatabaseHelper();
     timetableHelperVar = new TimetableHelper();
+    playersHelperVar = new PlayersHelper();
+
     playersDao = new PlayersDao();
     leaguesDao = new LeaguesDao();
     clubsDao = new ClubsDao();
     seasonsDao = new SeasonsDao();
     timetableDao = new TimetableDao();
+
     mainViewVar = new MainView();
     playerViewVar = new PlayerView();
     clubViewVar = new ClubView();
@@ -74,12 +77,13 @@ int Game::handleMenu(int menuOption){
     case 4:
         return 0;
     case 5:
-        playerVar2 = new Player();
-        playerVar2->setName("Krzysztof Werner");
-        playerVar2->setPosition("ST");
-        playerVar2->setAge(26);
-        playerVar2->setClubId(1);
-        playersDao->savePlayer(*playerVar2);
+        playersHelperVar->randommizeInitialSquads();
+        clubsVec = clubsDao->getClubs();
+        clubTestVar = clubsVec.at(0);
+        players = playersDao->getPlayersForClub(clubTestVar.getClubId());
+        std::cout<<players.size()<<std::endl;
+        clubTestVar.setPlayers(players);
+        clubViewVar->displayClubInfo(clubTestVar);
         system("pause");
         system ("CLS");
         return 1;

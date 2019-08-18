@@ -18,6 +18,7 @@
 					<Add option="-lsqlite3" />
 					<Add directory="include" />
 					<Add directory="cpp/Test2/Test2/include" />
+					<Add directory="PK/Menager2019/Test2/include" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
@@ -30,6 +31,7 @@
 					<Add option="-lsqlite3" />
 					<Add directory="include" />
 					<Add directory="cpp/Test2/Test2/include" />
+					<Add directory="PK/Menager2019/Test2/include" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -49,6 +51,9 @@
 		</Unit>
 		<Unit filename="include/Club.h">
 			<Option virtualFolder="Model/include/databaseClasses/" />
+		</Unit>
+		<Unit filename="include/ClubHelper.h">
+			<Option virtualFolder="Helper/include/" />
 		</Unit>
 		<Unit filename="include/ClubView.h">
 			<Option virtualFolder="View/include/" />
@@ -106,6 +111,9 @@
 		</Unit>
 		<Unit filename="src/Club.cpp">
 			<Option virtualFolder="Model/src/databaseClasses/" />
+		</Unit>
+		<Unit filename="src/ClubHelper.cpp">
+			<Option virtualFolder="Helper/src/" />
 		</Unit>
 		<Unit filename="src/ClubView.cpp">
 			<Option virtualFolder="View/src/" />

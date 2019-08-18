@@ -162,6 +162,7 @@ void PlayersDao::updatePlayer(Player playerVar){
                     "NAME = \'" + playerVar.getName() + "\', "
                     "POSITION = \'" + playerVar.getPosition() + "\', "
                     "AGE = " + std::to_string(playerVar.getAge()) + ", "
+                    "CLUB_ID = " + std::to_string(playerVar.getClubId()) + ", "
                     "MATCHSQUAD = " + std::to_string(playerVar.getMatchsquad()) + ", "
                     "NETT_WORTH = " + std::to_string(playerVar.getNettWorth()) + ", "
                     "HANDLING = " + std::to_string(playerVar.getHandling()) + ", "
@@ -324,9 +325,8 @@ std::vector<Player> PlayersDao::getPlayersForPosition(std::string positionVar){
     if(positionVar.empty() || positionVar == ""){
         return players;
     } else {
-        sql = "SELECT * FROM PLAYERS WHERE POSITION LIKE " + positionVar + ";";
+        sql = "SELECT * FROM PLAYERS WHERE POSITION LIKE \'" + positionVar + "\';";
     }
-
     sqlite3_prepare(DB, sql.c_str(), -1, &stmt, NULL);
 
     bool done = false;
