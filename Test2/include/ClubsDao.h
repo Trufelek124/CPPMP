@@ -43,6 +43,7 @@ class ClubsDao
         int saveClub(Club clubVar);
         void updateClub(Club clubVar);
         Club getPlayerClub();
+        Club getClub(int clubIdVar);
 
     protected:
 

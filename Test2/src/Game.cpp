@@ -154,6 +154,10 @@ void Game::matchweek(int matchweek){
 }
 
 void Game::match(int homeClubId, int awayClubId, int timetableId){
+    Club homeClub = clubsDao->getClub(homeClubId);
+    Club awayClub = clubsDao->getClub(awayClubId);
+    Timetable timetable = timetableDao->getTimetable(timetableId);
+
     //TODO
     //Algorytm meczowy
 }

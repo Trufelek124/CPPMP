@@ -40,6 +40,7 @@ class TimetableDao
         std::vector<Timetable> getTimetablesForSeason(int seasonIdQuery);
         std::vector<Timetable> getTimetablesForClubForSeason(int clubIdQuery, int seasonIdQuery);
         std::vector<Timetable> getTimetablesForMatchweek(int matchweekVar, int seasonIdQuery);
+        Timetable getTimetable(int timetableId);
         int saveTimetable(Timetable timetableVar);
         void saveTimetables(std::vector<Timetable> timetablesVar);
         void updateTimetable(Timetable timetableVar);

@@ -235,7 +235,68 @@ Club ClubsDao::getPlayerClub(){
     sqlite3_finalize(stmt);
     sqlite3_close(DB);
 
-    if(clubs.size() > 1){
+    if(clubs.size() >= 1){
+        playerClubResult = clubs.at(0);
+    };
+    return playerClubResult;
+}
+
+Club ClubsDao::getClub(int clubIdVar){
+    std::vector<Club> clubs;
+    Club playerClubResult;
+
+    exit = sqlite3_open("test.db", &DB);
+    std::string sql = "SELECT * FROM CLUBS WHERE CLUB_ID = " + std::to_string(clubIdVar)+ ";";
+
+    sqlite3_prepare(DB, sql.c_str(), -1, &stmt, NULL);
+
+    bool done = false;
+    while (!done) {
+        switch (sqlite3_step (stmt)) {
+            case SQLITE_ROW:
+                clubTmp = new Club();
+                id = sqlite3_column_text(stmt, 0);
+                name = sqlite3_column_text(stmt, 1);
+                budget  = sqlite3_column_text(stmt, 2);
+                points  = sqlite3_column_text(stmt, 3);
+                position  = sqlite3_column_text(stmt, 4);
+                leagueId  = sqlite3_column_text(stmt, 5);
+                playerClub  = sqlite3_column_text(stmt, 6);
+
+                idString = std::string(reinterpret_cast<const char*>(id));
+                nameString = std::string(reinterpret_cast<const char*>(name));
+                budgetString = std::string(reinterpret_cast<const char*>(budget));
+                pointsString = std::string(reinterpret_cast<const char*>(points));
+                positionString = std::string(reinterpret_cast<const char*>(position));
+                leagueIdString = std::string(reinterpret_cast<const char*>(leagueId));
+                playerClubString = std::string(reinterpret_cast<const char*>(playerClub));
+
+                clubTmp->setClubId(std::stoi(idString));
+                clubTmp->setName(nameString);
+                clubTmp->setBudget(std::stoi(budgetString));
+                clubTmp->setPoints(std::stoi(pointsString));
+                clubTmp->setPosition(std::stoi(positionString));
+                clubTmp->setLeagueId(std::stoi(leagueIdString));
+                clubTmp->setPlayerClub(std::stoi(playerClubString));
+
+                clubs.push_back(*clubTmp);
+
+                row++;
+                break;
+            case SQLITE_DONE:
+                done = true;
+                break;
+            default:
+                sqlite3_finalize(stmt);
+                sqlite3_close(DB);
+                return playerClubResult;
+        }
+    }
+
+    sqlite3_finalize(stmt);
+    sqlite3_close(DB);
+
+    if(clubs.size() >= 1){
         playerClubResult = clubs.at(0);
     };
     return playerClubResult;

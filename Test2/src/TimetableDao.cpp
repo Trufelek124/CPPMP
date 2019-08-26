@@ -309,6 +309,71 @@ std::vector<Timetable> TimetableDao::getTimetablesForMatchweek(int matchweekVar,
     return timetables;
 }
 
+Timetable TimetableDao::getTimetable(int timetableId){
+    std::vector<Timetable> timetables;
+    Timetable timetableResult;
+
+    exit = sqlite3_open("test.db", &DB);
+    std::string sql;
+    std::string sqlClub;
+    std::string sqlSeason;
+
+
+    sql = "SELECT * from TIMETABLE WHERE TIMETABLE_ID = " + std::to_string(timetableId) + ";";
+
+    sqlite3_prepare(DB, sql.c_str(), -1, &stmt, NULL);
+    sqlite3_prepare(DB, q, sizeof q, &stmt, NULL);
+
+    bool done = false;
+    while (!done) {
+        switch (sqlite3_step (stmt)) {
+            case SQLITE_ROW:
+                timetableTmp = new Timetable();
+                id = sqlite3_column_text(stmt, 0);
+                homeClub = sqlite3_column_text(stmt, 1);
+                awayClub = sqlite3_column_text(stmt, 2);
+                matchweek = sqlite3_column_text(stmt, 3);
+                seasonId = sqlite3_column_text(stmt, 4);
+                springFall = sqlite3_column_text(stmt, 5);
+                result = sqlite3_column_text(stmt, 6);
+
+                idString = std::string(reinterpret_cast<const char*>(id));
+                homeClubString = std::string(reinterpret_cast<const char*>(homeClub));
+                awayClubString = std::string(reinterpret_cast<const char*>(awayClub));
+                matchweekString = std::string(reinterpret_cast<const char*>(matchweek));
+                seasonIdString = std::string(reinterpret_cast<const char*>(seasonId));
+                springFallString = std::string(reinterpret_cast<const char*>(springFall));
+                resultString = std::string(reinterpret_cast<const char*>(result));
+
+                timetableTmp->setSeasonId(std::stoi(idString));
+                timetableTmp->setHomeClub(std::stoi(homeClubString));
+                timetableTmp->setAwayClub(std::stoi(awayClubString));
+                timetableTmp->setMatchweek(std::stoi(matchweekString));
+                timetableTmp->setSeasonId(std::stoi(seasonIdString));
+                timetableTmp->setSpringFall(std::stoi(springFallString));
+                timetableTmp->setResult(resultString);
+
+                timetables.push_back(*timetableTmp);
+
+                row++;
+                break;
+            case SQLITE_DONE:
+                done = true;
+                break;
+            default:
+                return timetableResult;
+        }
+    }
+
+    sqlite3_finalize(stmt);
+    sqlite3_close(DB);
+
+    if(timetables.size() >= 1){
+        timetableResult = timetables.at(0);
+    };
+    return timetableResult;
+}
+
 
 void TimetableDao::saveTimetables(std::vector<Timetable> timetablesVar){
 
