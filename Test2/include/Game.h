@@ -27,7 +27,9 @@ class Game
         virtual ~Game();
 
         void setup();
-        void clubSetup();
+        void programSetup();
+        void matchweek(int matchweek);
+        void match(int homeClubId, int awayClubId, int timetableId);
         int play();
         int handleMenu(int menuOption);
 
@@ -36,6 +38,7 @@ class Game
         std::vector<League> leaguesVec;
         std::vector<Season> seasonsVec;
         std::vector<Timetable> timetablesVec;
+        std::vector<Timetable> timetablesVecMatchweek;
 
     protected:
 

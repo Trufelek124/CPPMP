@@ -26,6 +26,7 @@ class TimetableDao
         const unsigned char* matchweek;
         const unsigned char* seasonId;
         const unsigned char* springFall;
+        const unsigned char* result;
 
         std::string idString;
         std::string homeClubString;
@@ -33,10 +34,12 @@ class TimetableDao
         std::string matchweekString;
         std::string seasonIdString;
         std::string springFallString;
+        std::string resultString;
 
         std::vector<Timetable> getTimetables();
         std::vector<Timetable> getTimetablesForSeason(int seasonIdQuery);
         std::vector<Timetable> getTimetablesForClubForSeason(int clubIdQuery, int seasonIdQuery);
+        std::vector<Timetable> getTimetablesForMatchweek(int matchweekVar, int seasonIdQuery);
         int saveTimetable(Timetable timetableVar);
         void saveTimetables(std::vector<Timetable> timetablesVar);
         void updateTimetable(Timetable timetableVar);

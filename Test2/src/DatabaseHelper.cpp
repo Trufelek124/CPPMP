@@ -50,7 +50,8 @@ void DatabaseHelper::createTables(){
                       "AWAY_CLUB   INT    NOT NULL, "
                       "MATCHWEEK   INT    NOT NULL, "
                       "SEASON_ID   INT    NOT NULL, "
-                      "SPRING_FALL INT    NOT NULL);"
+                      "SPRING_FALL INT    NOT NULL, "
+                      "RESULT      TEXT    NOT NULL);"
 
                       "CREATE TABLE LEAGUES("
                       "LEAGUE_ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "

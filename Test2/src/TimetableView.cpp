@@ -13,8 +13,14 @@ TimetableView::~TimetableView()
 void TimetableView::displayTimetableList(std::vector<Timetable> timetables){
 
     Timetable timetable;
+    std::cout << "MATCHWEEK | HOME | AWAY | RESULT" << std::endl;
+    std::cout << "________________________________" << std::endl;
     for(int i = 0; i < timetables.size(); i++){
         timetable = timetables.at(i);
-        std::cout << "Matchweek: " << timetable.getMatchweek() << ", home: " << timetable.getHomeClub() << ", away: " << timetable.getAwayClub() << "  " << ((timetable.getSpringFall() == 0) ? "Spring" : "Fall") << std::endl;
+        if(timetable.getMatchweek() < 10){
+            std::cout << timetable.getMatchweek() << "         | " << timetable.getHomeClub() << "    | " << timetable.getAwayClub() << "    | " << timetable.getResult() << std::endl;
+        } else {
+            std::cout << timetable.getMatchweek() << "        | " << timetable.getHomeClub() << "    | " << timetable.getAwayClub() << "    | " << timetable.getResult() << std::endl;
+        }
     };
 };

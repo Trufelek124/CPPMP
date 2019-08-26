@@ -190,11 +190,9 @@ void PlayersDao::updatePlayer(Player playerVar){
     exit = sqlite3_exec(DB, sql.c_str(), NULL, 0, &messaggeError);
 
     if (exit != SQLITE_OK) {
-        std::cerr << "Error updating records" << std::endl;
         std::cerr << messaggeError << std::endl;
         sqlite3_free(messaggeError);
     } else
-        std::cout << "Records updated successfully" << std::endl;
     sqlite3_close(DB);
 };
 

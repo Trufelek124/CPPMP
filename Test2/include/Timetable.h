@@ -1,6 +1,8 @@
 #ifndef TIMETABLE_H
 #define TIMETABLE_H
 
+#include <string>
+
 class Timetable
 {
     public:
@@ -19,6 +21,8 @@ class Timetable
         void setSpringFall(int val) { springFall = val; }
         int getMatchweek() { return matchweek; }
         void setMatchweek(int val) { matchweek = val; }
+        std::string getResult() { return result; }
+        void setResult(std::string val) { result = val; }
 
     protected:
 
@@ -29,6 +33,7 @@ class Timetable
         int seasonId;
         int matchweek;
         int springFall; //0 - spring, 1 - fall
+        std::string result;
 };
 
 #endif // TIMETABLE_H
