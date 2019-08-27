@@ -155,6 +155,7 @@ void Game::matchweek(int matchweek){
 
 void Game::match(int homeClubId, int awayClubId, int timetableId){
     Club tmp;
+    Player tmpPlayer;
     Club homeClub;
     Club awayClub;
     std::vector<Player> homeTeamPlayers;
@@ -199,7 +200,28 @@ void Game::match(int homeClubId, int awayClubId, int timetableId){
     double awayTeamMFStrength;
     double homeTeamSTStrength;
     double awayTeamSTStrength;
-    //Mam sk³ady i zespo³y
+
+    for(int i = 0; i < homeTeamPlayers.size(); i++){
+       tmpPlayer = homeTeamPlayers.at(i);
+       if(tmpPlayer.getPosition() == 'GK'){
+            homeTeamGKStrength = (((double) tmpPlayer.getDiving() + (double) tmpPlayer.getHandling()*0.7 + (double) tmpPlayer.getKicking()*0.5 + (double) tmpPlayer.getReflexes()*0.9)/3.1);//handling, diving, kicking, reflexes
+       } else if(tmpPlayer.getPosition() == 'CB'){
+           double cbStrength = 0.0;
+           //TODO - wyliczanie sily
+           homeTeamCBStrength += cbStrength;
+           //dodawac, a pozniej podzielic na 4 - juÅ¼ pozniej
+       } else if(tmpPlayer.getPosition() == 'MF'){
+           double mfStrength = 0.0;
+           homeTeamMFStrength += mfStrength;
+       } else {
+           double stStrength = 0.0;
+           homeTeamSTStrength += stStrength;
+       }
+    }
+    homeTeamCBStrength = homeTeamCBStrength/4;
+    homeTeamMFStrength = homeTeamMFStrength/4;
+    homeTeamSTStrength = homeTeamSTStrength/2;
+    //Mam sklady i zespoly
     //TODO
     //Algorytm meczowy
 }
