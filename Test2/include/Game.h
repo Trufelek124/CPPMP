@@ -18,6 +18,7 @@
 #include "PlayerView.h"
 #include "ClubView.h"
 #include "DatabaseHelper.h"
+#include "MatchHelper.h"
 #include <random>
 #include <vector>
 
@@ -47,6 +48,7 @@ class Game
         DatabaseHelper* databaseHelperVar;
         TimetableHelper* timetableHelperVar;
         PlayersHelper* playersHelperVar;
+        MatchHelper* matchHelperVar;
 
         PlayersDao* playersDao;
         LeaguesDao* leaguesDao;

@@ -76,6 +76,7 @@
 		<Unit filename="include/MainView.h">
 			<Option virtualFolder="View/include/" />
 		</Unit>
+		<Unit filename="include/MatchHelper.h" />
 		<Unit filename="include/Player.h">
 			<Option virtualFolder="Model/include/databaseClasses/" />
 		</Unit>
@@ -133,6 +134,7 @@
 		<Unit filename="src/LeaguesDao.cpp">
 			<Option virtualFolder="Dao/src/" />
 		</Unit>
+		<Unit filename="src/MatchHelper.cpp" />
 		<Unit filename="src/Player.cpp">
 			<Option virtualFolder="Model/src/databaseClasses/" />
 		</Unit>
