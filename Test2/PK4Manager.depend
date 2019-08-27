@@ -251,7 +251,7 @@
 	<sqlite3.h>
 	"Game.h"
 
-1566939655 c:\users\user\documents\studia\pk\menager2019\test2\include\game.h
+1566940135 c:\users\user\documents\studia\pk\menager2019\test2\include\game.h
 	"Player.h"
 	"Club.h"
 	"League.h"
@@ -270,7 +270,6 @@
 	"ClubView.h"
 	"DatabaseHelper.h"
 	"MatchHelper.h"
-	<random>
 	<vector>
 
 1566113511 c:\users\user\documents\studia\pk\menager2019\test2\include\player.h
@@ -426,7 +425,7 @@
 	"MainView.h"
 	<vector>
 
-1566939822 c:\users\user\documents\studia\pk\menager2019\test2\include\matchhelper.h
+1566940946 c:\users\user\documents\studia\pk\menager2019\test2\include\matchhelper.h
 	<vector>
 	"Timetable.h"
 	"TimetableDao.h"

@@ -74,45 +74,39 @@ void MatchHelper::match(int homeClubId, int awayClubId, int timetableId, std::ve
     //home team strength
     for(int i = 0; i < homeTeamPlayers.size(); i++){
        tmpPlayer = homeTeamPlayers.at(i);
-       if(tmpPlayer.getPosition() == "GK"){
-            homeTeamGKStrength = (((double) tmpPlayer.getDiving() + (double) tmpPlayer.getHandling()*0.7 + (double) tmpPlayer.getKicking()*0.5 + (double) tmpPlayer.getReflexes()*0.9)/3.1);//handling, diving, kicking, reflexes
-       } else if(tmpPlayer.getPosition() == "CB"){
            double cbStrength = 0.0;
            double mfStrength = 0.0;
            double stStrength = 0.0;
+       if(tmpPlayer.getPosition() == "GK"){
+            homeTeamGKStrength = getGkStrength(tmpPlayer);//handling, diving, kicking, reflexes
+       } else if(tmpPlayer.getPosition() == "CB"){
            //tackling, heading, marking, intercepting
-           cbStrength = (((double) tmpPlayer.getTackling()*0.75 + (double) tmpPlayer.getHeading()*0.5 + (double) tmpPlayer.getMarking()*0.3 + (double) tmpPlayer.getIntercepting())/2.55);
+           cbStrength = getCbStrength(tmpPlayer);
            //vision, crossing, shortPasses, longPasses, freeKicks, positioning, longShots
-           mfStrength = ((((double) tmpPlayer.getVision() + (double) tmpPlayer.getCrossing() * 0.9 + (double) tmpPlayer.getShortPasses()*0.9 + (double) tmpPlayer.getLongPasses()*0.8 + (double) tmpPlayer.getFreeKicks()*0.1 + (double) tmpPlayer.getPositioning()*0.5 + (double) tmpPlayer.getLongShots()*0.5)/4.7)*0.25);
+           mfStrength = (getMfStrength(tmpPlayer)*0.25);
            //positioning, finishing, power, volleys, longShots
-           stStrength = ((((double) tmpPlayer.getPositioning() + (double) tmpPlayer.getFinishing() + (double) tmpPlayer.getPower()*0.8 + (double) tmpPlayer.getVolleys()*0.2 + (double) tmpPlayer.getLongShots()*0.5)/3.5)*0.1);
+           stStrength = (getStStrength(tmpPlayer)*0.1);
            homeTeamCBStrength += cbStrength;
            homeTeamMFStrength += mfStrength;
            homeTeamSTStrength += stStrength;
            //dodawac, a pozniej podzielic na 4 - ju¿ pozniej
        } else if(tmpPlayer.getPosition() == "MF"){
-           double cbStrength = 0.0;
-           double mfStrength = 0.0;
-           double stStrength = 0.0;
            //tackling, heading, marking, intercepting
-           cbStrength = ((((double) tmpPlayer.getTackling()*0.75 + (double) tmpPlayer.getHeading()*0.5 + (double) tmpPlayer.getMarking()*0.3 + (double) tmpPlayer.getIntercepting())/2.55)*0.25);
+           cbStrength = (getCbStrength(tmpPlayer)*0.25);
            //vision, crossing, shortPasses, longPasses, freeKicks, positioning, longShots
-           mfStrength = (((double) tmpPlayer.getVision() + (double) tmpPlayer.getCrossing() * 0.9 + (double) tmpPlayer.getShortPasses()*0.9 + (double) tmpPlayer.getLongPasses()*0.8 + (double) tmpPlayer.getFreeKicks()*0.1 + (double) tmpPlayer.getPositioning()*0.5 + (double) tmpPlayer.getLongShots()*0.5)/4.7);
+           mfStrength = getMfStrength(tmpPlayer);
            //positioning, finishing, power, volleys, longShots
-           stStrength = ((((double) tmpPlayer.getPositioning() + (double) tmpPlayer.getFinishing() + (double) tmpPlayer.getPower()*0.8 + (double) tmpPlayer.getVolleys()*0.2 + (double) tmpPlayer.getLongShots()*0.5)/3.5)*0.25);
+           stStrength = (getStStrength(tmpPlayer)*0.25);
            homeTeamCBStrength += cbStrength;
            homeTeamMFStrength += mfStrength;
            homeTeamSTStrength += stStrength;
        } else {
-           double cbStrength = 0.0;
-           double mfStrength = 0.0;
-           double stStrength = 0.0;
            //tackling, heading, marking, intercepting
-           cbStrength = ((((double) tmpPlayer.getTackling()*0.75 + (double) tmpPlayer.getHeading()*0.5 + (double) tmpPlayer.getMarking()*0.3 + (double) tmpPlayer.getIntercepting())/2.55)*0.1);
+           cbStrength = (getCbStrength(tmpPlayer)*0.1);
            //vision, crossing, shortPasses, longPasses, freeKicks, positioning, longShots
-           mfStrength = ((((double) tmpPlayer.getVision() + (double) tmpPlayer.getCrossing() * 0.9 + (double) tmpPlayer.getShortPasses()*0.9 + (double) tmpPlayer.getLongPasses()*0.8 + (double) tmpPlayer.getFreeKicks()*0.1 + (double) tmpPlayer.getPositioning()*0.5 + (double) tmpPlayer.getLongShots()*0.5)/4.7)*0.1);
+           mfStrength = (getMfStrength(tmpPlayer)*0.1);
            //positioning, finishing, power, volleys, longShots
-           stStrength = (((double) tmpPlayer.getPositioning() + (double) tmpPlayer.getFinishing() + (double) tmpPlayer.getPower()*0.8 + (double) tmpPlayer.getVolleys()*0.2 + (double) tmpPlayer.getLongShots()*0.5)/3.5);
+           stStrength = getStStrength(tmpPlayer);
            homeTeamCBStrength += cbStrength;
            homeTeamMFStrength += mfStrength;
            homeTeamSTStrength += stStrength;
@@ -126,45 +120,39 @@ void MatchHelper::match(int homeClubId, int awayClubId, int timetableId, std::ve
     //away team strength
     for(int i = 0; i < awayTeamPlayers.size(); i++){
        tmpPlayer = awayTeamPlayers.at(i);
-       if(tmpPlayer.getPosition() == "GK"){
-            awayTeamGKStrength = (((double) tmpPlayer.getDiving() + (double) tmpPlayer.getHandling()*0.7 + (double) tmpPlayer.getKicking()*0.5 + (double) tmpPlayer.getReflexes()*0.9)/3.1);//handling, diving, kicking, reflexes
-       } else if(tmpPlayer.getPosition() == "CB"){
            double cbStrength = 0.0;
            double mfStrength = 0.0;
            double stStrength = 0.0;
+       if(tmpPlayer.getPosition() == "GK"){
+            awayTeamGKStrength = getGkStrength(tmpPlayer);//handling, diving, kicking, reflexes
+       } else if(tmpPlayer.getPosition() == "CB"){
            //tackling, heading, marking, intercepting
-           cbStrength = (((double) tmpPlayer.getTackling()*0.75 + (double) tmpPlayer.getHeading()*0.5 + (double) tmpPlayer.getMarking()*0.3 + (double) tmpPlayer.getIntercepting())/2.55);
+           cbStrength = getCbStrength(tmpPlayer);
            //vision, crossing, shortPasses, longPasses, freeKicks, positioning, longShots
-           mfStrength = ((((double) tmpPlayer.getVision() + (double) tmpPlayer.getCrossing() * 0.9 + (double) tmpPlayer.getShortPasses()*0.9 + (double) tmpPlayer.getLongPasses()*0.8 + (double) tmpPlayer.getFreeKicks()*0.1 + (double) tmpPlayer.getPositioning()*0.5 + (double) tmpPlayer.getLongShots()*0.5)/4.7)*0.25);
+           mfStrength = (getMfStrength(tmpPlayer)*0.25);
            //positioning, finishing, power, volleys, longShots
-           stStrength = ((((double) tmpPlayer.getPositioning() + (double) tmpPlayer.getFinishing() + (double) tmpPlayer.getPower()*0.8 + (double) tmpPlayer.getVolleys()*0.2 + (double) tmpPlayer.getLongShots()*0.5)/3.5)*0.1);
+           stStrength = (getStStrength(tmpPlayer)*0.1);
            awayTeamCBStrength += cbStrength;
            awayTeamMFStrength += mfStrength;
            awayTeamSTStrength += stStrength;
            //dodawac, a pozniej podzielic na 4 - ju¿ pozniej
        } else if(tmpPlayer.getPosition() == "MF"){
-           double cbStrength = 0.0;
-           double mfStrength = 0.0;
-           double stStrength = 0.0;
            //tackling, heading, marking, intercepting
-           cbStrength = ((((double) tmpPlayer.getTackling()*0.75 + (double) tmpPlayer.getHeading()*0.5 + (double) tmpPlayer.getMarking()*0.3 + (double) tmpPlayer.getIntercepting())/2.55)*0.25);
+           cbStrength = (getCbStrength(tmpPlayer)*0.25);
            //vision, crossing, shortPasses, longPasses, freeKicks, positioning, longShots
-           mfStrength = (((double) tmpPlayer.getVision() + (double) tmpPlayer.getCrossing() * 0.9 + (double) tmpPlayer.getShortPasses()*0.9 + (double) tmpPlayer.getLongPasses()*0.8 + (double) tmpPlayer.getFreeKicks()*0.1 + (double) tmpPlayer.getPositioning()*0.5 + (double) tmpPlayer.getLongShots()*0.5)/4.7);
+           mfStrength = getMfStrength(tmpPlayer);
            //positioning, finishing, power, volleys, longShots
-           stStrength = ((((double) tmpPlayer.getPositioning() + (double) tmpPlayer.getFinishing() + (double) tmpPlayer.getPower()*0.8 + (double) tmpPlayer.getVolleys()*0.2 + (double) tmpPlayer.getLongShots()*0.5)/3.5)*0.25);
+           stStrength = (getStStrength(tmpPlayer)*0.25);
            awayTeamCBStrength += cbStrength;
            awayTeamMFStrength += mfStrength;
            awayTeamSTStrength += stStrength;
        } else {
-           double cbStrength = 0.0;
-           double mfStrength = 0.0;
-           double stStrength = 0.0;
            //tackling, heading, marking, intercepting
-           cbStrength = ((((double) tmpPlayer.getTackling()*0.75 + (double) tmpPlayer.getHeading()*0.5 + (double) tmpPlayer.getMarking()*0.3 + (double) tmpPlayer.getIntercepting())/2.55)*0.1);
+           cbStrength = (getCbStrength(tmpPlayer)*0.1);
            //vision, crossing, shortPasses, longPasses, freeKicks, positioning, longShots
-           mfStrength = ((((double) tmpPlayer.getVision() + (double) tmpPlayer.getCrossing() * 0.9 + (double) tmpPlayer.getShortPasses()*0.9 + (double) tmpPlayer.getLongPasses()*0.8 + (double) tmpPlayer.getFreeKicks()*0.1 + (double) tmpPlayer.getPositioning()*0.5 + (double) tmpPlayer.getLongShots()*0.5)/4.7)*0.1);
+           mfStrength = (getMfStrength(tmpPlayer)*0.1);
            //positioning, finishing, power, volleys, longShots
-           stStrength = (((double) tmpPlayer.getPositioning() + (double) tmpPlayer.getFinishing() + (double) tmpPlayer.getPower()*0.8 + (double) tmpPlayer.getVolleys()*0.2 + (double) tmpPlayer.getLongShots()*0.5)/3.5);
+           stStrength = getStStrength(tmpPlayer);
            awayTeamCBStrength += cbStrength;
            awayTeamMFStrength += mfStrength;
            awayTeamSTStrength += stStrength;
@@ -177,3 +165,23 @@ void MatchHelper::match(int homeClubId, int awayClubId, int timetableId, std::ve
     //TODO
     //Algorytm meczowy
 }
+
+double MatchHelper::getGkStrength(Player tmpPlayer){
+    double result = (((double) tmpPlayer.getDiving() + (double) tmpPlayer.getHandling()*0.7 + (double) tmpPlayer.getKicking()*0.5 + (double) tmpPlayer.getReflexes()*0.9)/3.1);
+    return result;
+};
+
+double MatchHelper::getCbStrength(Player tmpPlayer){
+    double result = ((double) tmpPlayer.getDiving() + (double) tmpPlayer.getHandling()*0.7 + (double) tmpPlayer.getKicking()*0.5 + (double) tmpPlayer.getReflexes()*0.9);
+    return result;
+};
+
+double MatchHelper::getMfStrength(Player tmpPlayer){
+    double result = (((double) tmpPlayer.getVision() + (double) tmpPlayer.getCrossing() * 0.9 + (double) tmpPlayer.getShortPasses()*0.9 + (double) tmpPlayer.getLongPasses()*0.8 + (double) tmpPlayer.getFreeKicks()*0.1 + (double) tmpPlayer.getPositioning()*0.5 + (double) tmpPlayer.getLongShots()*0.5)/4.7);
+    return result;
+};
+
+double MatchHelper::getStStrength(Player tmpPlayer){
+    double result = (((double) tmpPlayer.getPositioning() + (double) tmpPlayer.getFinishing() + (double) tmpPlayer.getPower()*0.8 + (double) tmpPlayer.getVolleys()*0.2 + (double) tmpPlayer.getLongShots()*0.5)/3.5);
+    return result;
+};
