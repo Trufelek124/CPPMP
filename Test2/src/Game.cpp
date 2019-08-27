@@ -154,10 +154,52 @@ void Game::matchweek(int matchweek){
 }
 
 void Game::match(int homeClubId, int awayClubId, int timetableId){
-    Club homeClub = clubsDao->getClub(homeClubId);
-    Club awayClub = clubsDao->getClub(awayClubId);
+    Club tmp;
+    Club homeClub;
+    Club awayClub;
+    std::vector<Player> homeTeamPlayers;
+    std::vector<Player> awayTeamPlayers;
+    double homeFieldAdvantage;
+
+    if(!clubsVec.empty()){
+        for(int i = 0; i < clubsVec.size(); i++){
+            tmp = clubsVec.at(i);
+            if(tmp.getClubId() == homeClubId)
+                homeClub = clubsVec.at(i);
+            if(tmp.getClubId() == awayClubId)
+                awayClub = clubsVec.at(i);
+        }
+
+        homeTeamPlayers = homeClub.getPlayers();
+        awayTeamPlayers = awayClub.getPlayers();
+    } else {
+        homeClub = clubsDao->getClub(homeClubId);
+        awayClub = clubsDao->getClub(awayClubId);
+
+        homeTeamPlayers = playersDao->getPlayersForClub(homeClubId);
+        awayTeamPlayers = playersDao->getPlayersForClub(awayClubId);
+
+        homeClub.setPlayers(homeTeamPlayers);
+        awayClub.setPlayers(awayTeamPlayers);
+    }
+
     Timetable timetable = timetableDao->getTimetable(timetableId);
 
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_real_distribution<> dis(0, 1);
+
+    homeFieldAdvantage = (double) dis(gen);
+
+    double homeTeamGKStrength;
+    double awayTeamGKStrength;
+    double homeTeamCBStrength;
+    double awayTeamCBStrength;
+    double homeTeamMFStrength;
+    double awayTeamMFStrength;
+    double homeTeamSTStrength;
+    double awayTeamSTStrength;
+    //Mam sk³ady i zespo³y
     //TODO
     //Algorytm meczowy
 }

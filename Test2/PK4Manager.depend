@@ -251,25 +251,26 @@
 	<sqlite3.h>
 	"Game.h"
 
-1566834734 c:\users\user\documents\studia\pk\menager2019\test2\include\game.h
+1566920422 c:\users\user\documents\studia\pk\menager2019\test2\include\game.h
 	"Player.h"
 	"Club.h"
 	"League.h"
-	"DatabaseHelper.h"
 	"PlayersDao.h"
+	"PlayersHelper.h"
 	"LeaguesDao.h"
+	"Timetable.h"
+	"TimetableHelper.h"
+	"TimetableView.h"
 	"ClubsDao.h"
 	"SeasonsDao.h"
 	"TimetableDao.h"
 	"PlayerView.h"
 	"MainView.h"
-	<vector>
 	"PlayerView.h"
 	"ClubView.h"
-	"Timetable.h"
-	"TimetableHelper.h"
-	"TimetableView.h"
-	"PlayersHelper.h"
+	"DatabaseHelper.h"
+	<random>
+	<vector>
 
 1566113511 c:\users\user\documents\studia\pk\menager2019\test2\include\player.h
 	<string>
@@ -391,7 +392,7 @@
 1565793523 source:c:\users\user\documents\studia\pk\menager2019\test2\src\timetable.cpp
 	"Timetable.h"
 
-1566834723 source:c:\users\user\documents\studia\pk\menager2019\test2\src\timetabledao.cpp
+1566835448 source:c:\users\user\documents\studia\pk\menager2019\test2\src\timetabledao.cpp
 	"TimetableDao.h"
 
 1566832769 source:c:\users\user\documents\studia\pk\menager2019\test2\src\timetablehelper.cpp
