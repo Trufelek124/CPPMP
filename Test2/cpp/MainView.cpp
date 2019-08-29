@@ -34,3 +34,8 @@ int MainView::getUserInput(){
     std::cin >> response;
     return response;
 }
+
+void MainView::displayMatchScore(int homeClubId, int awayClubId, int homeTeamGoals, int awayTeamGoals){
+    std::cout << homeClubId << " vs " << awayClubId << std::endl;
+    std::cout << homeTeamGoals << " : " << awayTeamGoals << std::endl;
+}

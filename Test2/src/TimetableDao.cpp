@@ -2,7 +2,7 @@
 
 TimetableDao::TimetableDao()
 {
-    //ctor
+    timetableViewVar = new TimetableView();
 }
 
 TimetableDao::~TimetableDao()
@@ -35,6 +35,8 @@ std::vector<Timetable> TimetableDao::getTimetables(){
                 seasonId = sqlite3_column_text(stmt, 4);
                 springFall = sqlite3_column_text(stmt, 5);
                 result = sqlite3_column_text(stmt, 6);
+                goalsScored = sqlite3_column_text(stmt, 7);
+                goalsLost = sqlite3_column_text(stmt, 8);
 
                 idString = std::string(reinterpret_cast<const char*>(id));
                 homeClubString = std::string(reinterpret_cast<const char*>(homeClub));
@@ -43,6 +45,8 @@ std::vector<Timetable> TimetableDao::getTimetables(){
                 seasonIdString = std::string(reinterpret_cast<const char*>(seasonId));
                 springFallString = std::string(reinterpret_cast<const char*>(springFall));
                 resultString = std::string(reinterpret_cast<const char*>(result));
+                goalsScoredString = std::string(reinterpret_cast<const char*>(goalsScored));
+                goalsLostString = std::string(reinterpret_cast<const char*>(goalsLost));
 
                 timetableTmp->setSeasonId(std::stoi(idString));
                 timetableTmp->setHomeClub(std::stoi(homeClubString));
@@ -51,6 +55,8 @@ std::vector<Timetable> TimetableDao::getTimetables(){
                 timetableTmp->setSeasonId(std::stoi(seasonIdString));
                 timetableTmp->setSpringFall(std::stoi(springFallString));
                 timetableTmp->setResult(resultString);
+                timetableTmp->setGoalsScored(std::stoi(goalsScoredString));
+                timetableTmp->setGoalsLost(std::stoi(goalsLostString));
 
                 timetables.push_back(*timetableTmp);
 
@@ -71,9 +77,9 @@ std::vector<Timetable> TimetableDao::getTimetables(){
 
 int TimetableDao::saveTimetable(Timetable timetableVar){
  int timetableId;
- std::string sql =  "INSERT INTO TIMETABLES(HOME_CLUB, AWAY_CLUB, MATCHWEEK, SEASON_ID, SPRING_FALL, RESULT) "
+ std::string sql =  "INSERT INTO TIMETABLES(HOME_CLUB, AWAY_CLUB, MATCHWEEK, SEASON_ID, SPRING_FALL, RESULT, GOALS_SCORED, GOALS_LOST) "
                       "VALUES ("+std::to_string(timetableVar.getHomeClub())+", "+std::to_string(timetableVar.getAwayClub())+", "+std::to_string(timetableVar.getMatchweek())+
-                      ", "+std::to_string(timetableVar.getSeasonId())+", "+std::to_string(timetableVar.getSpringFall())+", \'"+timetableVar.getResult()+"\');";
+                      ", "+std::to_string(timetableVar.getSeasonId())+", "+std::to_string(timetableVar.getSpringFall())+", \'"+timetableVar.getResult()+"\', " + std::to_string(timetableVar.getGoalsScored()) + ", " + std::to_string(timetableVar.getGoalsLost()) + ");";
 
     exit = sqlite3_open("test.db", &DB);
     char* messaggeError;
@@ -98,6 +104,8 @@ void TimetableDao::updateTimetable(Timetable timetableVar){
                     "MATCHWEEK = " + std::to_string(timetableVar.getMatchweek()) + ", "
                     "SEASON_ID = " + std::to_string(timetableVar.getSeasonId()) + ", "
                     "SPRING_FALL = " + std::to_string(timetableVar.getSpringFall()) +", "
+                    "GOALS_SCORED = " + std::to_string(timetableVar.getGoalsScored()) +", "
+                    "GOALS_LOST = " + std::to_string(timetableVar.getGoalsLost()) +", "
                     "RESULT = " + timetableVar.getResult() +" "
                     "WHERE TIMETABLE_ID = "+std::to_string(timetableVar.getTimetableId())+";";
 
@@ -140,6 +148,8 @@ std::vector<Timetable> TimetableDao::getTimetablesForSeason(int seasonIdQuery){
                 seasonId = sqlite3_column_text(stmt, 4);
                 springFall = sqlite3_column_text(stmt, 5);
                 result = sqlite3_column_text(stmt, 6);
+                goalsScored = sqlite3_column_text(stmt, 7);
+                goalsLost = sqlite3_column_text(stmt, 8);
 
                 idString = std::string(reinterpret_cast<const char*>(id));
                 homeClubString = std::string(reinterpret_cast<const char*>(homeClub));
@@ -148,6 +158,8 @@ std::vector<Timetable> TimetableDao::getTimetablesForSeason(int seasonIdQuery){
                 seasonIdString = std::string(reinterpret_cast<const char*>(seasonId));
                 springFallString = std::string(reinterpret_cast<const char*>(springFall));
                 resultString = std::string(reinterpret_cast<const char*>(result));
+                goalsScoredString = std::string(reinterpret_cast<const char*>(goalsScored));
+                goalsLostString = std::string(reinterpret_cast<const char*>(goalsLost));
 
                 timetableTmp->setSeasonId(std::stoi(idString));
                 timetableTmp->setHomeClub(std::stoi(homeClubString));
@@ -156,6 +168,8 @@ std::vector<Timetable> TimetableDao::getTimetablesForSeason(int seasonIdQuery){
                 timetableTmp->setSeasonId(std::stoi(seasonIdString));
                 timetableTmp->setSpringFall(std::stoi(springFallString));
                 timetableTmp->setResult(resultString);
+                timetableTmp->setGoalsScored(std::stoi(goalsScoredString));
+                timetableTmp->setGoalsLost(std::stoi(goalsLostString));
 
                 timetables.push_back(*timetableTmp);
 
@@ -213,6 +227,8 @@ std::vector<Timetable> TimetableDao::getTimetablesForClubForSeason(int clubIdQue
                 seasonId = sqlite3_column_text(stmt, 4);
                 springFall = sqlite3_column_text(stmt, 5);
                 result = sqlite3_column_text(stmt, 6);
+                goalsScored = sqlite3_column_text(stmt, 7);
+                goalsLost = sqlite3_column_text(stmt, 8);
 
                 idString = std::string(reinterpret_cast<const char*>(id));
                 homeClubString = std::string(reinterpret_cast<const char*>(homeClub));
@@ -221,6 +237,8 @@ std::vector<Timetable> TimetableDao::getTimetablesForClubForSeason(int clubIdQue
                 seasonIdString = std::string(reinterpret_cast<const char*>(seasonId));
                 springFallString = std::string(reinterpret_cast<const char*>(springFall));
                 resultString = std::string(reinterpret_cast<const char*>(result));
+                goalsScoredString = std::string(reinterpret_cast<const char*>(goalsScored));
+                goalsLostString = std::string(reinterpret_cast<const char*>(goalsLost));
 
                 timetableTmp->setSeasonId(std::stoi(idString));
                 timetableTmp->setHomeClub(std::stoi(homeClubString));
@@ -229,6 +247,8 @@ std::vector<Timetable> TimetableDao::getTimetablesForClubForSeason(int clubIdQue
                 timetableTmp->setSeasonId(std::stoi(seasonIdString));
                 timetableTmp->setSpringFall(std::stoi(springFallString));
                 timetableTmp->setResult(resultString);
+                timetableTmp->setGoalsScored(std::stoi(goalsScoredString));
+                timetableTmp->setGoalsLost(std::stoi(goalsLostString));
 
                 timetables.push_back(*timetableTmp);
 
@@ -257,12 +277,10 @@ std::vector<Timetable> TimetableDao::getTimetablesForMatchweek(int matchweekVar,
     std::string sqlClub;
     std::string sqlSeason;
 
-
     sql = "SELECT * from TIMETABLE WHERE MATCHWEEK = " + std::to_string(matchweekVar) + " AND SEASON_ID = " + std::to_string(seasonIdQuery) + ";";
 
     sqlite3_prepare(DB, sql.c_str(), -1, &stmt, NULL);
     sqlite3_prepare(DB, q, sizeof q, &stmt, NULL);
-
     bool done = false;
     while (!done) {
         switch (sqlite3_step (stmt)) {
@@ -275,6 +293,8 @@ std::vector<Timetable> TimetableDao::getTimetablesForMatchweek(int matchweekVar,
                 seasonId = sqlite3_column_text(stmt, 4);
                 springFall = sqlite3_column_text(stmt, 5);
                 result = sqlite3_column_text(stmt, 6);
+                goalsScored = sqlite3_column_text(stmt, 7);
+                goalsLost = sqlite3_column_text(stmt, 8);
 
                 idString = std::string(reinterpret_cast<const char*>(id));
                 homeClubString = std::string(reinterpret_cast<const char*>(homeClub));
@@ -283,6 +303,8 @@ std::vector<Timetable> TimetableDao::getTimetablesForMatchweek(int matchweekVar,
                 seasonIdString = std::string(reinterpret_cast<const char*>(seasonId));
                 springFallString = std::string(reinterpret_cast<const char*>(springFall));
                 resultString = std::string(reinterpret_cast<const char*>(result));
+                goalsScoredString = std::string(reinterpret_cast<const char*>(goalsScored));
+                goalsLostString = std::string(reinterpret_cast<const char*>(goalsLost));
 
                 timetableTmp->setSeasonId(std::stoi(idString));
                 timetableTmp->setHomeClub(std::stoi(homeClubString));
@@ -291,8 +313,12 @@ std::vector<Timetable> TimetableDao::getTimetablesForMatchweek(int matchweekVar,
                 timetableTmp->setSeasonId(std::stoi(seasonIdString));
                 timetableTmp->setSpringFall(std::stoi(springFallString));
                 timetableTmp->setResult(resultString);
+                timetableTmp->setGoalsScored(std::stoi(goalsScoredString));
+                timetableTmp->setGoalsLost(std::stoi(goalsLostString));
 
-                timetables.push_back(*timetableTmp);
+                if(std::stoi(matchweekString) == matchweekVar){
+                    timetables.push_back(*timetableTmp);
+                }
 
                 row++;
                 break;
@@ -336,6 +362,8 @@ Timetable TimetableDao::getTimetable(int timetableId){
                 seasonId = sqlite3_column_text(stmt, 4);
                 springFall = sqlite3_column_text(stmt, 5);
                 result = sqlite3_column_text(stmt, 6);
+                goalsScored = sqlite3_column_text(stmt, 7);
+                goalsLost = sqlite3_column_text(stmt, 8);
 
                 idString = std::string(reinterpret_cast<const char*>(id));
                 homeClubString = std::string(reinterpret_cast<const char*>(homeClub));
@@ -344,6 +372,8 @@ Timetable TimetableDao::getTimetable(int timetableId){
                 seasonIdString = std::string(reinterpret_cast<const char*>(seasonId));
                 springFallString = std::string(reinterpret_cast<const char*>(springFall));
                 resultString = std::string(reinterpret_cast<const char*>(result));
+                goalsScoredString = std::string(reinterpret_cast<const char*>(goalsScored));
+                goalsLostString = std::string(reinterpret_cast<const char*>(goalsLost));
 
                 timetableTmp->setSeasonId(std::stoi(idString));
                 timetableTmp->setHomeClub(std::stoi(homeClubString));
@@ -352,6 +382,8 @@ Timetable TimetableDao::getTimetable(int timetableId){
                 timetableTmp->setSeasonId(std::stoi(seasonIdString));
                 timetableTmp->setSpringFall(std::stoi(springFallString));
                 timetableTmp->setResult(resultString);
+                timetableTmp->setGoalsScored(std::stoi(goalsScoredString));
+                timetableTmp->setGoalsLost(std::stoi(goalsLostString));
 
                 timetables.push_back(*timetableTmp);
 
@@ -376,25 +408,22 @@ Timetable TimetableDao::getTimetable(int timetableId){
 
 
 void TimetableDao::saveTimetables(std::vector<Timetable> timetablesVar){
+    Timetable timetableVar;
+    exit = sqlite3_open("test.db", &DB);
 
-Timetable timetableVar;
-exit = sqlite3_open("test.db", &DB);
+    for(int i = 0; i < timetablesVar.size(); i++){
+        timetableVar = timetablesVar.at(i);
+        std::string sql =  "INSERT INTO TIMETABLES(HOME_CLUB, AWAY_CLUB, MATCHWEEK, SEASON_ID, SPRING_FALL, RESULT, GOALS_SCORED, GOALS_LOST) "
+                           "VALUES ("+std::to_string(timetableVar.getHomeClub())+", "+std::to_string(timetableVar.getAwayClub())+", "+std::to_string(timetableVar.getMatchweek())+
+                           ", "+std::to_string(timetableVar.getSeasonId())+", "+std::to_string(timetableVar.getSpringFall())+", \'"+timetableVar.getResult()+"\', " + std::to_string(timetableVar.getGoalsScored()) + ", " + std::to_string(timetableVar.getGoalsLost()) + ");";
+        char* messaggeError;
+        exit = sqlite3_exec(DB, sql.c_str(), NULL, 0, &messaggeError);
 
-for(int i = 0; i < timetablesVar.size(); i++){
-
-    timetableVar = timetablesVar.at(i);
-    std::string sql =  "INSERT INTO TIMETABLES(HOME_CLUB, AWAY_CLUB, MATCHWEEK, SEASON_ID, SPRING_FALL, RESULT) "
-                      "VALUES ("+std::to_string(timetableVar.getHomeClub())+", "+std::to_string(timetableVar.getAwayClub())+", "+std::to_string(timetableVar.getMatchweek())+
-                      ", "+std::to_string(timetableVar.getSeasonId())+", "+std::to_string(timetableVar.getSpringFall())+", \'"+timetableVar.getResult()+"\');";
-//std::cout << sql << std::endl;
-    char* messaggeError;
-    exit = sqlite3_exec(DB, sql.c_str(), NULL, 0, &messaggeError);
-
-    if (exit != SQLITE_OK) {
-        std::cerr << "Error inserting records" << std::endl;
-        std::cerr << messaggeError << std::endl;
-        sqlite3_free(messaggeError);
+        if (exit != SQLITE_OK) {
+            std::cerr << "Error inserting records" << std::endl;
+            std::cerr << messaggeError << std::endl;
+            sqlite3_free(messaggeError);
+        }
     }
-}
-sqlite3_close(DB);
+    sqlite3_close(DB);
 };

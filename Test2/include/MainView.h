@@ -10,6 +10,7 @@ class MainView
         virtual ~MainView();
 
         void displayTestMenu();
+        void displayMatchScore(int homeClubId, int awayClubId, int homeTeamGoals, int awayTeamGoals);
         int getUserInput();
 
     protected:

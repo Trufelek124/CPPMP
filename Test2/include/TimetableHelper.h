@@ -9,6 +9,7 @@
 #include <algorithm>
 #include <cstdlib>
 #include "TimetableDao.h"
+#include "TimetableView.h"
 
 class TimetableHelper
 {
@@ -23,6 +24,7 @@ class TimetableHelper
 
     private:
         TimetableDao* timetableDao;
+        TimetableView* timetableViewVar;
 };
 
 #endif // TIMETABLEHELPER_H

@@ -6,9 +6,12 @@
 #include "TimetableDao.h"
 #include "Player.h"
 #include "PlayersDao.h"
+#include "PlayerView.h"
 #include "Club.h"
 #include "ClubsDao.h"
+#include "MainView.h"
 #include <random>
+#include <iostream>
 
 class MatchHelper
 {
@@ -28,6 +31,8 @@ class MatchHelper
         PlayersDao* playersDao;
         ClubsDao* clubsDao;
         TimetableDao* timetableDao;
+        PlayerView* playerView;
+        MainView* mainView;
 };
 
 #endif // MATCHHELPER_H

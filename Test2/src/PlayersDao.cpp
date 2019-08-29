@@ -148,8 +148,7 @@ int PlayersDao::savePlayer(Player playerVar){
         std::cerr << "Error inserting records" << std::endl;
         std::cerr << messaggeError << std::endl;
         sqlite3_free(messaggeError);
-    } else
-        std::cout << "Records inserted successfully" << std::endl;
+    }
 
     playerId = sqlite3_last_insert_rowid(DB);
     sqlite3_close(DB);

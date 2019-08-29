@@ -12,6 +12,7 @@ class PlayerView
         virtual ~PlayerView();
 
         void displayPlayersList(std::vector<Player> players);
+        void displayPlayer(Player player);
 
     protected:
 

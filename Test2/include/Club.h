@@ -27,6 +27,10 @@ class Club
         void setPlayers(std::vector<Player> val) { players = val; }
         int getPlayerClub() { return playerClub; }
         void setPlayerClub(int val) { playerClub = val; }
+        int getGoalsScored() { return goalsScored; }
+        void setGoalsScored(int val) { goalsScored = val; }
+        int getGoalsLost() { return goalsLost; }
+        void setGoalsLost(int val) { goalsLost = val; }
 
     protected:
 
@@ -39,6 +43,8 @@ class Club
         int leagueId;
         std::vector<Player> players;
         int playerClub;
+        int goalsScored;
+        int goalsLost;
 };
 
 #endif // CLUB_H

@@ -132,10 +132,13 @@ void Game::programSetup(){
             clubTestVar.setPlayers(players);
             clubViewVar->displayClubInfo(clubTestVar);
         }
+        if(timetablesVec.empty()){
+            timetableHelperVar->createTimetableForSeason(1, clubsVec);
+            timetablesVec = timetableDao->getTimetables();
+            timetableViewVar->displayTimetableList(timetablesVec);
+        }
+        matchweek(0);
 
-        timetableHelperVar->createTimetableForSeason(1, clubsVec);
-        timetablesVec = timetableDao->getTimetables();
-        timetableViewVar->displayTimetableList(timetablesVec);
     } else {
         std::cout << "No data in database" << std::endl;
     }
@@ -144,9 +147,11 @@ void Game::programSetup(){
 void Game::matchweek(int matchweek){
     if(!timetablesVec.empty()){
         clubsVec = clubsDao->getClubs();
-        for(int i = 0; i < (clubsVec.size()-1)*2; i++){ //kolejki
-            timetablesVecMatchweek = timetableDao->getTimetablesForMatchweek(i+1, 1); //na razie sezon = 1
+        for(int i = 0; i < (clubsVec.size()-1)*2; i++){ //kolejki - 12
+            timetablesVecMatchweek = timetableDao->getTimetablesForMatchweek(i+1, 1); //na razie sezon = 1 - 3
+            std::cout << "Kolejka: " << i << std::endl;
             for(int j = 0; j < timetablesVecMatchweek.size(); j++){
+                std::cout << "Mecz: " << j << std::endl;
                 Timetable tmp = timetablesVecMatchweek.at(j);
                 matchHelperVar->match(tmp.getHomeClub(), tmp.getAwayClub(), tmp.getTimetableId(), clubsVec);
             }

@@ -16,3 +16,8 @@ void PlayerView::displayPlayersList(std::vector<Player> players){
         std::cout << player.getPlayerId() << " " << player.getName() << " " << player.getPosition() << " " << player.getClubId() << std::endl;
     };
 };
+
+
+void PlayerView::displayPlayer(Player player){
+    std::cout << player.getPlayerId() << " " << player.getName() << " " << player.getPosition() << " " << player.getClubId() << std::endl;
+};

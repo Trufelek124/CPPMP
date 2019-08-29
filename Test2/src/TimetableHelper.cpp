@@ -3,6 +3,7 @@
 TimetableHelper::TimetableHelper()
 {
     timetableDao = new TimetableDao();
+    timetableViewVar = new TimetableView();
 }
 
 TimetableHelper::~TimetableHelper()
@@ -39,7 +40,6 @@ std::vector<Timetable> TimetableHelper::createTimetableForSeason(int seasonId, s
         std::vector<int> isConflict;
 
         while(!done){
-
             //randomizacja tabeli idków
             std::srand ( unsigned ( std::time(0) ) );
             std::random_shuffle(clubIds.begin(), clubIds.end());
@@ -64,7 +64,6 @@ std::vector<Timetable> TimetableHelper::createTimetableForSeason(int seasonId, s
                     }
 
                     matchStringTmp = homeClubStringTmp + awayClubStringTmp;
-
                     //tutaj mamy stringa dla ka¿dego z nowych meczów - musimy ka¿dy sprawdziæ i jak jakikolwiek bêdzie
                     //siê powtarza³, to ca³oœæ robimy jeszcze raz. Mo¿na daæ while zmienna - i jak bêdzie powtórzone to
                     //dajemy zmienn¹ na false - normalnie od pocz¹tku jest na true
@@ -95,7 +94,7 @@ std::vector<Timetable> TimetableHelper::createTimetableForSeason(int seasonId, s
             timetableVar->setSeasonId(seasonId);
             timetableVar->setMatchweek(x+1);
             timetableVar->setSpringFall(0);
-            timetableVar->setResult("NOT PLAYED");
+            timetableVar->setResult(std::string("NOT PLAYED"));
             timetables.push_back(*timetableVar);
 
             //tworzenie stringa do sprawdzania czy mecze siê nie powtarzaj¹
@@ -115,7 +114,6 @@ std::vector<Timetable> TimetableHelper::createTimetableForSeason(int seasonId, s
             simplifiedTimetable.push_back(matchStringTmp);
         }
     }
-
     for(int i = 0; i < timetables.size(); i++){
         Timetable timetableTmp = timetables.at(i);
         Timetable* timetableFall = new Timetable();
@@ -124,13 +122,13 @@ std::vector<Timetable> TimetableHelper::createTimetableForSeason(int seasonId, s
         timetableFall->setHomeClub(timetableTmp.getAwayClub());
         timetableFall->setAwayClub(timetableTmp.getHomeClub());
         timetableFall->setMatchweek(timetableTmp.getMatchweek()+clubsSize-1);
-        timetableFall->setResult("NOT PLAYED");
+        timetableFall->setResult(std::string("NOT PLAYED"));
         timetablesFall.push_back(*timetableFall);
         //timetables.push_back(*timetableFall);
     }
     timetables.insert(timetables.end(), timetablesFall.begin(), timetablesFall.end());
+    //timetableViewVar->displayTimetableList(timetables);
     timetableDao->saveTimetables(timetables);
-
     return timetables;
 };
 

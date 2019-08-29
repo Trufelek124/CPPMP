@@ -28,6 +28,8 @@ class ClubsDao
         const unsigned char* position;
         const unsigned char* leagueId;
         const unsigned char* playerClub;
+        const unsigned char* goalsScored;
+        const unsigned char* goalsLost;
 
         std::string idString;
         std::string nameString;
@@ -36,6 +38,8 @@ class ClubsDao
         std::string positionString;
         std::string leagueIdString;
         std::string playerClubString;
+        std::string goalsScoredString;
+        std::string goalsLostString;
 
 
         std::vector<Club> getClubs();

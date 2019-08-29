@@ -5,6 +5,7 @@
 #include<vector>
 #include <sqlite3.h>
 #include <iostream>
+#include "TimetableView.h"
 
 class TimetableDao
 {
@@ -27,6 +28,8 @@ class TimetableDao
         const unsigned char* seasonId;
         const unsigned char* springFall;
         const unsigned char* result;
+        const unsigned char* goalsScored;
+        const unsigned char* goalsLost;
 
         std::string idString;
         std::string homeClubString;
@@ -35,6 +38,8 @@ class TimetableDao
         std::string seasonIdString;
         std::string springFallString;
         std::string resultString;
+        std::string goalsScoredString;
+        std::string goalsLostString;
 
         std::vector<Timetable> getTimetables();
         std::vector<Timetable> getTimetablesForSeason(int seasonIdQuery);
@@ -48,6 +53,7 @@ class TimetableDao
     protected:
 
     private:
+        TimetableView* timetableViewVar;
 };
 
 #endif // TIMETABLEDAO_H
