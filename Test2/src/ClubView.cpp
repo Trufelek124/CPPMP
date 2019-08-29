@@ -15,13 +15,15 @@ void ClubView::displayClubInfo(Club club){
     std::cout<< club.getName() << myClub << std::endl;
     std::cout << "Position: " << club.getPosition() << std::endl;
     std::cout << "Points: " << club.getPoints() << std::endl;
+    std::cout << "Goals scored: " << club.getGoalsScored() << std::endl;
+    std::cout << "Goals lost: " << club.getGoalsLost() << std::endl;
     std::cout << "Players:" << std::endl;
     playerViewVar->displayPlayersList(club.getPlayers());
 };
 
 void ClubView::displayClubInfoInLine(Club club){
     std::string myClub = club.getPlayerClub() == 1 ? " MY CLUB" : "";
-    std::cout<< club.getName() << " - position: " << club.getPosition() << " - points: " << club.getPoints() << myClub << std::endl;
+    std::cout<< club.getName() << " - position: " << club.getPosition() << " - points: " << club.getPoints() << " - goals scored: " << club.getGoalsScored() << " - goals lost: " << club.getGoalsLost() << " " << myClub << std::endl;
 };
 
 void ClubView::displayClubList(std::vector<Club> clubs){

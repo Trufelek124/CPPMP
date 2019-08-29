@@ -4,6 +4,7 @@
 #include <vector>
 #include "Timetable.h"
 #include "TimetableDao.h"
+#include "TimetableView.h"
 #include "Player.h"
 #include "PlayersDao.h"
 #include "PlayerView.h"
@@ -19,7 +20,7 @@ class MatchHelper
         MatchHelper();
         virtual ~MatchHelper();
 
-        void match(int homeClubId, int awayClubId, int timetableId, std::vector<Club> clubsVec);
+        void match(int homeClubId, int awayClubId, Timetable timetable, std::vector<Club> clubsVec);
         double getGkStrength(Player tmpPlayer);
         double getCbStrength(Player tmpPlayer);
         double getMfStrength(Player tmpPlayer);
@@ -31,6 +32,7 @@ class MatchHelper
         PlayersDao* playersDao;
         ClubsDao* clubsDao;
         TimetableDao* timetableDao;
+        TimetableView* timetableView;
         PlayerView* playerView;
         MainView* mainView;
 };

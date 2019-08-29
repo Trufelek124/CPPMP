@@ -16,6 +16,7 @@ class TimetableDao
         sqlite3* DB;
         int exit;
         sqlite3_stmt* stmt;
+        sqlite3_stmt* stmt2;
         int row = 0;
         int bytes;
         Timetable* timetableTmp;
@@ -28,8 +29,8 @@ class TimetableDao
         const unsigned char* seasonId;
         const unsigned char* springFall;
         const unsigned char* result;
-        const unsigned char* goalsScored;
-        const unsigned char* goalsLost;
+        const unsigned char* homeTeamGoals;
+        const unsigned char* awayTeamGoals;
 
         std::string idString;
         std::string homeClubString;
@@ -38,8 +39,8 @@ class TimetableDao
         std::string seasonIdString;
         std::string springFallString;
         std::string resultString;
-        std::string goalsScoredString;
-        std::string goalsLostString;
+        std::string homeTeamGoalsString;
+        std::string awayTeamGoalsString;
 
         std::vector<Timetable> getTimetables();
         std::vector<Timetable> getTimetablesForSeason(int seasonIdQuery);

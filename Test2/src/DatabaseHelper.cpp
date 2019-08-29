@@ -44,7 +44,7 @@ void DatabaseHelper::createTables(){
                       "LEAGUE_ID    INT    NOT NULL, "
                       "PLAYER_CLUB  INT    NOT NULL, "
                       "GOALS_SCORED INT    NOT NULL, "
-                      "GOALS_LOST   INT    NOT NULL; "
+                      "GOALS_LOST   INT    NOT NULL); "
 
                       "CREATE TABLE TIMETABLES("
                       "TIMETABLE_ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "
@@ -54,13 +54,13 @@ void DatabaseHelper::createTables(){
                       "SEASON_ID    INT    NOT NULL, "
                       "SPRING_FALL  INT    NOT NULL, "
                       "RESULT       TEXT   NOT NULL, "
-                      "GOALS_SCORED INT, "
-                      "GOALS_LOST   INT);"
+                      "HOME_TEAM_GOALS INT, "
+                      "AWAY_TEAM_GOALS INT); "
 
                       "CREATE TABLE LEAGUES("
                       "LEAGUE_ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "
                       "SEASON_ID     INT   NOT NULL, "
-                      "MATCHWEEK     INT    NOT NULL);"
+                      "MATCHWEEK     INT   NOT NULL); "
 
                       "CREATE TABLE SEASONS("
                       "SEASON_ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "

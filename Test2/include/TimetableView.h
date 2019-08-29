@@ -12,6 +12,7 @@ class TimetableView
         virtual ~TimetableView();
 
         void displayTimetableList(std::vector<Timetable> timetables);
+        void displayTimetable(Timetable timetable);
 
     protected:
 

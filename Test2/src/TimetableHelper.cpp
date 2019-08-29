@@ -95,6 +95,8 @@ std::vector<Timetable> TimetableHelper::createTimetableForSeason(int seasonId, s
             timetableVar->setMatchweek(x+1);
             timetableVar->setSpringFall(0);
             timetableVar->setResult(std::string("NOT PLAYED"));
+            timetableVar->setHomeTeamGoals(0);
+            timetableVar->setAwayTeamGoals(0);
             timetables.push_back(*timetableVar);
 
             //tworzenie stringa do sprawdzania czy mecze siê nie powtarzaj¹
@@ -123,6 +125,8 @@ std::vector<Timetable> TimetableHelper::createTimetableForSeason(int seasonId, s
         timetableFall->setAwayClub(timetableTmp.getHomeClub());
         timetableFall->setMatchweek(timetableTmp.getMatchweek()+clubsSize-1);
         timetableFall->setResult(std::string("NOT PLAYED"));
+        timetableFall->setHomeTeamGoals(0);
+        timetableFall->setAwayTeamGoals(0);
         timetablesFall.push_back(*timetableFall);
         //timetables.push_back(*timetableFall);
     }

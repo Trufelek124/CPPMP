@@ -7,6 +7,7 @@ MatchHelper::MatchHelper()
     timetableDao = new TimetableDao();
     playerView = new PlayerView();
     mainView = new MainView();
+    timetableView = new TimetableView();
 }
 
 MatchHelper::~MatchHelper()
@@ -14,7 +15,7 @@ MatchHelper::~MatchHelper()
     //dtor
 }
 
-void MatchHelper::match(int homeClubId, int awayClubId, int timetableId, std::vector<Club> clubsVec){
+void MatchHelper::match(int homeClubId, int awayClubId, Timetable timetable, std::vector<Club> clubsVec){
     Club tmp;
     Player tmpPlayer;
     Club homeClub;
@@ -38,35 +39,24 @@ void MatchHelper::match(int homeClubId, int awayClubId, int timetableId, std::ve
     double homeTeamShotsSaved;
     int awayTeamChancesCreated;
     double awayTeamShotsSaved;
+    std::string resultString;
 
-    if(!clubsVec.empty()){
-        for(int i = 0; i < clubsVec.size(); i++){
-            tmp = clubsVec.at(i);
-            if(tmp.getClubId() == homeClubId)
-                homeClub = clubsVec.at(i);
-            if(tmp.getClubId() == awayClubId)
-                awayClub = clubsVec.at(i);
-        }
 
-        homeTeamPlayers = homeClub.getPlayers();
-        awayTeamPlayers = awayClub.getPlayers();
-    } else {
-        homeClub = clubsDao->getClub(homeClubId);
-        awayClub = clubsDao->getClub(awayClubId);
+    homeClub = clubsDao->getClub(homeClubId);
+    awayClub = clubsDao->getClub(awayClubId);
 
-        homeTeamPlayers = playersDao->getPlayersForClub(homeClubId);
-        awayTeamPlayers = playersDao->getPlayersForClub(awayClubId);
+   // if(homeClub.getPlayers().empty()){
+    homeTeamPlayers = playersDao->getPlayersForClub(homeClubId);
+    awayTeamPlayers = playersDao->getPlayersForClub(awayClubId);
 
-        homeClub.setPlayers(homeTeamPlayers);
-        awayClub.setPlayers(awayTeamPlayers);
-    }
+    homeClub.setPlayers(homeTeamPlayers);
+    awayClub.setPlayers(awayTeamPlayers);
+  //  }
 
     if(homeTeamPlayers.empty() || awayTeamPlayers.empty()){
         homeTeamPlayers = playersDao->getPlayersForClub(homeClubId);
         awayTeamPlayers = playersDao->getPlayersForClub(awayClubId);
     }
-
-    Timetable timetable = timetableDao->getTimetable(timetableId);
 
     std::random_device rd;
     std::mt19937 gen(rd());
@@ -169,19 +159,52 @@ void MatchHelper::match(int homeClubId, int awayClubId, int timetableId, std::ve
     //TODO
     //Algorytm meczowy
 
-    homeTeamChancesCreated = (int) ((((homeTeamSTStrength/100)*8 + (homeTeamMFStrength/100)*3 + (homeTeamCBStrength/100)) + homeFieldAdvantage) * (1/luckHomeTeam));
-    awayTeamChancesCreated = (int) (((awayTeamSTStrength/100)*8 + (awayTeamMFStrength/100)*3 + (awayTeamCBStrength/100)) * (1/luckAwayTeam));
+    homeTeamChancesCreated = (int) (((homeTeamSTStrength/100)*8 + (homeTeamMFStrength/100)*3 + (homeTeamCBStrength/100) + 0.5 + homeFieldAdvantage) * (1/luckHomeTeam));
+    awayTeamChancesCreated = (int) (((awayTeamSTStrength/100)*8 + (awayTeamMFStrength/100)*3 + (awayTeamCBStrength/100) + 0.5) * (1/luckAwayTeam));
 
     //Percent of saved shots
-    homeTeamShotsSaved = (((homeTeamGKStrength/100)*0.8 + (awayTeamCBStrength/100)*0.5 + ((homeFieldAdvantage/100)*5)) + (luckHomeTeam/100)*5);
-    awayTeamShotsSaved = (((homeTeamGKStrength/100)*0.8 + (awayTeamCBStrength/100)*0.5) + (luckAwayTeam/100)*5);
+    homeTeamShotsSaved = ((homeTeamGKStrength/100)*0.7 + (awayTeamCBStrength/100)*0.25 + (homeFieldAdvantage/100) + (luckHomeTeam/100)*5);
+    awayTeamShotsSaved = ((homeTeamGKStrength/100)*0.7 + (awayTeamCBStrength/100)*0.25 + (luckAwayTeam/100)*5);
 
-
-    homeTeamGoals = homeTeamShotsSaved/(awayTeamShotsSaved*10);
-    awayTeamGoals = awayTeamChancesCreated/(homeTeamShotsSaved*10);
+    homeTeamGoals = (int) (homeTeamChancesCreated/(awayTeamShotsSaved*10));
+    awayTeamGoals = (int) (awayTeamChancesCreated/(homeTeamShotsSaved*10));
 
     mainView->displayMatchScore(homeClubId, awayClubId, homeTeamGoals, awayTeamGoals);
 
+    homeClub.setGoalsScored(homeClub.getGoalsScored()+homeTeamGoals);
+    homeClub.setGoalsLost(homeClub.getGoalsLost()+awayTeamGoals);
+    awayClub.setGoalsScored(awayClub.getGoalsScored()+awayTeamGoals);
+    awayClub.setGoalsLost(awayClub.getGoalsLost()+homeTeamGoals);
+
+    int points = 0, points2 = 0;
+
+    if(homeTeamGoals == awayTeamGoals){
+        //draw
+        resultString = "DRAW";
+        points = homeClub.getPoints()+1;
+        homeClub.setPoints(points);
+        points2 = awayClub.getPoints()+1;
+        awayClub.setPoints(points2);
+    } else if (homeTeamGoals > awayTeamGoals){
+        //home teams wins
+        resultString = homeClub.getName() + " WINS";
+        points = homeClub.getPoints()+3;
+        homeClub.setPoints(points);
+    } else {
+        //away team wins
+        resultString = awayClub.getName() + " WINS";
+        points = awayClub.getPoints()+3;
+        awayClub.setPoints(points);
+    }
+
+    timetable.setResult(resultString);
+    timetable.setHomeTeamGoals(homeTeamGoals);
+    timetable.setAwayTeamGoals(awayTeamGoals);
+
+    //timetableView->displayTimetable(timetable);
+    timetableDao->updateTimetable(timetable);
+    clubsDao->updateClub(homeClub);
+    clubsDao->updateClub(awayClub);
 }
 
 double MatchHelper::getGkStrength(Player tmpPlayer){

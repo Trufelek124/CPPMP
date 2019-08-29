@@ -23,10 +23,10 @@ class Timetable
         void setMatchweek(int val) { matchweek = val; }
         std::string getResult() { return result; }
         void setResult(std::string val) { result = val; }
-        int getGoalsScored() { return goalsScored; }
-        void setGoalsScored(int val) { goalsScored = val; }
-        int getGoalsLost() { return goalsLost; }
-        void setGoalsLost(int val) { goalsLost = val; }
+        int getHomeTeamGoals() { return homeTeamGoals; }
+        void setHomeTeamGoals(int val) { homeTeamGoals = val; }
+        int getAwayTeamGoals() { return awayTeamGoals; }
+        void setAwayTeamGoals(int val) { awayTeamGoals = val; }
 
     protected:
 
@@ -38,8 +38,9 @@ class Timetable
         int matchweek;
         int springFall; //0 - spring, 1 - fall
         std::string result;
-        int goalsScored;
-        int goalsLost;
+        int homeTeamGoals;
+        int awayTeamGoals;
+        int a;
 };
 
 #endif // TIMETABLE_H
