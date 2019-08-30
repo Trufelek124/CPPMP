@@ -11,6 +11,7 @@
 #include "TimetableHelper.h"
 #include "TimetableView.h"
 #include "ClubsDao.h"
+#include "ClubHelper.h"
 #include "SeasonsDao.h"
 #include "TimetableDao.h"
 #include "PlayerView.h"
@@ -48,6 +49,7 @@ class Game
         TimetableHelper* timetableHelperVar;
         PlayersHelper* playersHelperVar;
         MatchHelper* matchHelperVar;
+        ClubHelper* clubHelper;
 
         PlayersDao* playersDao;
         LeaguesDao* leaguesDao;

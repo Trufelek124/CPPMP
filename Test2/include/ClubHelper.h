@@ -6,6 +6,7 @@
 #include "ClubView.h"
 #include "MainView.h"
 #include <vector>
+#include<algorithm>
 
 
 class ClubHelper
@@ -15,6 +16,7 @@ class ClubHelper
         virtual ~ClubHelper();
 
         int setUserClub();
+        void updateClubsPosition(std::vector<Club> clubsVec);
 
     protected:
 

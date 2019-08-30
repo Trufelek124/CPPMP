@@ -15,6 +15,7 @@ void Game::setup(){
     timetableHelperVar = new TimetableHelper();
     playersHelperVar = new PlayersHelper();
     matchHelperVar = new MatchHelper();
+    clubHelper = new ClubHelper();
 
     playersDao = new PlayersDao();
     leaguesDao = new LeaguesDao();
@@ -155,6 +156,11 @@ void Game::matchweek(int matchweek){
                 //timetableViewVar->displayTimetable(tmp);
                 matchHelperVar->match(tmp.getHomeClub(), tmp.getAwayClub(), tmp, clubsVec);
             }
+
+            //oblicz pozycjê zespo³u
+            clubsVec = clubsDao->getClubs();
+            clubHelper->updateClubsPosition(clubsVec);
+
         }
 
         timetablesVec = timetableDao->getTimetables();
@@ -162,9 +168,8 @@ void Game::matchweek(int matchweek){
 
         clubsVec = clubsDao->getClubs();
 
-        for(int i = 0; i < clubsVec.size(); i++){
-            clubTmp = clubsVec.at(i);
-            clubViewVar->displayClubInfo(clubTmp);
-        }
+        std::vector<Club> clubsSortedByPoints = clubsVec;
+        std::sort(clubsSortedByPoints.begin(), clubsSortedByPoints.end(), ClubComparator());
+        clubViewVar->displayClubsInfo(clubsSortedByPoints);
     }
 }

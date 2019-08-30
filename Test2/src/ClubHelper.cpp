@@ -22,3 +22,25 @@ int ClubHelper::setUserClub(){
     clubsDao->updateClub(clubVarTmp);
     return clubVarTmp.getClubId();
 }
+
+void ClubHelper::updateClubsPosition(std::vector<Club> clubsVec){
+    std::vector<Club> clubsSortedByPoints = clubsVec;
+    std::sort(clubsSortedByPoints.begin(), clubsSortedByPoints.end(), ClubComparator());
+
+    int currentPoints = 0;
+    int currentPosition = 1;
+
+    for(int i = 0; i < clubsSortedByPoints.size(); i++){
+
+        Club tmp = clubsSortedByPoints.at(i);
+
+        if(currentPoints == 0 || currentPoints == tmp.getPoints()){
+            tmp.setPosition(currentPosition);
+        } else {
+            currentPosition += 1;
+            tmp.setPosition(currentPosition);
+        }
+        currentPoints = tmp.getPoints();
+        clubsDao->updateClub(tmp);
+    }
+}

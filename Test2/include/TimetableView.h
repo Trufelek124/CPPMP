@@ -4,6 +4,7 @@
 #include<iostream>
 #include "Timetable.h"
 #include <vector>
+#include <string>
 
 class TimetableView
 {

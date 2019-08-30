@@ -11,6 +11,10 @@ class Club
         Club();
         virtual ~Club();
 
+        int points;
+        int goalsScored;
+        int goalsLost;
+
         int getClubId() { return clubId; }
         void setClubId(int val) { clubId = val; }
         std::string getName() { return name; }
@@ -31,6 +35,12 @@ class Club
         void setGoalsScored(int val) { goalsScored = val; }
         int getGoalsLost() { return goalsLost; }
         void setGoalsLost(int val) { goalsLost = val; }
+        int getWins() { return wins; }
+        void setWins(int val) { wins = val; }
+        int getDraws() { return draws; }
+        void setDraws(int val) { draws = val; }
+        int getLoses() { return loses; }
+        void setLoses(int val) { loses = val; }
 
     protected:
 
@@ -38,13 +48,24 @@ class Club
         int clubId;
         std::string name;
         int budget;
-        int points;
         int position;
         int leagueId;
         std::vector<Player> players;
         int playerClub;
-        int goalsScored;
-        int goalsLost;
+        int wins;
+        int draws;
+        int loses;
+};
+
+struct ClubComparator
+{
+	bool operator ()(const Club & club1, const Club & club2)
+	{
+		if(club1.points == club2.points)
+			return ((club1.goalsScored - club1.goalsLost) > (club2.goalsScored - club2.goalsLost));
+		return club1.points > club2.points;
+
+	}
 };
 
 #endif // CLUB_H

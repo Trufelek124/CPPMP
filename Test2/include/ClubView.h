@@ -16,6 +16,7 @@ class ClubView
         void displayClubInfoInLine(Club club);
         void displayClubList(std::vector<Club> clubs);
         void displayClubSetup();
+        void displayClubsInfo(std::vector<Club> clubs);
 
     protected:
 
