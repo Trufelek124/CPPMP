@@ -14,6 +14,7 @@ ClubHelper::~ClubHelper()
 
 int ClubHelper::setUserClub(){
     clubsVec = clubsDao->getClubs();
+    std::cout << "Choose Your club" << std::endl;
     clubView->displayClubList(clubsVec);
     clubView->displayClubSetup();
     int userOption = mainView->getUserInput();

@@ -10,6 +10,7 @@
 #include <ctime>
 #include <algorithm>
 #include <cstdlib>
+#include <math.h>
 
 class PlayersHelper
 {
@@ -18,6 +19,11 @@ class PlayersHelper
         virtual ~PlayersHelper();
 
         void randommizeInitialSquads();
+        int getPlayerWorth(Player player);
+        double getGkStrength(Player tmpPlayer);
+        double getCbStrength(Player tmpPlayer);
+        double getMfStrength(Player tmpPlayer);
+        double getStStrength(Player tmpPlayer);
 
     protected:
 

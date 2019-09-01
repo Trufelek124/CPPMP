@@ -109,6 +109,9 @@
 		<Unit filename="include/TimetableView.h">
 			<Option virtualFolder="View/include/" />
 		</Unit>
+		<Unit filename="include/TransferListHelper.h">
+			<Option virtualFolder="Helper/include/" />
+		</Unit>
 		<Unit filename="main.cpp">
 			<Option virtualFolder="Controller/src/" />
 		</Unit>
@@ -168,6 +171,9 @@
 		</Unit>
 		<Unit filename="src/TimetableView.cpp">
 			<Option virtualFolder="View/src/" />
+		</Unit>
+		<Unit filename="src/TransferListHelper.cpp">
+			<Option virtualFolder="Helper/src/" />
 		</Unit>
 		<Extensions>
 			<code_completion />

@@ -8,6 +8,7 @@ MatchHelper::MatchHelper()
     playerView = new PlayerView();
     mainView = new MainView();
     timetableView = new TimetableView();
+    playersHelper = new PlayersHelper;
 }
 
 MatchHelper::~MatchHelper()
@@ -80,23 +81,20 @@ void MatchHelper::match(int homeClubId, int awayClubId, Timetable timetable, std
        double stStrength = 0.0;
 
        if(tmpPlayer.getPosition() == "GK"){
-            //handling, diving, kicking, reflexes
-            homeTeamGKStrength = getGkStrength(tmpPlayer);
+           //handling, diving, kicking, reflexes
+           awayTeamGKStrength = playersHelper->getGkStrength(tmpPlayer);
        } else if(tmpPlayer.getPosition() == "CB"){
-           //tackling, heading, marking, intercepting
-           cbStrength = getCbStrength(tmpPlayer);
-           //vision, crossing, shortPasses, longPasses, freeKicks, positioning, longShots
-           mfStrength = (getMfStrength(tmpPlayer)*0.25);
-           //positioning, finishing, power, volleys, longShots
-           stStrength = (getStStrength(tmpPlayer)*0.1);
+           cbStrength = playersHelper->getCbStrength(tmpPlayer);
+           mfStrength = (playersHelper->getMfStrength(tmpPlayer)*0.25);
+           stStrength = (playersHelper->getStStrength(tmpPlayer)*0.1);
        } else if(tmpPlayer.getPosition() == "MF"){
-           cbStrength = (getCbStrength(tmpPlayer)*0.25);
-           mfStrength = getMfStrength(tmpPlayer);
-           stStrength = (getStStrength(tmpPlayer)*0.25);
-       } else {
-           cbStrength = (getCbStrength(tmpPlayer)*0.1);
-           mfStrength = (getMfStrength(tmpPlayer)*0.1);
-           stStrength = getStStrength(tmpPlayer);
+           cbStrength = (playersHelper->getCbStrength(tmpPlayer)*0.25);
+           mfStrength = playersHelper->getMfStrength(tmpPlayer);
+           stStrength = (playersHelper->getStStrength(tmpPlayer)*0.25);
+       } else{
+           cbStrength = (playersHelper->getCbStrength(tmpPlayer)*0.1);
+           mfStrength = (playersHelper->getMfStrength(tmpPlayer)*0.1);
+           stStrength = playersHelper->getStStrength(tmpPlayer);
        }
 
     homeTeamCBStrength += cbStrength;
@@ -111,22 +109,24 @@ void MatchHelper::match(int homeClubId, int awayClubId, Timetable timetable, std
        double mfStrength = 0.0;
        double stStrength = 0.0;
 
+
        if(tmpPlayer.getPosition() == "GK"){
-            //handling, diving, kicking, reflexes
-            awayTeamGKStrength = getGkStrength(tmpPlayer);
+           //handling, diving, kicking, reflexes
+           awayTeamGKStrength = playersHelper->getGkStrength(tmpPlayer);
        } else if(tmpPlayer.getPosition() == "CB"){
-           cbStrength = getCbStrength(tmpPlayer);
-           mfStrength = (getMfStrength(tmpPlayer)*0.25);
-           stStrength = (getStStrength(tmpPlayer)*0.1);
+           cbStrength = playersHelper->getCbStrength(tmpPlayer);
+           mfStrength = (playersHelper->getMfStrength(tmpPlayer)*0.25);
+           stStrength = (playersHelper->getStStrength(tmpPlayer)*0.1);
        } else if(tmpPlayer.getPosition() == "MF"){
-           cbStrength = (getCbStrength(tmpPlayer)*0.25);
-           mfStrength = getMfStrength(tmpPlayer);
-           stStrength = (getStStrength(tmpPlayer)*0.25);
-       } else {
-           cbStrength = (getCbStrength(tmpPlayer)*0.1);
-           mfStrength = (getMfStrength(tmpPlayer)*0.1);
-           stStrength = getStStrength(tmpPlayer);
+           cbStrength = (playersHelper->getCbStrength(tmpPlayer)*0.25);
+           mfStrength = playersHelper->getMfStrength(tmpPlayer);
+           stStrength = (playersHelper->getStStrength(tmpPlayer)*0.25);
+       } else{
+           cbStrength = (playersHelper->getCbStrength(tmpPlayer)*0.1);
+           mfStrength = (playersHelper->getMfStrength(tmpPlayer)*0.1);
+           stStrength = playersHelper->getStStrength(tmpPlayer);
        }
+
     awayTeamCBStrength += cbStrength;
     awayTeamMFStrength += mfStrength;
     awayTeamSTStrength += stStrength;
@@ -167,21 +167,27 @@ void MatchHelper::match(int homeClubId, int awayClubId, Timetable timetable, std
         points2 = awayClub.getPoints()+1;
         awayClub.setPoints(points2);
         homeClub.setDraws(homeClub.getDraws()+1);
+        homeClub.setBudget(homeClub.getBudget()+2000000);
         awayClub.setDraws(awayClub.getDraws()+1);
+        awayClub.setBudget(awayClub.getBudget()+2000000);
     } else if (homeTeamGoals > awayTeamGoals){
         //home teams wins
         resultString = homeClub.getName() + " wins";
         points = homeClub.getPoints()+3;
         homeClub.setPoints(points);
         homeClub.setWins(homeClub.getWins()+1);
+        homeClub.setBudget(homeClub.getBudget()+5000000);
         awayClub.setLoses(awayClub.getLoses()+1);
+        awayClub.setBudget(awayClub.getBudget()+1000000);
     } else {
         //away team wins
         resultString = awayClub.getName() + " wins";
         points = awayClub.getPoints()+3;
         awayClub.setPoints(points);
         homeClub.setLoses(homeClub.getLoses()+1);
+        homeClub.setBudget(homeClub.getBudget()+1000000);
         awayClub.setWins(awayClub.getWins()+1);
+        awayClub.setBudget(awayClub.getBudget()+5000000);
     }
 
     timetable.setResult(resultString);
@@ -192,23 +198,3 @@ void MatchHelper::match(int homeClubId, int awayClubId, Timetable timetable, std
     clubsDao->updateClub(homeClub);
     clubsDao->updateClub(awayClub);
 }
-
-double MatchHelper::getGkStrength(Player tmpPlayer){
-    double result = (((double) tmpPlayer.getDiving() + (double) tmpPlayer.getHandling()*0.7 + (double) tmpPlayer.getKicking()*0.5 + (double) tmpPlayer.getReflexes()*0.9)/3.1);
-    return result;
-};
-
-double MatchHelper::getCbStrength(Player tmpPlayer){
-    double result = ((double) tmpPlayer.getDiving() + (double) tmpPlayer.getHandling()*0.7 + (double) tmpPlayer.getKicking()*0.5 + (double) tmpPlayer.getReflexes()*0.9);
-    return result;
-};
-
-double MatchHelper::getMfStrength(Player tmpPlayer){
-    double result = (((double) tmpPlayer.getVision() + (double) tmpPlayer.getCrossing() * 0.9 + (double) tmpPlayer.getShortPasses()*0.9 + (double) tmpPlayer.getLongPasses()*0.8 + (double) tmpPlayer.getFreeKicks()*0.1 + (double) tmpPlayer.getPositioning()*0.5 + (double) tmpPlayer.getLongShots()*0.5)/4.7);
-    return result;
-};
-
-double MatchHelper::getStStrength(Player tmpPlayer){
-    double result = (((double) tmpPlayer.getPositioning() + (double) tmpPlayer.getFinishing() + (double) tmpPlayer.getPower()*0.8 + (double) tmpPlayer.getVolleys()*0.2 + (double) tmpPlayer.getLongShots()*0.5)/3.5);
-    return result;
-};

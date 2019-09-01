@@ -17,14 +17,10 @@ std::cout << "" << std::endl;
 std::cout << "MENU" << std::endl;
 std::cout << "" << std::endl;
 std::cout << "0. Setup game" << std::endl;
-std::cout << "1. Setup database" << std::endl;
-std::cout << "2. Select timetables" << std::endl;
+std::cout << "1. New game" << std::endl;
+std::cout << "2. Setup database" << std::endl;
 std::cout << "3. Drop database" << std::endl;
 std::cout << "4. Exit" << std::endl;
-std::cout << "5. Club+players" << std::endl;
-std::cout << "6. Update player" << std::endl;
-std::cout << "8. Clubs list" << std::endl;
-std::cout << "9. Timetable test" << std::endl;
 std::cout << "" << std::endl;
 
 }

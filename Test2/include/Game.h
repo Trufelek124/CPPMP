@@ -29,7 +29,9 @@ class Game
         virtual ~Game();
 
         void setup();
+        void programSetupGame();
         void programSetup();
+        void season();
         void matchweek(int matchweek);
         void match(int homeClubId, int awayClubId, int timetableId);
         int play();
