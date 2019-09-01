@@ -74,7 +74,9 @@ class PlayersDao
 
 
         std::vector<Player> getPlayers();
+        Player getPlayer(int playerId);
         std::vector<Player> getPlayersForClub(int clubIdQuery);
+        std::vector<Player> getPlayersForPlayersClub();
         std::vector<Player> getPlayersForPosition(std::string positionVar);
         int savePlayer(Player playerVar);
         void updatePlayer(Player playerVar);

@@ -127,6 +127,121 @@ std::vector<Player> PlayersDao::getPlayers(){
     return players;
 }
 
+Player PlayersDao::getPlayer(int playerId){
+    std::vector<Player> players;
+    Player player;
+
+    exit = sqlite3_open("test.db", &DB);
+    std::string sql = "SELECT * from PLAYERS WHERE PLAYER_ID = " + playerId;
+
+    sqlite3_prepare(DB, sql.c_str(), -1, &stmt, NULL);
+
+    bool done = false;
+    while (!done) {
+        switch (sqlite3_step (stmt)) {
+            case SQLITE_ROW:
+                playerTmp = new Player();
+                id = sqlite3_column_text(stmt, 0);
+                name = sqlite3_column_text(stmt, 1);
+                position  = sqlite3_column_text(stmt, 2);
+                clubId  = sqlite3_column_text(stmt, 3);
+                matchsquad  = sqlite3_column_text(stmt, 4);
+                age  = sqlite3_column_text(stmt, 5);
+                nettWorth  = sqlite3_column_text(stmt, 6);
+                handling  = sqlite3_column_text(stmt, 7);
+                diving  = sqlite3_column_text(stmt, 8);
+                kicking  = sqlite3_column_text(stmt, 9);
+                reflexes  = sqlite3_column_text(stmt, 10);
+                tackling  = sqlite3_column_text(stmt, 11);
+                heading  = sqlite3_column_text(stmt, 12);
+                marking  = sqlite3_column_text(stmt, 13);
+                intercepting  = sqlite3_column_text(stmt, 14);
+                vision  = sqlite3_column_text(stmt, 15);
+                crossing  = sqlite3_column_text(stmt, 16);
+                shortPasses  = sqlite3_column_text(stmt, 17);
+                longPasses  = sqlite3_column_text(stmt, 18);
+                freeKicks  = sqlite3_column_text(stmt, 19);
+                positioning  = sqlite3_column_text(stmt, 20);
+                finishing  = sqlite3_column_text(stmt, 21);
+                power  = sqlite3_column_text(stmt, 22);
+                volleys  = sqlite3_column_text(stmt, 23);
+                longShots  = sqlite3_column_text(stmt, 24);
+
+                idString = std::string(reinterpret_cast<const char*>(id));
+                nameString = std::string(reinterpret_cast<const char*>(name));
+                positionString = std::string(reinterpret_cast<const char*>(position));
+                if(clubId != NULL){
+                    clubIdString = std::string(reinterpret_cast<const char*>(clubId));
+                }
+                matchsquadString = std::string(reinterpret_cast<const char*>(matchsquad));
+                ageString = std::string(reinterpret_cast<const char*>(age));
+                nettWorthString = std::string(reinterpret_cast<const char*>(nettWorth));
+                handlingString = std::string(reinterpret_cast<const char*>(handling));
+                divingString = std::string(reinterpret_cast<const char*>(diving));
+                kickingString = std::string(reinterpret_cast<const char*>(kicking));
+                reflexesString = std::string(reinterpret_cast<const char*>(reflexes));
+                tacklingString = std::string(reinterpret_cast<const char*>(tackling));
+                headingString = std::string(reinterpret_cast<const char*>(heading));
+                markingString = std::string(reinterpret_cast<const char*>(marking));
+                interceptingString = std::string(reinterpret_cast<const char*>(intercepting));
+                visionString = std::string(reinterpret_cast<const char*>(vision));
+                crossingString = std::string(reinterpret_cast<const char*>(crossing));
+                shortPassesString = std::string(reinterpret_cast<const char*>(shortPasses));
+                longPassesString = std::string(reinterpret_cast<const char*>(longPasses));
+                freeKicksString = std::string(reinterpret_cast<const char*>(freeKicks));
+                positioningString = std::string(reinterpret_cast<const char*>(positioning));
+                finishingString = std::string(reinterpret_cast<const char*>(finishing));
+                powerString = std::string(reinterpret_cast<const char*>(power));
+                volleysString = std::string(reinterpret_cast<const char*>(volleys));
+                longShotsString = std::string(reinterpret_cast<const char*>(longShots));
+
+                playerTmp->setPlayerId(std::stoi(idString));
+                playerTmp->setName(nameString);
+                playerTmp->setPosition(positionString);
+                if(clubId != NULL){
+                    playerTmp->setClubId(std::stoi(clubIdString));
+                }
+                playerTmp->setMatchsquad(std::stoi(matchsquadString));
+                playerTmp->setAge(std::stoi(ageString));
+                playerTmp->setNettWorth(std::stoi(nettWorthString));
+                playerTmp->setHandling(std::stoi(handlingString));
+                playerTmp->setDiving(std::stoi(divingString));
+                playerTmp->setKicking(std::stoi(kickingString));
+                playerTmp->setReflexes(std::stoi(reflexesString));
+                playerTmp->setTackling(std::stoi(tacklingString));
+                playerTmp->setHeading(std::stoi(headingString));
+                playerTmp->setMarking(std::stoi(markingString));
+                playerTmp->setIntercepting(std::stoi(interceptingString));
+                playerTmp->setVision(std::stoi(visionString));
+                playerTmp->setCrossing(std::stoi(crossingString));
+                playerTmp->setShortPasses(std::stoi(shortPassesString));
+                playerTmp->setLongPasses(std::stoi(longPassesString));
+                playerTmp->setFreeKicks(std::stoi(freeKicksString));
+                playerTmp->setPositioning(std::stoi(positioningString));
+                playerTmp->setFinishing(std::stoi(finishingString));
+                playerTmp->setPower(std::stoi(powerString));
+                playerTmp->setVolleys(std::stoi(volleysString));
+                playerTmp->setLongShots(std::stoi(longShotsString));
+
+                players.push_back(*playerTmp);
+
+                row++;
+                break;
+            case SQLITE_DONE:
+                done = true;
+                break;
+            default:
+                return player;;
+        }
+    }
+
+    sqlite3_finalize(stmt);
+    sqlite3_close(DB);
+    if(players.size() > 0){
+        return players.at(0);
+    }
+}
+
 int PlayersDao::savePlayer(Player playerVar){
  int playerId;
  std::string sql =  "INSERT INTO PLAYERS(NAME, POSITION, MATCHSQUAD, AGE, NETT_WORTH, HANDLING, DIVING, KICKING, REFLEXES, TACKLING, HEADING, "
@@ -202,11 +317,123 @@ std::vector<Player> PlayersDao::getPlayersForClub(int clubIdQuery ){
     std::string sql;
 
     if(clubIdQuery == 0){
-            sql = "SELECT * FROM PLAYERS WHERE CLUB_ID is NULL;";
+            sql = "SELECT * FROM PLAYERS WHERE CLUB_ID is NULL OR CLUB_ID = 0;";
 
     } else {
         sql = "SELECT * FROM PLAYERS WHERE CLUB_ID = " + std::to_string(clubIdQuery) + ";";
     }
+
+    sqlite3_prepare(DB, sql.c_str(), -1, &stmt, NULL);
+
+    bool done = false;
+    while (!done) {
+        switch (sqlite3_step (stmt)) {
+            case SQLITE_ROW:
+                playerTmp = new Player();
+                id = sqlite3_column_text(stmt, 0);
+                name = sqlite3_column_text(stmt, 1);
+                position  = sqlite3_column_text(stmt, 2);
+                clubId  = sqlite3_column_text(stmt, 3);
+                matchsquad  = sqlite3_column_text(stmt, 4);
+                age  = sqlite3_column_text(stmt, 5);
+                nettWorth  = sqlite3_column_text(stmt, 6);
+                handling  = sqlite3_column_text(stmt, 7);
+                diving  = sqlite3_column_text(stmt, 8);
+                kicking  = sqlite3_column_text(stmt, 9);
+                reflexes  = sqlite3_column_text(stmt, 10);
+                tackling  = sqlite3_column_text(stmt, 11);
+                heading  = sqlite3_column_text(stmt, 12);
+                marking  = sqlite3_column_text(stmt, 13);
+                intercepting  = sqlite3_column_text(stmt, 14);
+                vision  = sqlite3_column_text(stmt, 15);
+                crossing  = sqlite3_column_text(stmt, 16);
+                shortPasses  = sqlite3_column_text(stmt, 17);
+                longPasses  = sqlite3_column_text(stmt, 18);
+                freeKicks  = sqlite3_column_text(stmt, 19);
+                positioning  = sqlite3_column_text(stmt, 20);
+                finishing  = sqlite3_column_text(stmt, 21);
+                power  = sqlite3_column_text(stmt, 22);
+                volleys  = sqlite3_column_text(stmt, 23);
+                longShots  = sqlite3_column_text(stmt, 24);
+
+                idString = std::string(reinterpret_cast<const char*>(id));
+                nameString = std::string(reinterpret_cast<const char*>(name));
+                positionString = std::string(reinterpret_cast<const char*>(position));
+                if(clubId != NULL){
+                    clubIdString = std::string(reinterpret_cast<const char*>(clubId));
+                }
+                matchsquadString = std::string(reinterpret_cast<const char*>(matchsquad));
+                ageString = std::string(reinterpret_cast<const char*>(age));
+                nettWorthString = std::string(reinterpret_cast<const char*>(nettWorth));
+                handlingString = std::string(reinterpret_cast<const char*>(handling));
+                divingString = std::string(reinterpret_cast<const char*>(diving));
+                kickingString = std::string(reinterpret_cast<const char*>(kicking));
+                reflexesString = std::string(reinterpret_cast<const char*>(reflexes));
+                tacklingString = std::string(reinterpret_cast<const char*>(tackling));
+                headingString = std::string(reinterpret_cast<const char*>(heading));
+                markingString = std::string(reinterpret_cast<const char*>(marking));
+                interceptingString = std::string(reinterpret_cast<const char*>(intercepting));
+                visionString = std::string(reinterpret_cast<const char*>(vision));
+                crossingString = std::string(reinterpret_cast<const char*>(crossing));
+                shortPassesString = std::string(reinterpret_cast<const char*>(shortPasses));
+                longPassesString = std::string(reinterpret_cast<const char*>(longPasses));
+                freeKicksString = std::string(reinterpret_cast<const char*>(freeKicks));
+                positioningString = std::string(reinterpret_cast<const char*>(positioning));
+                finishingString = std::string(reinterpret_cast<const char*>(finishing));
+                powerString = std::string(reinterpret_cast<const char*>(power));
+                volleysString = std::string(reinterpret_cast<const char*>(volleys));
+                longShotsString = std::string(reinterpret_cast<const char*>(longShots));
+
+                playerTmp->setPlayerId(std::stoi(idString));
+                playerTmp->setName(nameString);
+                playerTmp->setPosition(positionString);
+                if(clubId != NULL){
+                    playerTmp->setClubId(std::stoi(clubIdString));
+                }
+                playerTmp->setMatchsquad(std::stoi(matchsquadString));
+                playerTmp->setAge(std::stoi(ageString));
+                playerTmp->setNettWorth(std::stoi(nettWorthString));
+                playerTmp->setHandling(std::stoi(handlingString));
+                playerTmp->setDiving(std::stoi(divingString));
+                playerTmp->setKicking(std::stoi(kickingString));
+                playerTmp->setReflexes(std::stoi(reflexesString));
+                playerTmp->setTackling(std::stoi(tacklingString));
+                playerTmp->setHeading(std::stoi(headingString));
+                playerTmp->setMarking(std::stoi(markingString));
+                playerTmp->setIntercepting(std::stoi(interceptingString));
+                playerTmp->setVision(std::stoi(visionString));
+                playerTmp->setCrossing(std::stoi(crossingString));
+                playerTmp->setShortPasses(std::stoi(shortPassesString));
+                playerTmp->setLongPasses(std::stoi(longPassesString));
+                playerTmp->setFreeKicks(std::stoi(freeKicksString));
+                playerTmp->setPositioning(std::stoi(positioningString));
+                playerTmp->setFinishing(std::stoi(finishingString));
+                playerTmp->setPower(std::stoi(powerString));
+                playerTmp->setVolleys(std::stoi(volleysString));
+                playerTmp->setLongShots(std::stoi(longShotsString));
+
+                players.push_back(*playerTmp);
+
+                row++;
+                break;
+            case SQLITE_DONE:
+                done = true;
+                break;
+            default:
+                return players;
+        }
+    }
+
+    sqlite3_finalize(stmt);
+    sqlite3_close(DB);
+    return players;
+}
+
+std::vector<Player> PlayersDao::getPlayersForPlayersClub(){
+    std::vector<Player> players;
+
+    exit = sqlite3_open("test.db", &DB);
+    std::string sql = "SELECT * FROM PLAYERS WHERE PLAYER_CLUB = 1";
 
     sqlite3_prepare(DB, sql.c_str(), -1, &stmt, NULL);
 

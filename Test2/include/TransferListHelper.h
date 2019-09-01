@@ -4,10 +4,12 @@
 #include "Player.h"
 #include "PlayersDao.h"
 #include "PlayerView.h"
+#include "PlayersHelper.h"
 #include "Club.h"
 #include "ClubsDao.h"
 #include "ClubView.h"
 #include <vector>
+#include <iostream>
 
 class TransferListHelper
 {
@@ -22,6 +24,8 @@ class TransferListHelper
     private:
         PlayersDao* playersDao;
         PlayerView* playerView;
+        PlayersHelper* playersHelper;
+        ClubsDao* clubsDao;
 };
 
 #endif // TRANSFERLISTHELPER_H
