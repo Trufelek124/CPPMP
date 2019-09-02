@@ -16,8 +16,8 @@ class TransferListHelper
     public:
         TransferListHelper();
         virtual ~TransferListHelper();
-        void getTransferList();
-        void transferPlayerToTheTeam();
+        void transferWindow(int playerClubId);
+        void makeTransfer(int transferOutResponse, int transferInResponse, int playerClubId, std::vector<Player> playersPlayersList, std::vector<Player> freePlayersList);
 
     protected:
 

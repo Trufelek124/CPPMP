@@ -20,6 +20,7 @@
 #include "ClubView.h"
 #include "DatabaseHelper.h"
 #include "MatchHelper.h"
+#include "TransferListHelper.h"
 #include <vector>
 
 class Game
@@ -52,6 +53,7 @@ class Game
         PlayersHelper* playersHelperVar;
         MatchHelper* matchHelperVar;
         ClubHelper* clubHelper;
+        TransferListHelper* transferListHelper;
 
         PlayersDao* playersDao;
         LeaguesDao* leaguesDao;
@@ -69,6 +71,7 @@ class Game
         League* leagueVar;
         Player* playerVar2;
         Player playerVar3;
+        int playerClubId;
 
         int submenuOption;
 

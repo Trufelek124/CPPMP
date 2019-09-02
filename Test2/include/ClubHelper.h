@@ -5,6 +5,8 @@
 #include "ClubsDao.h"
 #include "ClubView.h"
 #include "MainView.h"
+#include "Player.h"
+#include "PlayersDao.h"
 #include <vector>
 #include<algorithm>
 
@@ -15,7 +17,7 @@ class ClubHelper
         ClubHelper();
         virtual ~ClubHelper();
 
-        int setUserClub();
+        int setUserClub(std::vector<Club> clubsVec);
         void updateClubsPosition(std::vector<Club> clubsVec);
 
     protected:
@@ -26,6 +28,7 @@ class ClubHelper
         std::vector<Club> clubsVec;
         ClubView* clubView;
         MainView* mainView;
+        PlayersDao* playersDao;
 };
 
 #endif // CLUBHELPER_H

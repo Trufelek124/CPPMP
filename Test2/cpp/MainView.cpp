@@ -16,7 +16,6 @@ std::cout << "" << std::endl;
 std::cout << "" << std::endl;
 std::cout << "MENU" << std::endl;
 std::cout << "" << std::endl;
-std::cout << "0. Setup game" << std::endl;
 std::cout << "1. New game" << std::endl;
 std::cout << "2. Setup database" << std::endl;
 std::cout << "3. Drop database" << std::endl;

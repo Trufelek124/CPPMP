@@ -18,7 +18,7 @@ std::vector<Player> PlayersDao::getPlayers(){
     snprintf(
         q,
         sizeof q - 1,
-        "SELECT * from PLAYERS"
+        "SELECT * from PLAYERS;"
     );
 
     sqlite3_prepare(DB, q, sizeof q, &stmt, NULL);
@@ -132,7 +132,7 @@ Player PlayersDao::getPlayer(int playerId){
     Player player;
 
     exit = sqlite3_open("test.db", &DB);
-    std::string sql = "SELECT * from PLAYERS WHERE PLAYER_ID = " + playerId;
+    std::string sql = "SELECT * from PLAYERS WHERE PLAYER_ID = " + playerId + std::string(";");
 
     sqlite3_prepare(DB, sql.c_str(), -1, &stmt, NULL);
 
@@ -170,9 +170,7 @@ Player PlayersDao::getPlayer(int playerId){
                 idString = std::string(reinterpret_cast<const char*>(id));
                 nameString = std::string(reinterpret_cast<const char*>(name));
                 positionString = std::string(reinterpret_cast<const char*>(position));
-                if(clubId != NULL){
-                    clubIdString = std::string(reinterpret_cast<const char*>(clubId));
-                }
+                clubIdString = std::string(reinterpret_cast<const char*>(clubId));
                 matchsquadString = std::string(reinterpret_cast<const char*>(matchsquad));
                 ageString = std::string(reinterpret_cast<const char*>(age));
                 nettWorthString = std::string(reinterpret_cast<const char*>(nettWorth));
@@ -433,7 +431,7 @@ std::vector<Player> PlayersDao::getPlayersForPlayersClub(){
     std::vector<Player> players;
 
     exit = sqlite3_open("test.db", &DB);
-    std::string sql = "SELECT * FROM PLAYERS WHERE PLAYER_CLUB = 1";
+    std::string sql = "SELECT * FROM PLAYERS WHERE PLAYER_CLUB = 1;";
 
     sqlite3_prepare(DB, sql.c_str(), -1, &stmt, NULL);
 

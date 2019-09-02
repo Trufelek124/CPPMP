@@ -16,6 +16,7 @@ void Game::setup(){
     playersHelperVar = new PlayersHelper();
     matchHelperVar = new MatchHelper();
     clubHelper = new ClubHelper();
+    transferListHelper = new TransferListHelper();
 
     playersDao = new PlayersDao();
     leaguesDao = new LeaguesDao();
@@ -48,15 +49,8 @@ int Game::play(){
 
 int Game::handleMenu(int menuOption){
     switch(menuOption){
-    case 0:
-        programSetupGame();
-        system("pause");
-        system ("CLS");
-        return 1;
     case 1:
-        //TODO new game itd
         programSetup();
-        clubHelper->setUserClub();
         season();
         system("pause");
         system ("CLS");
@@ -79,54 +73,27 @@ int Game::handleMenu(int menuOption){
     }
 }
 
-void Game::programSetupGame(){
-
-    playersVec = playersDao->getPlayers();
-    clubsVec = clubsDao->getClubs();
-    leaguesVec = leaguesDao->getLeagues();
-    seasonsVec = seasonsDao->getSeasons();
-    timetablesVec = timetableDao->getTimetables();
-
-    if(!playersVec.empty()){
-        playersHelperVar->randommizeInitialSquads();
-        clubsVec = clubsDao->getClubs();
-
-        for(int i = 0; i < clubsVec.size(); i++){
-            clubTestVar = clubsVec.at(i);
-            players = playersDao->getPlayersForClub(clubTestVar.getClubId());
-            clubTestVar.setPlayers(players);
-           // clubViewVar->displayClubInfo(clubTestVar);
-        }
-        if(timetablesVec.empty()){
-            timetableHelperVar->createTimetableForSeason(1, clubsVec);
-            timetablesVec = timetableDao->getTimetables();
-            timetableViewVar->displayTimetableList(timetablesVec);
-        }
-        season();
-
-    } else {
-        std::cout << "No data in database" << std::endl;
-    }
-}
-
 void Game::programSetup(){
 
     playersVec = playersDao->getPlayers();
-    clubsVec = clubsDao->getClubs();
+    std::vector<Club> clubsVecTmp = clubsDao->getClubs();
     leaguesVec = leaguesDao->getLeagues();
     seasonsVec = seasonsDao->getSeasons();
     timetablesVec = timetableDao->getTimetables();
 
     if(!playersVec.empty()){
         playersHelperVar->randommizeInitialSquads();
-        clubsVec = clubsDao->getClubs();
+        clubsVecTmp = clubsDao->getClubs();
 
-        for(int i = 0; i < clubsVec.size(); i++){
-            clubTestVar = clubsVec.at(i);
+        for(int i = 0; i < clubsVecTmp.size(); i++){
+            clubTestVar = clubsVecTmp.at(i);
             players = playersDao->getPlayersForClub(clubTestVar.getClubId());
             clubTestVar.setPlayers(players);
-           // clubViewVar->displayClubInfo(clubTestVar);
+            clubsVec.push_back(clubTestVar);
         }
+
+        playerClubId = clubHelper->setUserClub(clubsVec);
+
         if(timetablesVec.empty()){
             timetableHelperVar->createTimetableForSeason(1, clubsVec);
             timetablesVec = timetableDao->getTimetables();
@@ -140,8 +107,18 @@ void Game::programSetup(){
 
 void Game::matchweek(int matchweek){
     Club clubTmp;
+    std::vector<Club> clubsVecTmp;
     if(!timetablesVec.empty()){
-        clubsVec = clubsDao->getClubs();
+        clubsVecTmp = clubsDao->getClubs();
+
+
+        for(int i = 0; i < clubsVecTmp.size(); i++){
+            clubTestVar = clubsVecTmp.at(i);
+            players = playersDao->getPlayersForClub(clubTestVar.getClubId());
+            clubTestVar.setPlayers(players);
+            clubsVec.push_back(clubTestVar);
+        }
+
         timetablesVecMatchweek = timetableDao->getTimetablesForMatchweek(matchweek, 1); //na razie sezon = 1 - 3
         for(int j = 0; j < timetablesVecMatchweek.size(); j++){
             Timetable tmp = timetablesVecMatchweek.at(j);
@@ -156,14 +133,12 @@ void Game::matchweek(int matchweek){
         std::vector<Club> clubsSortedByPoints = clubsVec;
         std::sort(clubsSortedByPoints.begin(), clubsSortedByPoints.end(), ClubComparator());
         clubViewVar->displayClubsInfo(clubsSortedByPoints);
-
-      //  system("pause");
-      //  system ("CLS");
     }
 }
 
 void Game::season(){
     Club clubTmp;
+    std::vector<Club> clubsVecTmp;
     if(!timetablesVec.empty()){
         clubsVec = clubsDao->getClubs();
         for(int i = 0; i < (clubsVec.size()-1); i++){ //kolejki - 12
@@ -187,6 +162,8 @@ void Game::season(){
             //system ("CLS");
         }
 
+        transferListHelper->transferWindow(playerClubId);
+
         //lista transferowa
         for(int i = (clubsVec.size()-1); i < (clubsVec.size()-1)*2; i++){
             timetablesVecMatchweek = timetableDao->getTimetablesForMatchweek(i+1, 1); //na razie sezon = 1 - 3
@@ -203,6 +180,7 @@ void Game::season(){
 
             std::vector<Club> clubsSortedByPoints = clubsVec;
             std::sort(clubsSortedByPoints.begin(), clubsSortedByPoints.end(), ClubComparator());
+            clubHelper->updateClubsPosition(clubsVec);
             clubViewVar->displayClubList(clubsSortedByPoints);
 
             system("pause");
@@ -211,11 +189,22 @@ void Game::season(){
         timetablesVec = timetableDao->getTimetables();
         timetableViewVar->displayTimetableList(timetablesVec);
 
-        clubsVec = clubsDao->getClubs();
+        //clubsVec = clubsDao->getClubs();
+
+        clubsVecTmp = clubsDao->getClubs();
+        clubsVec.clear();
+
+
+        for(int i = 0; i < clubsVecTmp.size(); i++){
+            clubTestVar = clubsVecTmp.at(i);
+            players = playersDao->getPlayersForClub(clubTestVar.getClubId());
+            clubTestVar.setPlayers(players);
+            clubsVec.push_back(clubTestVar);
+        }
 
         std::vector<Club> clubsSortedByPoints = clubsVec;
         std::sort(clubsSortedByPoints.begin(), clubsSortedByPoints.end(), ClubComparator());
-        clubViewVar->displayClubsInfo(clubsSortedByPoints);
+        clubViewVar->displayClubList(clubsSortedByPoints);
     }
 }
 

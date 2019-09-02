@@ -73,16 +73,17 @@ void MatchHelper::match(int homeClubId, int awayClubId, Timetable timetable, std
 
     luckAwayTeam = ((double) dis3(gen3));
 
+    double cbStrength = 0.0;
+    double mfStrength = 0.0;
+    double stStrength = 0.0;
+
     //home team strength
     for(int i = 0; i < homeTeamPlayers.size(); i++){
        tmpPlayer = homeTeamPlayers.at(i);
-       double cbStrength = 0.0;
-       double mfStrength = 0.0;
-       double stStrength = 0.0;
 
        if(tmpPlayer.getPosition() == "GK"){
            //handling, diving, kicking, reflexes
-           awayTeamGKStrength = playersHelper->getGkStrength(tmpPlayer);
+           homeTeamGKStrength = playersHelper->getGkStrength(tmpPlayer);
        } else if(tmpPlayer.getPosition() == "CB"){
            cbStrength = playersHelper->getCbStrength(tmpPlayer);
            mfStrength = (playersHelper->getMfStrength(tmpPlayer)*0.25);
@@ -102,12 +103,17 @@ void MatchHelper::match(int homeClubId, int awayClubId, Timetable timetable, std
     homeTeamSTStrength += stStrength;
     }
 
+    homeTeamCBStrength = homeTeamCBStrength/(5.4*4);
+    homeTeamMFStrength = homeTeamMFStrength/(5.4*4);
+    homeTeamSTStrength = homeTeamSTStrength/(3.4*2);
+
+    cbStrength = 0.0;
+    mfStrength = 0.0;
+    stStrength = 0.0;
+
     //away team strength
     for(int i = 0; i < awayTeamPlayers.size(); i++){
        tmpPlayer = awayTeamPlayers.at(i);
-       double cbStrength = 0.0;
-       double mfStrength = 0.0;
-       double stStrength = 0.0;
 
 
        if(tmpPlayer.getPosition() == "GK"){
@@ -131,10 +137,6 @@ void MatchHelper::match(int homeClubId, int awayClubId, Timetable timetable, std
     awayTeamMFStrength += mfStrength;
     awayTeamSTStrength += stStrength;
     }
-
-    homeTeamCBStrength = homeTeamCBStrength/(5.4*4);
-    homeTeamMFStrength = homeTeamMFStrength/(5.4*4);
-    homeTeamSTStrength = homeTeamSTStrength/(3.4*2);
 
     awayTeamCBStrength = awayTeamCBStrength/(5.4*4);
     awayTeamMFStrength = awayTeamMFStrength/(5.4*4);

@@ -18,7 +18,7 @@ std::vector<Club> ClubsDao::getClubs(){
     snprintf(
         q,
         sizeof q - 1,
-        "SELECT * FROM CLUBS"
+        "SELECT * FROM CLUBS;"
     );
 
     sqlite3_prepare(DB, q, sizeof q, &stmt, NULL);

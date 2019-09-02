@@ -67,8 +67,7 @@ int SeasonsDao::saveSeason(Season seasonVar){
         std::cerr << "Error inserting records" << std::endl;
         std::cerr << messaggeError << std::endl;
         sqlite3_free(messaggeError);
-    } else
-        std::cout << "Records inserted successfully" << std::endl;
+    }
 
     seasonId = sqlite3_last_insert_rowid(DB);
     sqlite3_close(DB);
@@ -88,7 +87,6 @@ void SeasonsDao::updateSeason(Season seasonVar){
         std::cerr << "Error updating records" << std::endl;
         std::cerr << messaggeError << std::endl;
         sqlite3_free(messaggeError);
-    } else
-        std::cout << "Records updated successfully" << std::endl;
+    }
     sqlite3_close(DB);
 };

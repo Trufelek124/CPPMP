@@ -70,8 +70,7 @@ int LeaguesDao::saveLeague(League leagueVar){
         std::cerr << "Error inserting records" << std::endl;
         std::cerr << messaggeError << std::endl;
         sqlite3_free(messaggeError);
-    } else
-        std::cout << "Records inserted successfully" << std::endl;
+    }
 
     leagueId = sqlite3_last_insert_rowid(DB);
     sqlite3_close(DB);
@@ -92,8 +91,7 @@ void LeaguesDao::updateLeague(League leagueVar){
         std::cerr << "Error updating records" << std::endl;
         std::cerr << messaggeError << std::endl;
         sqlite3_free(messaggeError);
-    } else
-        std::cout << "Records updated successfully" << std::endl;
+    }
     sqlite3_close(DB);
 };
 
