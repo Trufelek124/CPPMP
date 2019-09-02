@@ -70,7 +70,7 @@ double PlayersHelper::getGkStrength(Player tmpPlayer){
 };
 
 double PlayersHelper::getCbStrength(Player tmpPlayer){
-    double result = ((double) tmpPlayer.getDiving() + (double) tmpPlayer.getHandling()*0.7 + (double) tmpPlayer.getKicking()*0.5 + (double) tmpPlayer.getReflexes()*0.9);
+    double result = (((double) tmpPlayer.getTackling()*0.75 + (double) tmpPlayer.getHeading()*0.5 + (double) tmpPlayer.getMarking()*0.3 + (double) tmpPlayer.getIntercepting())/2.55);
     return result;
 };
 
@@ -90,13 +90,13 @@ int PlayersHelper::getPlayerWorth(Player player){
     double strength = 0.0;
 
     if(player.getPosition() == "GK"){
-        playerWorth = ((int) (sqrt ((getGkStrength(player)) * 1000.0))); //for 100(max) - 10 million
+        playerWorth = ((int) (sqrt(getGkStrength(player)) * 1000.0)); //for 100(max) - 10 million
     } else if(player.getPosition() == "CB"){
-        playerWorth = ((int) (sqrt ((getCbStrength(player)) * 2500.0))); //for 100(max) - 25 million
+        playerWorth = ((int) (sqrt(getCbStrength(player)) * 2500.0)); //for 100(max) - 25 million
     } else if(player.getPosition() == "MF"){
-        playerWorth = ((int) (sqrt ((getMfStrength(player)) * 10000.0))); //for 100(max) - 100 million
-    } else {
-        playerWorth = ((int) (sqrt ((getStStrength(player)) * 7500.0))); //for 100(max) - 75 million
+        playerWorth = ((int) (sqrt(getMfStrength(player)) * 10000.0)); //for 100(max) - 100 million
+    } else if(player.getPosition() == "ST"){
+        playerWorth = ((int) (sqrt(getStStrength(player)) * 7500.0)); //for 100(max) - 75 million
     }
 
     return playerWorth;
