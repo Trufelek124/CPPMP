@@ -5,6 +5,7 @@
 #include "Club.h"
 #include <vector>
 #include "PlayersDao.h"
+#include "PlayerView.h"
 #include "ClubsDao.h"
 #include <stdlib.h>
 #include <ctime>
@@ -12,6 +13,7 @@
 #include <cstdlib>
 #include <math.h>
 #include <random>
+#include <iostream>
 
 class PlayersHelper
 {
@@ -26,11 +28,13 @@ class PlayersHelper
         double getMfStrength(Player tmpPlayer);
         double getStStrength(Player tmpPlayer);
         void trainPlayer(Player tmpPlayer);
+        std::vector<Player> playersClubPlayersTraining(std::vector<Player> playersVec, int playerClubId);
 
     protected:
 
     private:
         PlayersDao* playersDao;
+        PlayerView* playersView;
         ClubsDao* clubsDao;
 };
 

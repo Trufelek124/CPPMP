@@ -330,10 +330,11 @@
 	<iostream>
 	"TimetableView.h"
 
-1567002660 c:\users\user\documents\studia\pk\menager2019\test2\include\playerview.h
+1567524815 c:\users\user\documents\studia\pk\menager2019\test2\include\playerview.h
 	<iostream>
 	"Player.h"
 	<vector>
+	<string>
 
 1567167335 c:\users\user\documents\studia\pk\menager2019\test2\include\clubview.h
 	<vector>
@@ -370,7 +371,7 @@
 1567406566 source:c:\users\user\documents\studia\pk\menager2019\test2\src\databasehelper.cpp
 	"DatabaseHelper.h"
 
-1567430678 source:c:\users\user\documents\studia\pk\menager2019\test2\src\game.cpp
+1567524761 source:c:\users\user\documents\studia\pk\menager2019\test2\src\game.cpp
 	"Game.h"
 
 1565793523 source:c:\users\user\documents\studia\pk\menager2019\test2\src\league.cpp
@@ -385,7 +386,7 @@
 1567409208 source:c:\users\user\documents\studia\pk\menager2019\test2\src\playersdao.cpp
 	"PlayersDao.h"
 
-1567002694 source:c:\users\user\documents\studia\pk\menager2019\test2\src\playerview.cpp
+1567524916 source:c:\users\user\documents\studia\pk\menager2019\test2\src\playerview.cpp
 	"PlayerView.h"
 
 1565793523 source:c:\users\user\documents\studia\pk\menager2019\test2\src\season.cpp
@@ -406,11 +407,12 @@
 1567094554 source:c:\users\user\documents\studia\pk\menager2019\test2\src\timetableview.cpp
 	"TimetableView.h"
 
-1567517007 c:\users\user\documents\studia\pk\menager2019\test2\include\playershelper.h
+1567524952 c:\users\user\documents\studia\pk\menager2019\test2\include\playershelper.h
 	"Player.h"
 	"Club.h"
 	<vector>
 	"PlayersDao.h"
+	"PlayerView.h"
 	"ClubsDao.h"
 	<stdlib.h>
 	<ctime>
@@ -418,6 +420,7 @@
 	<cstdlib>
 	<math.h>
 	<random>
+	<iostream>
 
 1567413853 source:c:\users\user\documents\studia\pk\menager2019\test2\src\playershelper.cpp
 	"PlayersHelper.h"
@@ -450,7 +453,7 @@
 	<random>
 	<iostream>
 
-1567405784 source:c:\users\user\documents\studia\pk\menager2019\test2\src\matchhelper.cpp
+1567516834 source:c:\users\user\documents\studia\pk\menager2019\test2\src\matchhelper.cpp
 	"MatchHelper.h"
 
 1567410354 source:c:\users\user\documents\studia\pk\menager2019\test2\src\transferlisthelper.cpp

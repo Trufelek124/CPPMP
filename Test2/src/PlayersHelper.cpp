@@ -4,6 +4,7 @@ PlayersHelper::PlayersHelper()
 {
     playersDao = new PlayersDao();
     clubsDao = new ClubsDao();
+    playersView = new PlayerView();
 }
 
 PlayersHelper::~PlayersHelper()
@@ -330,4 +331,48 @@ void PlayersHelper::trainPlayer(Player tmpPlayer){
             }
         }
     }
+    playersDao->updatePlayer(tmpPlayer);
+};
+
+
+std::vector<Player> PlayersHelper::playersClubPlayersTraining(std::vector<Player> playersVec, int playerClubId){
+    std::vector<Player> playersClubPlayers;
+    bool done = false;
+    int response;
+    Player trainedPlayer;
+    std::string responseType;
+
+    for(int i = 0; i < playersVec.size(); i++){
+        Player tmpPlayer = playersVec.at(i);
+        if(tmpPlayer.getClubId() == playerClubId){
+            playersClubPlayers.push_back(tmpPlayer);
+        }
+    };
+
+    playersView->displayPlayersListTraining(playersClubPlayers);
+    while(!done){
+        std::cout << "If you want to change training type for any of Your players please type in its id, if not - type in 0: " << std::endl;
+        std::cin >> response;
+        if(response == 0){
+            done = true;
+        } else {
+            for(int i = 0; i < playersClubPlayers.size(); i++){
+                if(playersClubPlayers.at(i).getPlayerId() == response){
+                    std::cout << "Now type in training type for Your player (GK, CB, MF, ST, or anything different for general training: " << std::endl;
+                    std::cin >> responseType;
+
+                    playersClubPlayers.at(i).setTrainingType(responseType);
+                }
+            }
+        }
+    }
+
+    for(int i = 0; i < playersVec.size(); i++){
+        Player tmpPlayer = playersVec.at(i);
+        if(tmpPlayer.getClubId() != playerClubId){
+            playersClubPlayers.push_back(tmpPlayer);
+        }
+    };
+
+    return playersClubPlayers;
 };

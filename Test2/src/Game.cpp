@@ -128,14 +128,14 @@ void Game::season(){
             std::sort(clubsSortedByPoints.begin(), clubsSortedByPoints.end(), ClubComparator());
             clubViewVar->displayClubList(clubsSortedByPoints);
 
+            system("pause");
+
             playersVec = playersDao->getPlayers();
+            playersVec = playersHelperVar->playersClubPlayersTraining(playersVec, playerClubId);
             for(int i = 0; i < playersVec.size(); i++){
                 Player tmpPlayer = playersVec.at(i);
                 playersHelperVar->trainPlayer(tmpPlayer);
-            }
-
-            system("pause");
-            //system ("CLS");
+            };
         }
 
         transferListHelper->transferWindow(playerClubId);
@@ -160,6 +160,14 @@ void Game::season(){
             clubViewVar->displayClubList(clubsSortedByPoints);
 
             system("pause");
+
+
+            playersVec = playersDao->getPlayers();
+            playersVec = playersHelperVar->playersClubPlayersTraining(playersVec, playerClubId);
+            for(int i = 0; i < playersVec.size(); i++){
+                Player tmpPlayer = playersVec.at(i);
+                playersHelperVar->trainPlayer(tmpPlayer);
+            }
         }
 
         timetablesVec = timetableDao->getTimetables();
@@ -192,7 +200,19 @@ void Game::season(){
         std::sort(clubsSortedByPoints.begin(), clubsSortedByPoints.end(), ClubComparator());
         clubViewVar->displayClubList(clubsSortedByPoints);
 
+        //postarzanie zawodników
+
+        playersVec = playersDao->getPlayers();
+        for(int i = 0; i < playersVec.size(); i++){
+            Player tmpPlayer = playersVec.at(i);
+            tmpPlayer.setAge(tmpPlayer.getAge()+1);
+            playersDao->updatePlayer(tmpPlayer);
+        }
+
         transferListHelper->transferWindow(playerClubId);
+
+        std::cout << "OFFICIAL SEASON STANDINGS" << std::endl;
+        clubViewVar->displayClubList(clubsSortedByPoints);
     }
 }
 

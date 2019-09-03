@@ -4,6 +4,7 @@
 #include<iostream>
 #include"Player.h"
 #include<vector>
+#include <string>
 
 class PlayerView
 {
@@ -13,6 +14,7 @@ class PlayerView
 
         void displayPlayersList(std::vector<Player> players);
         void displayPlayer(Player player);
+        void displayPlayersListTraining(std::vector<Player> players);
 
     protected:
 

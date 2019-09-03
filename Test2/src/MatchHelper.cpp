@@ -164,27 +164,27 @@ void MatchHelper::match(int homeClubId, int awayClubId, Timetable timetable, std
         points2 = awayClub.getPoints()+1;
         awayClub.setPoints(points2);
         homeClub.setDraws(homeClub.getDraws()+1);
-        homeClub.setBudget(homeClub.getBudget()+2000000);
+        homeClub.setBudget(homeClub.getBudget()+200000);
         awayClub.setDraws(awayClub.getDraws()+1);
-        awayClub.setBudget(awayClub.getBudget()+2000000);
+        awayClub.setBudget(awayClub.getBudget()+200000);
     } else if (homeTeamGoals > awayTeamGoals){
         //home teams wins
         resultString = homeClub.getName() + " wins";
         points = homeClub.getPoints()+3;
         homeClub.setPoints(points);
         homeClub.setWins(homeClub.getWins()+1);
-        homeClub.setBudget(homeClub.getBudget()+5000000);
+        homeClub.setBudget(homeClub.getBudget()+500000);
         awayClub.setLoses(awayClub.getLoses()+1);
-        awayClub.setBudget(awayClub.getBudget()+1000000);
+        awayClub.setBudget(awayClub.getBudget()+100000);
     } else {
         //away team wins
         resultString = awayClub.getName() + " wins";
         points = awayClub.getPoints()+3;
         awayClub.setPoints(points);
         homeClub.setLoses(homeClub.getLoses()+1);
-        homeClub.setBudget(homeClub.getBudget()+1000000);
+        homeClub.setBudget(homeClub.getBudget()+100000);
         awayClub.setWins(awayClub.getWins()+1);
-        awayClub.setBudget(awayClub.getBudget()+5000000);
+        awayClub.setBudget(awayClub.getBudget()+500000);
     }
 
     timetable.setResult(resultString);
