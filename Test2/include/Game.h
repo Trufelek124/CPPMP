@@ -71,9 +71,10 @@ class Game
         League* leagueVar;
         Player* playerVar2;
         Player playerVar3;
-        int playerClubId;
 
+        int playerClubId;
         int submenuOption;
+        int seasonNumber;
 
         Club clubTestVar;
         std::vector<Player> players;

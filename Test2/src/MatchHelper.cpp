@@ -52,11 +52,6 @@ void MatchHelper::match(int homeClubId, int awayClubId, Timetable timetable, std
     homeClub.setPlayers(homeTeamPlayers);
     awayClub.setPlayers(awayTeamPlayers);
 
-    if(homeTeamPlayers.empty() || awayTeamPlayers.empty()){
-        homeTeamPlayers = playersDao->getPlayersForClub(homeClubId);
-        awayTeamPlayers = playersDao->getPlayersForClub(awayClubId);
-    }
-
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_real_distribution<> dis(0, 1);

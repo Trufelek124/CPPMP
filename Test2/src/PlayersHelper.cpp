@@ -87,7 +87,6 @@ double PlayersHelper::getStStrength(Player tmpPlayer){
 
 int PlayersHelper::getPlayerWorth(Player player){
     int playerWorth = 0;
-    double strength = 0.0;
 
     if(player.getPosition() == "GK"){
         playerWorth = ((int) (sqrt(getGkStrength(player)) * 1000.0)); //for 100(max) - 10 million
@@ -100,4 +99,235 @@ int PlayersHelper::getPlayerWorth(Player player){
     }
 
     return playerWorth;
+};
+
+void PlayersHelper::trainPlayer(Player tmpPlayer){
+    int stat;
+    srand(time(NULL));
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_real_distribution<> dis(0, 1);
+    std::string treningType = tmpPlayer.getTrainingType();
+    double trainingEffectiveness = ((double) dis(gen)) - tmpPlayer.getAge()/100; //after 50 - no chance
+
+    if(trainingEffectiveness > 0.5){
+        if(treningType == "GK"){
+            stat = (rand() % 4);
+            switch(stat){
+            case 0:
+                //diving
+                if(tmpPlayer.getDiving() < 97)
+                    tmpPlayer.setDiving(tmpPlayer.getDiving()+2);
+                break;
+            case 1:
+                //handling
+                if(tmpPlayer.getHandling() < 97)
+                    tmpPlayer.setHandling(tmpPlayer.getHandling()+2);
+                break;
+            case 2:
+                //kicking
+                if(tmpPlayer.getKicking() < 97)
+                    tmpPlayer.setKicking(tmpPlayer.getKicking()+2);
+                break;
+            default:
+                //reflex
+                if(tmpPlayer.getReflexes() < 97)
+                    tmpPlayer.setReflexes(tmpPlayer.getReflexes()+2);
+                break;
+            }
+        } else if(treningType == "CB"){
+            stat = (rand() % 4);
+            switch(stat){
+            case 0:
+                //tackling
+                if(tmpPlayer.getTackling() < 97)
+                    tmpPlayer.setTackling(tmpPlayer.getTackling()+2);
+                break;
+            case 1:
+                //heading
+                if(tmpPlayer.getHeading() < 97)
+                    tmpPlayer.setHeading(tmpPlayer.getHeading()+2);
+                break;
+            case 2:
+                //marking
+                if(tmpPlayer.getMarking() < 97)
+                    tmpPlayer.setMarking(tmpPlayer.getMarking()+2);
+                break;
+            default:
+                //intercepting
+                if(tmpPlayer.getIntercepting() < 97)
+                    tmpPlayer.setIntercepting(tmpPlayer.getIntercepting()+2);
+                break;
+            }
+        } else if(treningType == "MF"){
+            stat = (rand() % 7);
+            switch(stat){
+            case 0:
+                //vision
+                if(tmpPlayer.getVision() < 97)
+                    tmpPlayer.setVision(tmpPlayer.getVision()+2);
+                break;
+            case 1:
+                //crossing
+                if(tmpPlayer.getCrossing() < 97)
+                    tmpPlayer.setCrossing(tmpPlayer.getCrossing()+2);
+                break;
+            case 2:
+                //short passes
+                if(tmpPlayer.getShortPasses() < 97)
+                    tmpPlayer.setShortPasses(tmpPlayer.getShortPasses()+2);
+                break;
+            case 3:
+                //long passes
+                if(tmpPlayer.getLongPasses() < 97)
+                    tmpPlayer.setLongPasses(tmpPlayer.getLongPasses()+2);
+                break;
+            case 4:
+                //free kicks
+                if(tmpPlayer.getFreeKicks() < 97)
+                    tmpPlayer.setFreeKicks(tmpPlayer.getFreeKicks()+2);
+                break;
+            case 5:
+                //positioning
+                if(tmpPlayer.getPositioning() < 97)
+                    tmpPlayer.setPositioning(tmpPlayer.getPositioning()+2);
+                break;
+            default:
+                //long shots
+                if(tmpPlayer.getLongShots() < 97)
+                    tmpPlayer.setLongShots(tmpPlayer.getLongShots()+2);
+                break;
+            }
+        } else if(treningType == "ST"){
+            stat = (rand() % 5);
+            switch(stat){
+            case 0:
+                //positioning
+                if(tmpPlayer.getPositioning() < 97)
+                    tmpPlayer.setPositioning(tmpPlayer.getPositioning()+2);
+                break;
+            case 1:
+                //finishing
+                if(tmpPlayer.getFinishing() < 97)
+                    tmpPlayer.setFinishing(tmpPlayer.getFinishing()+2);
+                break;
+            case 2:
+                //power
+                if(tmpPlayer.getPower() < 97)
+                    tmpPlayer.setPower(tmpPlayer.getPower()+2);
+                break;
+            case 3:
+                //volleys
+                if(tmpPlayer.getVolleys() < 97)
+                    tmpPlayer.setVolleys(tmpPlayer.getVolleys()+2);
+                break;
+            default:
+                //long shots
+                if(tmpPlayer.getLongShots() < 97)
+                    tmpPlayer.setLongShots(tmpPlayer.getLongShots()+2);
+                break;
+            }
+        } else { //all around training
+            for(int i = 0; i < 3; i++){
+                stat = (rand() % 19);
+                switch(stat){
+                case 0:
+                    //vision
+                    if(tmpPlayer.getVision() < 98)
+                        tmpPlayer.setVision(tmpPlayer.getVision()+1);
+                    break;
+                case 1:
+                    //crossing
+                    if(tmpPlayer.getCrossing() < 98)
+                        tmpPlayer.setCrossing(tmpPlayer.getCrossing()+1);
+                    break;
+                case 2:
+                    //short passes
+                    if(tmpPlayer.getShortPasses() < 98)
+                        tmpPlayer.setShortPasses(tmpPlayer.getShortPasses()+1);
+                    break;
+                case 3:
+                    //long passes
+                    if(tmpPlayer.getLongPasses() < 98)
+                        tmpPlayer.setLongPasses(tmpPlayer.getLongPasses()+1);
+                    break;
+                case 4:
+                    //free kicks
+                    if(tmpPlayer.getFreeKicks() < 98)
+                        tmpPlayer.setFreeKicks(tmpPlayer.getFreeKicks()+1);
+                    break;
+                case 5:
+                    //positioning
+                    if(tmpPlayer.getPositioning() < 98)
+                        tmpPlayer.setPositioning(tmpPlayer.getPositioning()+1);
+                    break;
+                case 6:
+                    //tackling
+                    if(tmpPlayer.getTackling() < 98)
+                        tmpPlayer.setTackling(tmpPlayer.getTackling()+1);
+                    break;
+                case 7:
+                    //heading
+                    if(tmpPlayer.getHeading() < 98)
+                        tmpPlayer.setHeading(tmpPlayer.getHeading()+1);
+                    break;
+                case 8:
+                    //marking
+                    if(tmpPlayer.getMarking() < 98)
+                        tmpPlayer.setMarking(tmpPlayer.getMarking()+1);
+                    break;
+                case 9:
+                    //intercepting
+                    if(tmpPlayer.getIntercepting() < 98)
+                        tmpPlayer.setIntercepting(tmpPlayer.getIntercepting()+1);
+                    break;
+                case 10:
+                    //positioning
+                    if(tmpPlayer.getPositioning() < 98)
+                        tmpPlayer.setPositioning(tmpPlayer.getPositioning()+1);
+                    break;
+                case 11:
+                    //finishing
+                    if(tmpPlayer.getFinishing() < 98)
+                        tmpPlayer.setFinishing(tmpPlayer.getFinishing()+1);
+                    break;
+                case 12:
+                    //power
+                    if(tmpPlayer.getPower() < 98)
+                        tmpPlayer.setPower(tmpPlayer.getPower()+1);
+                    break;
+                case 13:
+                    //volleys
+                    if(tmpPlayer.getVolleys() < 98)
+                        tmpPlayer.setVolleys(tmpPlayer.getVolleys()+1);
+                    break;
+                case 14:
+                    //diving
+                    if(tmpPlayer.getDiving() < 98)
+                        tmpPlayer.setDiving(tmpPlayer.getDiving()+1);
+                    break;
+                case 15:
+                    //handling
+                    if(tmpPlayer.getHandling() < 98)
+                        tmpPlayer.setHandling(tmpPlayer.getHandling()+1);
+                    break;
+                case 16:
+                    //kicking
+                    if(tmpPlayer.getKicking() < 98)
+                        tmpPlayer.setKicking(tmpPlayer.getKicking()+1);
+                    break;
+                case 17:
+                    //reflex
+                    if(tmpPlayer.getReflexes() < 98)
+                        tmpPlayer.setReflexes(tmpPlayer.getReflexes()+1);
+                    break;
+                default:
+                    //long shots
+                    if(tmpPlayer.getLongShots() < 98)
+                        tmpPlayer.setLongShots(tmpPlayer.getLongShots()+1);
+                    break;
+                }
+            }
+        }
+    }
 };

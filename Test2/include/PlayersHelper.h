@@ -11,6 +11,7 @@
 #include <algorithm>
 #include <cstdlib>
 #include <math.h>
+#include <random>
 
 class PlayersHelper
 {
@@ -24,6 +25,7 @@ class PlayersHelper
         double getCbStrength(Player tmpPlayer);
         double getMfStrength(Player tmpPlayer);
         double getStStrength(Player tmpPlayer);
+        void trainPlayer(Player tmpPlayer);
 
     protected:
 
