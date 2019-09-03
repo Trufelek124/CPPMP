@@ -14,6 +14,8 @@ class PlayerView
 
         void displayPlayersList(std::vector<Player> players);
         void displayPlayer(Player player);
+        void simpleStatsView(Player player);
+        void playerDetails(Player tmpPlayer);
         void displayPlayersListTraining(std::vector<Player> players);
 
     protected:

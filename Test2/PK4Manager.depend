@@ -330,7 +330,7 @@
 	<iostream>
 	"TimetableView.h"
 
-1567524815 c:\users\user\documents\studia\pk\menager2019\test2\include\playerview.h
+1567526754 c:\users\user\documents\studia\pk\menager2019\test2\include\playerview.h
 	<iostream>
 	"Player.h"
 	<vector>
@@ -365,13 +365,13 @@
 1567410268 source:c:\users\user\documents\studia\pk\menager2019\test2\src\clubsdao.cpp
 	"ClubsDao.h"
 
-1567414281 source:c:\users\user\documents\studia\pk\menager2019\test2\src\clubview.cpp
+1567526729 source:c:\users\user\documents\studia\pk\menager2019\test2\src\clubview.cpp
 	"ClubView.h"
 
 1567406566 source:c:\users\user\documents\studia\pk\menager2019\test2\src\databasehelper.cpp
 	"DatabaseHelper.h"
 
-1567524761 source:c:\users\user\documents\studia\pk\menager2019\test2\src\game.cpp
+1567525874 source:c:\users\user\documents\studia\pk\menager2019\test2\src\game.cpp
 	"Game.h"
 
 1565793523 source:c:\users\user\documents\studia\pk\menager2019\test2\src\league.cpp
@@ -422,7 +422,7 @@
 	<random>
 	<iostream>
 
-1567413853 source:c:\users\user\documents\studia\pk\menager2019\test2\src\playershelper.cpp
+1567525691 source:c:\users\user\documents\studia\pk\menager2019\test2\src\playershelper.cpp
 	"PlayersHelper.h"
 
 1567408010 source:c:\users\user\documents\studia\pk\menager2019\test2\src\clubhelper.cpp
@@ -453,7 +453,7 @@
 	<random>
 	<iostream>
 
-1567516834 source:c:\users\user\documents\studia\pk\menager2019\test2\src\matchhelper.cpp
+1567525389 source:c:\users\user\documents\studia\pk\menager2019\test2\src\matchhelper.cpp
 	"MatchHelper.h"
 
 1567410354 source:c:\users\user\documents\studia\pk\menager2019\test2\src\transferlisthelper.cpp
