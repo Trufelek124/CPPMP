@@ -20,11 +20,6 @@ class SeasonsDao
         Season* seasonTmp;
         char q[999];
 
-        const unsigned char* id;
-        const unsigned char* number;
-        std::string idString;
-        std::string numberString;
-
         std::vector<Season> getSeasons();
         int saveSeason(Season seasonVar);
         void updateSeason(Season seasonVar);
@@ -32,6 +27,10 @@ class SeasonsDao
     protected:
 
     private:
+        const unsigned char* id;
+        const unsigned char* number;
+        std::string idString;
+        std::string numberString;
 };
 
 #endif // SEASONSDAO_H

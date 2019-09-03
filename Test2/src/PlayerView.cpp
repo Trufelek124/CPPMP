@@ -93,6 +93,6 @@ void PlayerView::simpleStatsView(Player tmpPlayer){
     std::cout << "    KIC   " << tmpPlayer.getKicking() << " |" << " MAR  " << tmpPlayer.getMarking() << " |" << " SPAS " << tmpPlayer.getShortPasses() << " |" << " VOL   " << tmpPlayer.getVolleys() << std::endl;
     std::cout << "    REF   " << tmpPlayer.getReflexes() << " |" << " ITC  " << tmpPlayer.getIntercepting() << " |" << " LPAS " << tmpPlayer.getLongPasses() << " |" << " LSHOT " << tmpPlayer.getLongShots() << std::endl;
     std::cout << "             |         | FKIC " << tmpPlayer.getFreeKicks() << " |" << std::endl;
-    std::cout << "             |         | POS " << tmpPlayer.getPositioning() << "  |" << std::endl;
+    std::cout << "             |         | POS  " << tmpPlayer.getPositioning() << " |" << std::endl;
     std::cout << " " << std::endl;
 };

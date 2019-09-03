@@ -21,6 +21,16 @@ class ClubsDao
         Club* clubTmp;
         char q[999];
 
+        std::vector<Club> getClubs();
+        std::vector<Club> getClubsForLeague(int leagueIdQuery);
+        int saveClub(Club clubVar);
+        void updateClub(Club clubVar);
+        Club getPlayerClub();
+        Club getClub(int clubIdVar);
+
+    protected:
+
+    private:
         const unsigned char* id;
         const unsigned char* name;
         const unsigned char* budget;
@@ -47,17 +57,7 @@ class ClubsDao
         std::string drawsString;
         std::string losesString;
 
-
-        std::vector<Club> getClubs();
-        std::vector<Club> getClubsForLeague(int leagueIdQuery);
-        int saveClub(Club clubVar);
-        void updateClub(Club clubVar);
-        Club getPlayerClub();
-        Club getClub(int clubIdVar);
-
-    protected:
-
-    private:
+        void getClubFromStatement(sqlite3_stmt* stmt);
 };
 
 #endif // CLUBSDAO_H

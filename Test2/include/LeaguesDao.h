@@ -21,14 +21,6 @@ class LeaguesDao
         League* leagueTmp;
         char q[999];
 
-        const unsigned char* id;
-        const unsigned char* seasonId;
-        const unsigned char* matchweek;
-
-        std::string idString;
-        std::string seasonIdString;
-        std::string matchweekString;
-
         std::vector<League> getLeagues();
         League getLeagueForClub(int leagueIdQuery);
         int saveLeague(League leagueVar);
@@ -37,6 +29,13 @@ class LeaguesDao
     protected:
 
     private:
+        const unsigned char* id;
+        const unsigned char* seasonId;
+        const unsigned char* matchweek;
+
+        std::string idString;
+        std::string seasonIdString;
+        std::string matchweekString;
 };
 
 #endif // LEAGUESDAO_H

@@ -20,6 +20,17 @@ class PlayersDao
         Player* playerTmp;
         char q[999];
 
+        std::vector<Player> getPlayers();
+        Player getPlayer(int playerId);
+        std::vector<Player> getPlayersForClub(int clubIdQuery);
+        std::vector<Player> getPlayersForPlayersClub();
+        std::vector<Player> getPlayersForPosition(std::string positionVar);
+        int savePlayer(Player playerVar);
+        void updatePlayer(Player playerVar);
+
+    protected:
+
+    private:
         const unsigned char* id;
         const unsigned char* name;
         const unsigned char* position;
@@ -72,18 +83,7 @@ class PlayersDao
         std::string volleysString;
         std::string longShotsString;
 
-
-        std::vector<Player> getPlayers();
-        Player getPlayer(int playerId);
-        std::vector<Player> getPlayersForClub(int clubIdQuery);
-        std::vector<Player> getPlayersForPlayersClub();
-        std::vector<Player> getPlayersForPosition(std::string positionVar);
-        int savePlayer(Player playerVar);
-        void updatePlayer(Player playerVar);
-
-    protected:
-
-    private:
+        void playerFromStatement(sqlite3_stmt* stmt);
 };
 
 #endif // PLAYERSDAO_H

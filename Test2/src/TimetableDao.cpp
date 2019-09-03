@@ -27,37 +27,7 @@ std::vector<Timetable> TimetableDao::getTimetables(){
     while (!done) {
         switch (sqlite3_step (stmt)) {
             case SQLITE_ROW:
-                timetableTmp = new Timetable();
-                id = sqlite3_column_text(stmt, 0);
-                homeClub = sqlite3_column_text(stmt, 1);
-                awayClub = sqlite3_column_text(stmt, 2);
-                matchweek = sqlite3_column_text(stmt, 3);
-                seasonId = sqlite3_column_text(stmt, 4);
-                springFall = sqlite3_column_text(stmt, 5);
-                result = sqlite3_column_text(stmt, 6);
-                homeTeamGoals = sqlite3_column_text(stmt, 7);
-                awayTeamGoals = sqlite3_column_text(stmt, 8);
-
-                idString = std::string(reinterpret_cast<const char*>(id));
-                homeClubString = std::string(reinterpret_cast<const char*>(homeClub));
-                awayClubString = std::string(reinterpret_cast<const char*>(awayClub));
-                matchweekString = std::string(reinterpret_cast<const char*>(matchweek));
-                seasonIdString = std::string(reinterpret_cast<const char*>(seasonId));
-                springFallString = std::string(reinterpret_cast<const char*>(springFall));
-                resultString = std::string(reinterpret_cast<const char*>(result));
-                homeTeamGoalsString = std::string(reinterpret_cast<const char*>(homeTeamGoals));
-                awayTeamGoalsString = std::string(reinterpret_cast<const char*>(awayTeamGoals));
-
-                timetableTmp->setTimetableId(std::stoi(idString));
-                timetableTmp->setHomeClub(std::stoi(homeClubString));
-                timetableTmp->setAwayClub(std::stoi(awayClubString));
-                timetableTmp->setMatchweek(std::stoi(matchweekString));
-                timetableTmp->setSeasonId(std::stoi(seasonIdString));
-                timetableTmp->setSpringFall(std::stoi(springFallString));
-                timetableTmp->setResult(resultString);
-                timetableTmp->setHomeTeamGoals(std::stoi(homeTeamGoalsString));
-                timetableTmp->setAwayTeamGoals(std::stoi(awayTeamGoalsString));
-
+                getTimetableFromStatement(stmt);
                 timetables.push_back(*timetableTmp);
 
                 row++;
@@ -141,37 +111,7 @@ std::vector<Timetable> TimetableDao::getTimetablesForSeason(int seasonIdQuery){
     while (!done) {
         switch (sqlite3_step (stmt)) {
             case SQLITE_ROW:
-                timetableTmp = new Timetable();
-                id = sqlite3_column_text(stmt, 0);
-                homeClub = sqlite3_column_text(stmt, 1);
-                awayClub = sqlite3_column_text(stmt, 2);
-                matchweek = sqlite3_column_text(stmt, 3);
-                seasonId = sqlite3_column_text(stmt, 4);
-                springFall = sqlite3_column_text(stmt, 5);
-                result = sqlite3_column_text(stmt, 6);
-                homeTeamGoals = sqlite3_column_text(stmt, 7);
-                awayTeamGoals = sqlite3_column_text(stmt, 8);
-
-                idString = std::string(reinterpret_cast<const char*>(id));
-                homeClubString = std::string(reinterpret_cast<const char*>(homeClub));
-                awayClubString = std::string(reinterpret_cast<const char*>(awayClub));
-                matchweekString = std::string(reinterpret_cast<const char*>(matchweek));
-                seasonIdString = std::string(reinterpret_cast<const char*>(seasonId));
-                springFallString = std::string(reinterpret_cast<const char*>(springFall));
-                resultString = std::string(reinterpret_cast<const char*>(result));
-                homeTeamGoalsString = std::string(reinterpret_cast<const char*>(homeTeamGoals));
-                awayTeamGoalsString = std::string(reinterpret_cast<const char*>(awayTeamGoals));
-
-                timetableTmp->setTimetableId(std::stoi(idString));
-                timetableTmp->setHomeClub(std::stoi(homeClubString));
-                timetableTmp->setAwayClub(std::stoi(awayClubString));
-                timetableTmp->setMatchweek(std::stoi(matchweekString));
-                timetableTmp->setSeasonId(std::stoi(seasonIdString));
-                timetableTmp->setSpringFall(std::stoi(springFallString));
-                timetableTmp->setResult(resultString);
-                timetableTmp->setHomeTeamGoals(std::stoi(homeTeamGoalsString));
-                timetableTmp->setAwayTeamGoals(std::stoi(awayTeamGoalsString));
-
+                getTimetableFromStatement(stmt);
                 timetables.push_back(*timetableTmp);
 
                 row++;
@@ -220,37 +160,7 @@ std::vector<Timetable> TimetableDao::getTimetablesForClubForSeason(int clubIdQue
     while (!done) {
         switch (sqlite3_step (stmt)) {
             case SQLITE_ROW:
-                timetableTmp = new Timetable();
-                id = sqlite3_column_text(stmt, 0);
-                homeClub = sqlite3_column_text(stmt, 1);
-                awayClub = sqlite3_column_text(stmt, 2);
-                matchweek = sqlite3_column_text(stmt, 3);
-                seasonId = sqlite3_column_text(stmt, 4);
-                springFall = sqlite3_column_text(stmt, 5);
-                result = sqlite3_column_text(stmt, 6);
-                homeTeamGoals = sqlite3_column_text(stmt, 7);
-                awayTeamGoals = sqlite3_column_text(stmt, 8);
-
-                idString = std::string(reinterpret_cast<const char*>(id));
-                homeClubString = std::string(reinterpret_cast<const char*>(homeClub));
-                awayClubString = std::string(reinterpret_cast<const char*>(awayClub));
-                matchweekString = std::string(reinterpret_cast<const char*>(matchweek));
-                seasonIdString = std::string(reinterpret_cast<const char*>(seasonId));
-                springFallString = std::string(reinterpret_cast<const char*>(springFall));
-                resultString = std::string(reinterpret_cast<const char*>(result));
-                homeTeamGoalsString = std::string(reinterpret_cast<const char*>(homeTeamGoals));
-                awayTeamGoalsString = std::string(reinterpret_cast<const char*>(awayTeamGoals));
-
-                timetableTmp->setTimetableId(std::stoi(idString));
-                timetableTmp->setHomeClub(std::stoi(homeClubString));
-                timetableTmp->setAwayClub(std::stoi(awayClubString));
-                timetableTmp->setMatchweek(std::stoi(matchweekString));
-                timetableTmp->setSeasonId(std::stoi(seasonIdString));
-                timetableTmp->setSpringFall(std::stoi(springFallString));
-                timetableTmp->setResult(resultString);
-                timetableTmp->setHomeTeamGoals(std::stoi(homeTeamGoalsString));
-                timetableTmp->setAwayTeamGoals(std::stoi(awayTeamGoalsString));
-
+                getTimetableFromStatement(stmt);
                 timetables.push_back(*timetableTmp);
 
                 row++;
@@ -286,36 +196,7 @@ std::vector<Timetable> TimetableDao::getTimetablesForMatchweek(int matchweekVar,
     while (!done) {
         switch (sqlite3_step (stmt)) {
             case SQLITE_ROW:
-                timetableTmp = new Timetable();
-                id = sqlite3_column_text(stmt, 0);
-                homeClub = sqlite3_column_text(stmt, 1);
-                awayClub = sqlite3_column_text(stmt, 2);
-                matchweek = sqlite3_column_text(stmt, 3);
-                seasonId = sqlite3_column_text(stmt, 4);
-                springFall = sqlite3_column_text(stmt, 5);
-                result = sqlite3_column_text(stmt, 6);
-                homeTeamGoals = sqlite3_column_text(stmt, 7);
-                awayTeamGoals = sqlite3_column_text(stmt, 8);
-
-                idString = std::string(reinterpret_cast<const char*>(id));
-                homeClubString = std::string(reinterpret_cast<const char*>(homeClub));
-                awayClubString = std::string(reinterpret_cast<const char*>(awayClub));
-                matchweekString = std::string(reinterpret_cast<const char*>(matchweek));
-                seasonIdString = std::string(reinterpret_cast<const char*>(seasonId));
-                springFallString = std::string(reinterpret_cast<const char*>(springFall));
-                resultString = std::string(reinterpret_cast<const char*>(result));
-                homeTeamGoalsString = std::string(reinterpret_cast<const char*>(homeTeamGoals));
-                awayTeamGoalsString = std::string(reinterpret_cast<const char*>(awayTeamGoals));
-
-                timetableTmp->setTimetableId(std::stoi(idString));
-                timetableTmp->setHomeClub(std::stoi(homeClubString));
-                timetableTmp->setAwayClub(std::stoi(awayClubString));
-                timetableTmp->setMatchweek(std::stoi(matchweekString));
-                timetableTmp->setSeasonId(std::stoi(seasonIdString));
-                timetableTmp->setSpringFall(std::stoi(springFallString));
-                timetableTmp->setResult(resultString);
-                timetableTmp->setHomeTeamGoals(std::stoi(homeTeamGoalsString));
-                timetableTmp->setAwayTeamGoals(std::stoi(awayTeamGoalsString));
+                getTimetableFromStatement(stmt);
 
                 if(std::stoi(matchweekString) == matchweekVar){
                     timetables.push_back(*timetableTmp);
@@ -355,36 +236,7 @@ Timetable TimetableDao::getTimetable(int timetableId){
     while (!done) {
         switch (sqlite3_step (stmt2)) {
             case SQLITE_ROW:
-                timetableTmp = new Timetable();
-                id = sqlite3_column_text(stmt2, 0);
-                homeClub = sqlite3_column_text(stmt2, 1);
-                awayClub = sqlite3_column_text(stmt2, 2);
-                matchweek = sqlite3_column_text(stmt2, 3);
-                seasonId = sqlite3_column_text(stmt2, 4);
-                springFall = sqlite3_column_text(stmt2, 5);
-                result = sqlite3_column_text(stmt2, 6);
-                homeTeamGoals = sqlite3_column_text(stmt2, 7);
-                awayTeamGoals = sqlite3_column_text(stmt2, 8);
-
-                idString = std::string(reinterpret_cast<const char*>(id));
-                homeClubString = std::string(reinterpret_cast<const char*>(homeClub));
-                awayClubString = std::string(reinterpret_cast<const char*>(awayClub));
-                matchweekString = std::string(reinterpret_cast<const char*>(matchweek));
-                seasonIdString = std::string(reinterpret_cast<const char*>(seasonId));
-                springFallString = std::string(reinterpret_cast<const char*>(springFall));
-                resultString = std::string(reinterpret_cast<const char*>(result));
-                homeTeamGoalsString = std::string(reinterpret_cast<const char*>(homeTeamGoals));
-                awayTeamGoalsString = std::string(reinterpret_cast<const char*>(awayTeamGoals));
-
-                timetableTmp->setTimetableId(std::stoi(idString));
-                timetableTmp->setHomeClub(std::stoi(homeClubString));
-                timetableTmp->setAwayClub(std::stoi(awayClubString));
-                timetableTmp->setMatchweek(std::stoi(matchweekString));
-                timetableTmp->setSeasonId(std::stoi(seasonIdString));
-                timetableTmp->setSpringFall(std::stoi(springFallString));
-                timetableTmp->setResult(resultString);
-                timetableTmp->setHomeTeamGoals(std::stoi(homeTeamGoalsString));
-                timetableTmp->setAwayTeamGoals(std::stoi(awayTeamGoalsString));
+                getTimetableFromStatement(stmt2);
 
                 if(std::stoi(idString) == timetableId){
                     timetables.push_back(*timetableTmp);
@@ -429,4 +281,37 @@ void TimetableDao::saveTimetables(std::vector<Timetable> timetablesVar){
         }
     }
     sqlite3_close(DB);
+};
+
+void TimetableDao::getTimetableFromStatement(sqlite3_stmt* stmt){
+    timetableTmp = new Timetable();
+    id = sqlite3_column_text(stmt, 0);
+    homeClub = sqlite3_column_text(stmt, 1);
+    awayClub = sqlite3_column_text(stmt, 2);
+    matchweek = sqlite3_column_text(stmt, 3);
+    seasonId = sqlite3_column_text(stmt, 4);
+    springFall = sqlite3_column_text(stmt, 5);
+    result = sqlite3_column_text(stmt, 6);
+    homeTeamGoals = sqlite3_column_text(stmt, 7);
+    awayTeamGoals = sqlite3_column_text(stmt, 8);
+
+    idString = std::string(reinterpret_cast<const char*>(id));
+    homeClubString = std::string(reinterpret_cast<const char*>(homeClub));
+    awayClubString = std::string(reinterpret_cast<const char*>(awayClub));
+    matchweekString = std::string(reinterpret_cast<const char*>(matchweek));
+    seasonIdString = std::string(reinterpret_cast<const char*>(seasonId));
+    springFallString = std::string(reinterpret_cast<const char*>(springFall));
+    resultString = std::string(reinterpret_cast<const char*>(result));
+    homeTeamGoalsString = std::string(reinterpret_cast<const char*>(homeTeamGoals));
+    awayTeamGoalsString = std::string(reinterpret_cast<const char*>(awayTeamGoals));
+
+    timetableTmp->setTimetableId(std::stoi(idString));
+    timetableTmp->setHomeClub(std::stoi(homeClubString));
+    timetableTmp->setAwayClub(std::stoi(awayClubString));
+    timetableTmp->setMatchweek(std::stoi(matchweekString));
+    timetableTmp->setSeasonId(std::stoi(seasonIdString));
+    timetableTmp->setSpringFall(std::stoi(springFallString));
+    timetableTmp->setResult(resultString);
+    timetableTmp->setHomeTeamGoals(std::stoi(homeTeamGoalsString));
+    timetableTmp->setAwayTeamGoals(std::stoi(awayTeamGoalsString));
 };

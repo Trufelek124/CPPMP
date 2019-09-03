@@ -27,46 +27,7 @@ std::vector<Club> ClubsDao::getClubs(){
     while (!done) {
         switch (sqlite3_step (stmt)) {
             case SQLITE_ROW:
-                clubTmp = new Club();
-                id = sqlite3_column_text(stmt, 0);
-                name = sqlite3_column_text(stmt, 1);
-                budget  = sqlite3_column_text(stmt, 2);
-                points  = sqlite3_column_text(stmt, 3);
-                position  = sqlite3_column_text(stmt, 4);
-                leagueId  = sqlite3_column_text(stmt, 5);
-                playerClub  = sqlite3_column_text(stmt, 6);
-                goalsScored  = sqlite3_column_text(stmt, 7);
-                goalsLost  = sqlite3_column_text(stmt, 8);
-                wins  = sqlite3_column_text(stmt, 9);
-                draws  = sqlite3_column_text(stmt, 10);
-                loses  = sqlite3_column_text(stmt, 11);
-
-                idString = std::string(reinterpret_cast<const char*>(id));
-                nameString = std::string(reinterpret_cast<const char*>(name));
-                budgetString = std::string(reinterpret_cast<const char*>(budget));
-                pointsString = std::string(reinterpret_cast<const char*>(points));
-                positionString = std::string(reinterpret_cast<const char*>(position));
-                leagueIdString = std::string(reinterpret_cast<const char*>(leagueId));
-                playerClubString = std::string(reinterpret_cast<const char*>(playerClub));
-                goalsScoredString = std::string(reinterpret_cast<const char*>(goalsScored));
-                goalsLostString = std::string(reinterpret_cast<const char*>(goalsLost));
-                winsString = std::string(reinterpret_cast<const char*>(wins));
-                drawsString = std::string(reinterpret_cast<const char*>(draws));
-                losesString = std::string(reinterpret_cast<const char*>(loses));
-
-                clubTmp->setClubId(std::stoi(idString));
-                clubTmp->setName(nameString);
-                clubTmp->setBudget(std::stoi(budgetString));
-                clubTmp->setPoints(std::stoi(pointsString));
-                clubTmp->setPosition(std::stoi(positionString));
-                clubTmp->setLeagueId(std::stoi(leagueIdString));
-                clubTmp->setPlayerClub(std::stoi(playerClubString));
-                clubTmp->setGoalsScored(std::stoi(goalsScoredString));
-                clubTmp->setGoalsLost(std::stoi(goalsLostString));
-                clubTmp->setWins(std::stoi(winsString));
-                clubTmp->setDraws(std::stoi(drawsString));
-                clubTmp->setLoses(std::stoi(losesString));
-
+                getClubFromStatement(stmt);
                 clubs.push_back(*clubTmp);
 
                 row++;
@@ -155,46 +116,7 @@ std::vector<Club> ClubsDao::getClubsForLeague(int leagueIdQuery){
     while (!done) {
         switch (sqlite3_step (stmt)) {
             case SQLITE_ROW:
-                clubTmp = new Club();
-                id = sqlite3_column_text(stmt, 0);
-                name = sqlite3_column_text(stmt, 1);
-                budget  = sqlite3_column_text(stmt, 2);
-                points  = sqlite3_column_text(stmt, 3);
-                position  = sqlite3_column_text(stmt, 4);
-                leagueId  = sqlite3_column_text(stmt, 5);
-                playerClub  = sqlite3_column_text(stmt, 6);
-                goalsScored  = sqlite3_column_text(stmt, 7);
-                goalsLost  = sqlite3_column_text(stmt, 8);
-                wins  = sqlite3_column_text(stmt, 9);
-                draws  = sqlite3_column_text(stmt, 10);
-                loses  = sqlite3_column_text(stmt, 11);
-
-                idString = std::string(reinterpret_cast<const char*>(id));
-                nameString = std::string(reinterpret_cast<const char*>(name));
-                budgetString = std::string(reinterpret_cast<const char*>(budget));
-                pointsString = std::string(reinterpret_cast<const char*>(points));
-                positionString = std::string(reinterpret_cast<const char*>(position));
-                leagueIdString = std::string(reinterpret_cast<const char*>(leagueId));
-                playerClubString = std::string(reinterpret_cast<const char*>(playerClub));
-                goalsScoredString = std::string(reinterpret_cast<const char*>(goalsScored));
-                goalsLostString = std::string(reinterpret_cast<const char*>(goalsLost));
-                winsString = std::string(reinterpret_cast<const char*>(wins));
-                drawsString = std::string(reinterpret_cast<const char*>(draws));
-                losesString = std::string(reinterpret_cast<const char*>(loses));
-
-                clubTmp->setClubId(std::stoi(idString));
-                clubTmp->setName(nameString);
-                clubTmp->setBudget(std::stoi(budgetString));
-                clubTmp->setPoints(std::stoi(pointsString));
-                clubTmp->setPosition(std::stoi(positionString));
-                clubTmp->setLeagueId(std::stoi(leagueIdString));
-                clubTmp->setPlayerClub(std::stoi(playerClubString));
-                clubTmp->setGoalsScored(std::stoi(goalsScoredString));
-                clubTmp->setGoalsLost(std::stoi(goalsLostString));
-                clubTmp->setWins(std::stoi(winsString));
-                clubTmp->setDraws(std::stoi(drawsString));
-                clubTmp->setLoses(std::stoi(losesString));
-
+                getClubFromStatement(stmt);
                 clubs.push_back(*clubTmp);
 
                 row++;
@@ -227,46 +149,7 @@ Club ClubsDao::getPlayerClub(){
     while (!done) {
         switch (sqlite3_step (stmt)) {
             case SQLITE_ROW:
-                clubTmp = new Club();
-                id = sqlite3_column_text(stmt, 0);
-                name = sqlite3_column_text(stmt, 1);
-                budget  = sqlite3_column_text(stmt, 2);
-                points  = sqlite3_column_text(stmt, 3);
-                position  = sqlite3_column_text(stmt, 4);
-                leagueId  = sqlite3_column_text(stmt, 5);
-                playerClub  = sqlite3_column_text(stmt, 6);
-                goalsScored  = sqlite3_column_text(stmt, 7);
-                goalsLost  = sqlite3_column_text(stmt, 8);
-                wins  = sqlite3_column_text(stmt, 9);
-                draws  = sqlite3_column_text(stmt, 10);
-                loses  = sqlite3_column_text(stmt, 11);
-
-                idString = std::string(reinterpret_cast<const char*>(id));
-                nameString = std::string(reinterpret_cast<const char*>(name));
-                budgetString = std::string(reinterpret_cast<const char*>(budget));
-                pointsString = std::string(reinterpret_cast<const char*>(points));
-                positionString = std::string(reinterpret_cast<const char*>(position));
-                leagueIdString = std::string(reinterpret_cast<const char*>(leagueId));
-                playerClubString = std::string(reinterpret_cast<const char*>(playerClub));
-                goalsScoredString = std::string(reinterpret_cast<const char*>(goalsScored));
-                goalsLostString = std::string(reinterpret_cast<const char*>(goalsLost));
-                winsString = std::string(reinterpret_cast<const char*>(wins));
-                drawsString = std::string(reinterpret_cast<const char*>(draws));
-                losesString = std::string(reinterpret_cast<const char*>(loses));
-
-                clubTmp->setClubId(std::stoi(idString));
-                clubTmp->setName(nameString);
-                clubTmp->setBudget(std::stoi(budgetString));
-                clubTmp->setPoints(std::stoi(pointsString));
-                clubTmp->setPosition(std::stoi(positionString));
-                clubTmp->setLeagueId(std::stoi(leagueIdString));
-                clubTmp->setPlayerClub(std::stoi(playerClubString));
-                clubTmp->setGoalsScored(std::stoi(goalsScoredString));
-                clubTmp->setGoalsLost(std::stoi(goalsLostString));
-                clubTmp->setWins(std::stoi(winsString));
-                clubTmp->setDraws(std::stoi(drawsString));
-                clubTmp->setLoses(std::stoi(losesString));
-
+                getClubFromStatement(stmt);
                 clubs.push_back(*clubTmp);
 
                 row++;
@@ -303,46 +186,7 @@ Club ClubsDao::getClub(int clubIdVar){
     while (!done) {
         switch (sqlite3_step (stmt)) {
             case SQLITE_ROW:
-                clubTmp = new Club();
-                id = sqlite3_column_text(stmt, 0);
-                name = sqlite3_column_text(stmt, 1);
-                budget  = sqlite3_column_text(stmt, 2);
-                points  = sqlite3_column_text(stmt, 3);
-                position  = sqlite3_column_text(stmt, 4);
-                leagueId  = sqlite3_column_text(stmt, 5);
-                playerClub  = sqlite3_column_text(stmt, 6);
-                goalsScored  = sqlite3_column_text(stmt, 7);
-                goalsLost  = sqlite3_column_text(stmt, 8);
-                wins  = sqlite3_column_text(stmt, 9);
-                draws  = sqlite3_column_text(stmt, 10);
-                loses  = sqlite3_column_text(stmt, 11);
-
-                idString = std::string(reinterpret_cast<const char*>(id));
-                nameString = std::string(reinterpret_cast<const char*>(name));
-                budgetString = std::string(reinterpret_cast<const char*>(budget));
-                pointsString = std::string(reinterpret_cast<const char*>(points));
-                positionString = std::string(reinterpret_cast<const char*>(position));
-                leagueIdString = std::string(reinterpret_cast<const char*>(leagueId));
-                playerClubString = std::string(reinterpret_cast<const char*>(playerClub));
-                goalsScoredString = std::string(reinterpret_cast<const char*>(goalsScored));
-                goalsLostString = std::string(reinterpret_cast<const char*>(goalsLost));
-                winsString = std::string(reinterpret_cast<const char*>(wins));
-                drawsString = std::string(reinterpret_cast<const char*>(draws));
-                losesString = std::string(reinterpret_cast<const char*>(loses));
-
-                clubTmp->setClubId(std::stoi(idString));
-                clubTmp->setName(nameString);
-                clubTmp->setBudget(std::stoi(budgetString));
-                clubTmp->setPoints(std::stoi(pointsString));
-                clubTmp->setPosition(std::stoi(positionString));
-                clubTmp->setLeagueId(std::stoi(leagueIdString));
-                clubTmp->setPlayerClub(std::stoi(playerClubString));
-                clubTmp->setGoalsScored(std::stoi(goalsScoredString));
-                clubTmp->setGoalsLost(std::stoi(goalsLostString));
-                clubTmp->setWins(std::stoi(winsString));
-                clubTmp->setDraws(std::stoi(drawsString));
-                clubTmp->setLoses(std::stoi(losesString));
-
+                getClubFromStatement(stmt);
                 clubs.push_back(*clubTmp);
 
                 row++;
@@ -364,4 +208,46 @@ Club ClubsDao::getClub(int clubIdVar){
         playerClubResult = clubs.at(0);
     };
     return playerClubResult;
+}
+
+void ClubsDao::getClubFromStatement(sqlite3_stmt* stmt){
+    clubTmp = new Club();
+    id = sqlite3_column_text(stmt, 0);
+    name = sqlite3_column_text(stmt, 1);
+    budget  = sqlite3_column_text(stmt, 2);
+    points  = sqlite3_column_text(stmt, 3);
+    position  = sqlite3_column_text(stmt, 4);
+    leagueId  = sqlite3_column_text(stmt, 5);
+    playerClub  = sqlite3_column_text(stmt, 6);
+    goalsScored  = sqlite3_column_text(stmt, 7);
+    goalsLost  = sqlite3_column_text(stmt, 8);
+    wins  = sqlite3_column_text(stmt, 9);
+    draws  = sqlite3_column_text(stmt, 10);
+    loses  = sqlite3_column_text(stmt, 11);
+
+    idString = std::string(reinterpret_cast<const char*>(id));
+    nameString = std::string(reinterpret_cast<const char*>(name));
+    budgetString = std::string(reinterpret_cast<const char*>(budget));
+    pointsString = std::string(reinterpret_cast<const char*>(points));
+    positionString = std::string(reinterpret_cast<const char*>(position));
+    leagueIdString = std::string(reinterpret_cast<const char*>(leagueId));
+    playerClubString = std::string(reinterpret_cast<const char*>(playerClub));
+    goalsScoredString = std::string(reinterpret_cast<const char*>(goalsScored));
+    goalsLostString = std::string(reinterpret_cast<const char*>(goalsLost));
+    winsString = std::string(reinterpret_cast<const char*>(wins));
+    drawsString = std::string(reinterpret_cast<const char*>(draws));
+    losesString = std::string(reinterpret_cast<const char*>(loses));
+
+    clubTmp->setClubId(std::stoi(idString));
+    clubTmp->setName(nameString);
+    clubTmp->setBudget(std::stoi(budgetString));
+    clubTmp->setPoints(std::stoi(pointsString));
+    clubTmp->setPosition(std::stoi(positionString));
+    clubTmp->setLeagueId(std::stoi(leagueIdString));
+    clubTmp->setPlayerClub(std::stoi(playerClubString));
+    clubTmp->setGoalsScored(std::stoi(goalsScoredString));
+    clubTmp->setGoalsLost(std::stoi(goalsLostString));
+    clubTmp->setWins(std::stoi(winsString));
+    clubTmp->setDraws(std::stoi(drawsString));
+    clubTmp->setLoses(std::stoi(losesString));
 }

@@ -290,27 +290,27 @@
 	<sqlite3.h>
 	<iostream>
 
-1567368102 c:\users\user\documents\studia\pk\menager2019\test2\include\playersdao.h
+1567528431 c:\users\user\documents\studia\pk\menager2019\test2\include\playersdao.h
 	"Player.h"
 	<vector>
 	<sqlite3.h>
 	<iostream>
 
-1565793522 c:\users\user\documents\studia\pk\menager2019\test2\include\leaguesdao.h
+1567528207 c:\users\user\documents\studia\pk\menager2019\test2\include\leaguesdao.h
 	"League.h"
 	<vector>
 	<sqlite3.h>
 	<iostream>
 	<string>
 
-1567168871 c:\users\user\documents\studia\pk\menager2019\test2\include\clubsdao.h
+1567528418 c:\users\user\documents\studia\pk\menager2019\test2\include\clubsdao.h
 	"Club.h"
 	<vector>
 	<sqlite3.h>
 	<iostream>
 	<string>
 
-1565793523 c:\users\user\documents\studia\pk\menager2019\test2\include\seasonsdao.h
+1567528219 c:\users\user\documents\studia\pk\menager2019\test2\include\seasonsdao.h
 	"Season.h"
 	<vector>
 	<sqlite3.h>
@@ -323,14 +323,14 @@
 1567084833 c:\users\user\documents\studia\pk\menager2019\test2\include\timetable.h
 	<string>
 
-1567087847 c:\users\user\documents\studia\pk\menager2019\test2\include\timetabledao.h
+1567528509 c:\users\user\documents\studia\pk\menager2019\test2\include\timetabledao.h
 	"Timetable.h"
 	<vector>
 	<sqlite3.h>
 	<iostream>
 	"TimetableView.h"
 
-1567526754 c:\users\user\documents\studia\pk\menager2019\test2\include\playerview.h
+1567527090 c:\users\user\documents\studia\pk\menager2019\test2\include\playerview.h
 	<iostream>
 	"Player.h"
 	<vector>
@@ -362,7 +362,7 @@
 1565793523 source:c:\users\user\documents\studia\pk\menager2019\test2\src\club.cpp
 	"Club.h"
 
-1567410268 source:c:\users\user\documents\studia\pk\menager2019\test2\src\clubsdao.cpp
+1567528572 source:c:\users\user\documents\studia\pk\menager2019\test2\src\clubsdao.cpp
 	"ClubsDao.h"
 
 1567526729 source:c:\users\user\documents\studia\pk\menager2019\test2\src\clubview.cpp
@@ -383,10 +383,10 @@
 1565793523 source:c:\users\user\documents\studia\pk\menager2019\test2\src\player.cpp
 	"Player.h"
 
-1567409208 source:c:\users\user\documents\studia\pk\menager2019\test2\src\playersdao.cpp
+1567528490 source:c:\users\user\documents\studia\pk\menager2019\test2\src\playersdao.cpp
 	"PlayersDao.h"
 
-1567524916 source:c:\users\user\documents\studia\pk\menager2019\test2\src\playerview.cpp
+1567527757 source:c:\users\user\documents\studia\pk\menager2019\test2\src\playerview.cpp
 	"PlayerView.h"
 
 1565793523 source:c:\users\user\documents\studia\pk\menager2019\test2\src\season.cpp
@@ -398,7 +398,7 @@
 1565793523 source:c:\users\user\documents\studia\pk\menager2019\test2\src\timetable.cpp
 	"Timetable.h"
 
-1567087957 source:c:\users\user\documents\studia\pk\menager2019\test2\src\timetabledao.cpp
+1567528555 source:c:\users\user\documents\studia\pk\menager2019\test2\src\timetabledao.cpp
 	"TimetableDao.h"
 
 1567086337 source:c:\users\user\documents\studia\pk\menager2019\test2\src\timetablehelper.cpp

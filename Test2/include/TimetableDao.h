@@ -22,6 +22,18 @@ class TimetableDao
         Timetable* timetableTmp;
         char q[999];
 
+        std::vector<Timetable> getTimetables();
+        std::vector<Timetable> getTimetablesForSeason(int seasonIdQuery);
+        std::vector<Timetable> getTimetablesForClubForSeason(int clubIdQuery, int seasonIdQuery);
+        std::vector<Timetable> getTimetablesForMatchweek(int matchweekVar, int seasonIdQuery);
+        Timetable getTimetable(int timetableId);
+        int saveTimetable(Timetable timetableVar);
+        void saveTimetables(std::vector<Timetable> timetablesVar);
+        void updateTimetable(Timetable timetableVar);
+
+    protected:
+
+    private:
         const unsigned char* id;
         const unsigned char* homeClub;
         const unsigned char* awayClub;
@@ -42,19 +54,8 @@ class TimetableDao
         std::string homeTeamGoalsString;
         std::string awayTeamGoalsString;
 
-        std::vector<Timetable> getTimetables();
-        std::vector<Timetable> getTimetablesForSeason(int seasonIdQuery);
-        std::vector<Timetable> getTimetablesForClubForSeason(int clubIdQuery, int seasonIdQuery);
-        std::vector<Timetable> getTimetablesForMatchweek(int matchweekVar, int seasonIdQuery);
-        Timetable getTimetable(int timetableId);
-        int saveTimetable(Timetable timetableVar);
-        void saveTimetables(std::vector<Timetable> timetablesVar);
-        void updateTimetable(Timetable timetableVar);
-
-    protected:
-
-    private:
         TimetableView* timetableViewVar;
+        void getTimetableFromStatement(sqlite3_stmt* stmt);
 };
 
 #endif // TIMETABLEDAO_H
