@@ -47,10 +47,23 @@ int Game::play(){
 }
 
 int Game::handleMenu(int menuOption){
+    std::string response;
+    bool done = false;
     switch(menuOption){
     case 1:
         programSetup();
-        season();
+        while(!done){
+            season();
+            std::cout << "Do You want to play another season (Y/N)? ";
+            std::cin >> response;
+            if(response == "N"){
+                done = true;
+            } else {
+                timetablesVec.clear();
+                seasonNumber += 1;
+                system("CLS");
+            }
+        }
         system("pause");
         system ("CLS");
         return 1;
@@ -102,131 +115,124 @@ void Game::season(){
     Club clubTmp;
     std::vector<Club> clubsVecTmp;
 
-
     if(timetablesVec.empty()){
         timetableHelperVar->createTimetableForSeason(seasonNumber, clubsVec);
-        timetablesVec = timetableDao->getTimetables();
+        timetablesVec = timetableDao->getTimetablesForSeason(seasonNumber);
         timetableViewVar->displayTimetableList(timetablesVec);
     };
 
-    if(!timetablesVec.empty()){
+    clubsVec = clubsDao->getClubs();
+    for(int i = 0; i < (clubsVec.size()-1); i++){ //kolejki - 12
+        timetablesVecMatchweek = timetableDao->getTimetablesForMatchweek(i+1, seasonNumber); //na razie sezon = 1 - 3
+        timetableViewVar->displayTimetableList(timetablesVecMatchweek);
+        clubsVec = clubHelper->chooseTacticsForClub(playerClubId, clubsVec);
+        std::cout << "Matchweek: " << i << std::endl;
+        std::cout << "Results: " << std::endl;
+        for(int j = 0; j < timetablesVecMatchweek.size(); j++){
+            Timetable tmp = timetablesVecMatchweek.at(j);
+            matchHelperVar->match(tmp.getHomeClub(), tmp.getAwayClub(), tmp, clubsVec);
+        }
+
+        //oblicz pozycjê zespo³u
         clubsVec = clubsDao->getClubs();
-        for(int i = 0; i < (clubsVec.size()-1); i++){ //kolejki - 12
-            clubsVec = clubHelper->chooseTacticsForClub(playerClubId, clubsVec);
-            timetablesVecMatchweek = timetableDao->getTimetablesForMatchweek(i+1, seasonNumber); //na razie sezon = 1 - 3
-            std::cout << "Kolejka: " << i << std::endl;
-            timetableViewVar->displayTimetableList(timetablesVecMatchweek);
-            for(int j = 0; j < timetablesVecMatchweek.size(); j++){
-                Timetable tmp = timetablesVecMatchweek.at(j);
-                //timetableViewVar->displayTimetable(tmp);
-                    //wybór taktyki
-                matchHelperVar->match(tmp.getHomeClub(), tmp.getAwayClub(), tmp, clubsVec);
-            }
-
-            //oblicz pozycjê zespo³u
-            clubsVec = clubsDao->getClubs();
-            clubHelper->updateClubsPosition(clubsVec);
-
-            std::vector<Club> clubsSortedByPoints = clubsVec;
-            std::sort(clubsSortedByPoints.begin(), clubsSortedByPoints.end(), ClubComparator());
-            clubViewVar->displayClubList(clubsSortedByPoints);
-
-            system("pause");
-
-            playersVec = playersDao->getPlayers();
-            playersVec = playersHelperVar->playersClubPlayersTraining(playersVec, playerClubId);
-            for(int i = 0; i < playersVec.size(); i++){
-                Player tmpPlayer = playersVec.at(i);
-                playersHelperVar->trainPlayer(tmpPlayer);
-            };
-        }
-
-        transferListHelper->transferWindow(playerClubId);
-
-        //lista transferowa
-        for(int i = (clubsVec.size()-1); i < (clubsVec.size()-1)*2; i++){
-            clubsVec = clubHelper->chooseTacticsForClub(playerClubId, clubsVec);
-            timetablesVecMatchweek = timetableDao->getTimetablesForMatchweek(i+1, 1); //na razie sezon = 1 - 3
-            std::cout << "Kolejka: " << i << std::endl;
-            timetableViewVar->displayTimetableList(timetablesVecMatchweek);
-            for(int j = 0; j < timetablesVecMatchweek.size(); j++){
-                Timetable tmp = timetablesVecMatchweek.at(j);
-                //timetableViewVar->displayTimetable(tmp);
-                matchHelperVar->match(tmp.getHomeClub(), tmp.getAwayClub(), tmp, clubsVec);
-            }
-
-            //oblicz pozycjê zespo³u
-            clubsVec = clubsDao->getClubs();
-            clubHelper->updateClubsPosition(clubsVec);
-
-            std::vector<Club> clubsSortedByPoints = clubsVec;
-            std::sort(clubsSortedByPoints.begin(), clubsSortedByPoints.end(), ClubComparator());
-            clubHelper->updateClubsPosition(clubsVec);
-            clubViewVar->displayClubList(clubsSortedByPoints);
-
-            system("pause");
-
-
-            playersVec = playersDao->getPlayers();
-            playersVec = playersHelperVar->playersClubPlayersTraining(playersVec, playerClubId);
-            for(int i = 0; i < playersVec.size(); i++){
-                Player tmpPlayer = playersVec.at(i);
-                playersHelperVar->trainPlayer(tmpPlayer);
-            }
-        }
-
-        timetablesVec = timetableDao->getTimetables();
-        timetableViewVar->displayTimetableList(timetablesVec);
-
-        //clubsVec = clubsDao->getClubs();
-
-        clubsVecTmp = clubsDao->getClubs();
-        clubsVec.clear();
-
-
-        for(int i = 0; i < clubsVecTmp.size(); i++){
-            clubTestVar = clubsVecTmp.at(i);
-            if(clubTestVar.getPosition() == 1){ //prize for the end result
-                clubTestVar.setBudget(clubTestVar.getBudget()+5000000);
-            } else if(clubTestVar.getPosition() == 2){
-                clubTestVar.setBudget(clubTestVar.getBudget()+2500000);
-            } else if(clubTestVar.getPosition() == 3){
-                clubTestVar.setBudget(clubTestVar.getBudget()+1000000);
-            }
-
-            clubsDao->updateClub(clubTestVar);
-
-            //players = playersDao->getPlayersForClub(clubTestVar.getClubId());
-            //clubTestVar.setPlayers(players);
-            clubsVec.push_back(clubTestVar);
-        }
+        clubHelper->updateClubsPosition(clubsVec);
 
         std::vector<Club> clubsSortedByPoints = clubsVec;
         std::sort(clubsSortedByPoints.begin(), clubsSortedByPoints.end(), ClubComparator());
         clubViewVar->displayClubList(clubsSortedByPoints);
 
-        transferListHelper->transferWindow(playerClubId);
-
-        std::cout << "OFFICIAL SEASON STANDINGS" << std::endl;
-        clubViewVar->displayClubList(clubsSortedByPoints);
-        //postarzanie zawodników
+        system("pause");
+        system("CLS");
 
         playersVec = playersDao->getPlayers();
+        playersVec = playersHelperVar->playersClubPlayersTraining(playersVec, playerClubId);
         for(int i = 0; i < playersVec.size(); i++){
             Player tmpPlayer = playersVec.at(i);
-            tmpPlayer.setAge(tmpPlayer.getAge()+1);
-            playersDao->updatePlayer(tmpPlayer);
+            playersHelperVar->trainPlayer(tmpPlayer);
+        };
+    }
+
+    transferListHelper->transferWindow(playerClubId);
+
+    //lista transferowa
+    for(int i = (clubsVec.size()-1); i < (clubsVec.size()-1)*2; i++){
+        clubsVec = clubHelper->chooseTacticsForClub(playerClubId, clubsVec);
+        timetablesVecMatchweek = timetableDao->getTimetablesForMatchweek(i+1, 1); //na razie sezon = 1 - 3
+        std::cout << "Matchweek: " << i << std::endl;
+        timetableViewVar->displayTimetableList(timetablesVecMatchweek);
+        std::cout << "Results: " << std::endl;
+        for(int j = 0; j < timetablesVecMatchweek.size(); j++){
+            Timetable tmp = timetablesVecMatchweek.at(j);
+            //timetableViewVar->displayTimetable(tmp);
+            matchHelperVar->match(tmp.getHomeClub(), tmp.getAwayClub(), tmp, clubsVec);
         }
 
-        for(int i = 0; i < clubsVec.size(); i++){
-            Club tmpClub = clubsVec.at(i);
-            tmpClub.setPoints(0);
-            tmpClub.setWins(0);
-            tmpClub.setDraws(0);
-            tmpClub.setLoses(0);
-            clubsDao->updateClub(tmpClub);
+        //oblicz pozycjê zespo³u
+        clubsVec = clubsDao->getClubs();
+        clubHelper->updateClubsPosition(clubsVec);
+
+        std::vector<Club> clubsSortedByPoints = clubsVec;
+        std::sort(clubsSortedByPoints.begin(), clubsSortedByPoints.end(), ClubComparator());
+        clubHelper->updateClubsPosition(clubsVec);
+        clubViewVar->displayClubList(clubsSortedByPoints);
+
+        system("pause");
+        system("CLS");
+
+        playersVec = playersDao->getPlayers();
+        playersVec = playersHelperVar->playersClubPlayersTraining(playersVec, playerClubId);
+        for(int i = 0; i < playersVec.size(); i++){
+            Player tmpPlayer = playersVec.at(i);
+            playersHelperVar->trainPlayer(tmpPlayer);
+        }
+    }
+
+    timetablesVec = timetableDao->getTimetables();
+    timetableViewVar->displayTimetableList(timetablesVec);
+
+    clubsVecTmp = clubsDao->getClubs();
+    clubsVec.clear();
+
+
+    for(int i = 0; i < clubsVecTmp.size(); i++){
+        clubTestVar = clubsVecTmp.at(i);
+        if(clubTestVar.getPosition() == 1){ //prize for the end result
+            clubTestVar.setBudget(clubTestVar.getBudget()+5000000);
+        } else if(clubTestVar.getPosition() == 2){
+            clubTestVar.setBudget(clubTestVar.getBudget()+2500000);
+        } else if(clubTestVar.getPosition() == 3){
+            clubTestVar.setBudget(clubTestVar.getBudget()+1000000);
         }
 
+        clubsDao->updateClub(clubTestVar);
+        clubsVec.push_back(clubTestVar);
+    }
+
+    std::vector<Club> clubsSortedByPoints = clubsVec;
+    std::sort(clubsSortedByPoints.begin(), clubsSortedByPoints.end(), ClubComparator());
+    clubViewVar->displayClubList(clubsSortedByPoints);
+
+    transferListHelper->transferWindow(playerClubId);
+
+    std::cout << "OFFICIAL SEASON STANDINGS" << std::endl;
+    clubViewVar->displayClubList(clubsSortedByPoints);
+
+    //postarzanie zawodników
+    playersVec = playersDao->getPlayers();
+    for(int i = 0; i < playersVec.size(); i++){
+        Player tmpPlayer = playersVec.at(i);
+        tmpPlayer.setAge(tmpPlayer.getAge()+1);
+        playersDao->updatePlayer(tmpPlayer);
+    }
+
+    //resetowanie wyników klubów
+    for(int i = 0; i < clubsVec.size(); i++){
+        Club tmpClub = clubsVec.at(i);
+        tmpClub.setPoints(0);
+        tmpClub.setWins(0);
+        tmpClub.setDraws(0);
+        tmpClub.setLoses(0);
+        clubsDao->updateClub(tmpClub);
     }
 }
 

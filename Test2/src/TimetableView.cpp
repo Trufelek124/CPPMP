@@ -2,7 +2,7 @@
 
 TimetableView::TimetableView()
 {
-    //ctor
+    clubsDao = new ClubsDao();
 }
 
 TimetableView::~TimetableView()
@@ -13,12 +13,16 @@ TimetableView::~TimetableView()
 void TimetableView::displayTimetableList(std::vector<Timetable> timetables){
 
     Timetable timetable;
-    std::cout << "MATCHWEEK | HOME | AWAY |          RESULT          | H_GOALS | A_GOALS" << std::endl;
-    std::cout << "______________________________________________________________________" << std::endl;
+    std::cout << "MATCHWEEK |        HOME        |        AWAY        |          RESULT          | H_GOALS | A_GOALS" << std::endl;
+    std::cout << "__________________________________________________________________________________________________" << std::endl;
     for(int i = 0; i < timetables.size(); i++){
         timetable = timetables.at(i);
         std:: string result = timetable.getResult();
+        std:: string home = clubsDao->getClub(timetable.getHomeClub()).getName();
+        std:: string away = clubsDao->getClub(timetable.getAwayClub()).getName();
         int numberOfWhitespacesResult = 25 - result.length();
+        int numberOfWhitespacesHome = 20 - home.length();
+        int numberOfWhitespacesAway = 20 - away.length();
         int numberOPfWhitespacesMatchweek;
         if(timetable.getMatchweek() < 10){
             numberOPfWhitespacesMatchweek = 9;
@@ -30,7 +34,15 @@ void TimetableView::displayTimetableList(std::vector<Timetable> timetables){
         for(int j = 0; j < numberOPfWhitespacesMatchweek; j++){
             std::cout << " ";
         }
-        std::cout << "| " << timetable.getHomeClub() << "    | " << timetable.getAwayClub() << "    | " << result;
+        std::cout << "| " << home;
+        for(int j = 0; j < numberOfWhitespacesHome; j++){
+            std::cout << " ";
+        }
+        std::cout << "| " << away;
+        for(int j = 0; j < numberOfWhitespacesAway; j++){
+            std::cout << " ";
+        }
+        std::cout << "| " << result;
         for(int j = 0; j < numberOfWhitespacesResult; j++){
             std::cout << " ";
         }

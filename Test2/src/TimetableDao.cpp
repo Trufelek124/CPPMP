@@ -112,7 +112,14 @@ std::vector<Timetable> TimetableDao::getTimetablesForSeason(int seasonIdQuery){
         switch (sqlite3_step (stmt)) {
             case SQLITE_ROW:
                 getTimetableFromStatement(stmt);
-                timetables.push_back(*timetableTmp);
+
+           //     if(timetableTmp->getSeasonId() == seasonIdQuery){
+          //          timetables.push_back(*timetableTmp);
+            //    }
+
+                if(std::stoi(seasonIdString) == seasonIdQuery){
+                    timetables.push_back(*timetableTmp);
+                }
 
                 row++;
                 break;
@@ -198,7 +205,7 @@ std::vector<Timetable> TimetableDao::getTimetablesForMatchweek(int matchweekVar,
             case SQLITE_ROW:
                 getTimetableFromStatement(stmt);
 
-                if(std::stoi(matchweekString) == matchweekVar){
+                if(std::stoi(matchweekString) == matchweekVar && std::stoi(seasonIdString) == seasonIdQuery){
                     timetables.push_back(*timetableTmp);
                 }
 

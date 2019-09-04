@@ -3,6 +3,8 @@
 
 #include<iostream>
 #include "Timetable.h"
+#include "Club.h"
+#include "ClubsDao.h"
 #include <vector>
 #include <string>
 
@@ -18,6 +20,7 @@ class TimetableView
     protected:
 
     private:
+        ClubsDao* clubsDao;
 };
 
 #endif // TIMETABLEVIEW_H

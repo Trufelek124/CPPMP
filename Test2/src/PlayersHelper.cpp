@@ -24,6 +24,9 @@ void PlayersHelper::randommizeInitialSquads(){
 
     std::srand ( unsigned ( std::time(0) ) );
     std::random_shuffle(goalkeepers.begin(), goalkeepers.end());
+    std::random_shuffle(defenders.begin(), defenders.end());
+    std::random_shuffle(midfielders.begin(), midfielders.end());
+    std::random_shuffle(strikers.begin(), strikers.end());
 
     for(std::vector<Club>::iterator it = clubs.begin(); it != clubs.end(); ++it, i++){
         Player goalkeeper;
