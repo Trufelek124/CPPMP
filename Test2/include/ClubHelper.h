@@ -8,7 +8,8 @@
 #include "Player.h"
 #include "PlayersDao.h"
 #include <vector>
-#include<algorithm>
+#include <algorithm>
+#include <iostream>
 
 
 class ClubHelper
@@ -19,6 +20,7 @@ class ClubHelper
 
         int setUserClub(std::vector<Club> clubsVec);
         void updateClubsPosition(std::vector<Club> clubsVec);
+        std::vector<Club> chooseTacticsForClub(int playerClubId, std::vector<Club> clubsVec);
 
     protected:
 

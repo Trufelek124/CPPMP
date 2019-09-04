@@ -45,3 +45,21 @@ void ClubHelper::updateClubsPosition(std::vector<Club> clubsVec){
         clubsDao->updateClub(tmp);
     }
 }
+
+std::vector<Club> ClubHelper::chooseTacticsForClub(int playerClubId, std::vector<Club> clubsVec){
+    Club tmpClub = clubsDao->getClub(playerClubId);
+    std::vector<Club> vec;
+    int response;
+    std::cout << "Current team tactics: " << tmpClub.getTactics() << " " << tmpClub.getTacticsString() << std::endl;
+    std::cout << "Please choose new tactics for You club (1 - 5: 1 - ultradeffensive, 5 - ultraoffensive), or type in 0 to skip this step: ";
+    std::cin >> response;
+    for(int i = 0; i < clubsVec.size(); i++){
+        Club tmp = clubsVec.at(i);
+        if(tmp.getClubId() == playerClubId && response > 0 && response <= 5){
+            tmp.setTactics(response);
+            clubsDao->updateClub(tmp);
+        }
+        vec.push_back(tmp);
+    }
+    return vec;
+};

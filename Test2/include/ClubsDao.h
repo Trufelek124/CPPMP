@@ -43,6 +43,7 @@ class ClubsDao
         const unsigned char* wins;
         const unsigned char* draws;
         const unsigned char* loses;
+        const unsigned char* tactics;
 
         std::string idString;
         std::string nameString;
@@ -56,6 +57,7 @@ class ClubsDao
         std::string winsString;
         std::string drawsString;
         std::string losesString;
+        std::string tacticsString;
 
         void getClubFromStatement(sqlite3_stmt* stmt);
 };

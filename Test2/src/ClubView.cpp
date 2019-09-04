@@ -19,6 +19,7 @@ void ClubView::displayClubInfo(Club club){
     std::cout << "Goals scored: " << club.getGoalsScored() << std::endl;
     std::cout << "Goals lost: " << club.getGoalsLost() << std::endl;
     std::cout << "Budget: " << club.getBudget() << std::endl;
+    std::cout << "Current tactics: " << club.getTacticsString() << std::endl;
     std::cout << "W:D:L: "<< club.getWins() << ":"<< club.getDraws() << ":"<< club.getLoses() << std::endl;
     std::cout << "Players:" << std::endl;
     //playerViewVar->displayPlayersList(club.getPlayers());
@@ -31,7 +32,7 @@ void ClubView::displayClubInfo(Club club){
 void ClubView::displayClubInfoInLine(Club club){
     std::string myClub = club.getPlayerClub() == 1 ? " MY CLUB" : "";
     std::cout<< club.getName() << " - position: " << club.getPosition() << " - points: " << club.getPoints() << " - goals scored: " << club.getGoalsScored() << " - goals lost: " << club.getGoalsLost() << " -W:D:L: "<< club.getWins();
-    std::cout << ":"<< club.getDraws() << ":"<< club.getLoses() << " - bugdet: " << club.getBudget() << " " << myClub << std::endl;
+    std::cout << ":"<< club.getDraws() << ":"<< club.getLoses() << " - bugdet: " << club.getBudget() << " - tactics " << club.getTacticsString() << " " << myClub << std::endl;
 };
 
 void ClubView::displayClubList(std::vector<Club> clubs){

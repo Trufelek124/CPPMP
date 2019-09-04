@@ -49,11 +49,11 @@ std::vector<Club> ClubsDao::getClubs(){
 
 int ClubsDao::saveClub(Club clubVar){
     int clubId;
-    std::string sql =  "INSERT INTO CLUBS(NAME, BUDGET, POINTS, POSITION, LEAGUE_ID, PLAYER_CLUB, GOALS_SCORED, GOALS_LOST, WINS, DRAWS, LOSES) "
+    std::string sql =  "INSERT INTO CLUBS(NAME, BUDGET, POINTS, POSITION, LEAGUE_ID, PLAYER_CLUB, GOALS_SCORED, GOALS_LOST, WINS, DRAWS, LOSES, TACTICS) "
                       "VALUES (\'" + clubVar.getName() + "\', "+std::to_string(clubVar.getBudget())+
                       ", "+std::to_string(clubVar.getPoints())+", "+std::to_string(clubVar.getPosition())+", "+std::to_string(clubVar.getLeagueId())+
                       ", "+std::to_string(clubVar.getPlayerClub())+", " + std::to_string(clubVar.getGoalsScored()) + ", " + std::to_string(clubVar.getGoalsLost()) + ", " + std::to_string(clubVar.getWins())+
-                      ", "+std::to_string(clubVar.getDraws()) + ", " + std::to_string(clubVar.getLoses()) + ");";
+                      ", "+std::to_string(clubVar.getDraws()) + ", " + std::to_string(clubVar.getLoses()) + ", " + std::to_string(clubVar.getTactics()) + ");";
 
     exit = sqlite3_open("test.db", &DB);
     char* messaggeError;
@@ -82,6 +82,7 @@ void ClubsDao::updateClub(Club clubVar){
                     "WINS = " + std::to_string(clubVar.getWins()) + ", "
                     "DRAWS = " + std::to_string(clubVar.getDraws()) + ", "
                     "LOSES = " + std::to_string(clubVar.getLoses()) + ", "
+                    "TACTICS = " + std::to_string(clubVar.getTactics()) + ", "
                     "GOALS_LOST = " + std::to_string(clubVar.getGoalsLost()) + " "
                     "WHERE CLUB_ID = " + std::to_string(clubVar.getClubId()) + ";";
 
@@ -224,6 +225,7 @@ void ClubsDao::getClubFromStatement(sqlite3_stmt* stmt){
     wins  = sqlite3_column_text(stmt, 9);
     draws  = sqlite3_column_text(stmt, 10);
     loses  = sqlite3_column_text(stmt, 11);
+    tactics  = sqlite3_column_text(stmt, 12);
 
     idString = std::string(reinterpret_cast<const char*>(id));
     nameString = std::string(reinterpret_cast<const char*>(name));
@@ -237,6 +239,7 @@ void ClubsDao::getClubFromStatement(sqlite3_stmt* stmt){
     winsString = std::string(reinterpret_cast<const char*>(wins));
     drawsString = std::string(reinterpret_cast<const char*>(draws));
     losesString = std::string(reinterpret_cast<const char*>(loses));
+    tacticsString = std::string(reinterpret_cast<const char*>(tactics));
 
     clubTmp->setClubId(std::stoi(idString));
     clubTmp->setName(nameString);
@@ -250,4 +253,5 @@ void ClubsDao::getClubFromStatement(sqlite3_stmt* stmt){
     clubTmp->setWins(std::stoi(winsString));
     clubTmp->setDraws(std::stoi(drawsString));
     clubTmp->setLoses(std::stoi(losesString));
+    clubTmp->setTactics(std::stoi(tacticsString));
 }

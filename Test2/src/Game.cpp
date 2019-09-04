@@ -112,11 +112,14 @@ void Game::season(){
     if(!timetablesVec.empty()){
         clubsVec = clubsDao->getClubs();
         for(int i = 0; i < (clubsVec.size()-1); i++){ //kolejki - 12
+            clubsVec = clubHelper->chooseTacticsForClub(playerClubId, clubsVec);
             timetablesVecMatchweek = timetableDao->getTimetablesForMatchweek(i+1, seasonNumber); //na razie sezon = 1 - 3
             std::cout << "Kolejka: " << i << std::endl;
+            timetableViewVar->displayTimetableList(timetablesVecMatchweek);
             for(int j = 0; j < timetablesVecMatchweek.size(); j++){
                 Timetable tmp = timetablesVecMatchweek.at(j);
                 //timetableViewVar->displayTimetable(tmp);
+                    //wybór taktyki
                 matchHelperVar->match(tmp.getHomeClub(), tmp.getAwayClub(), tmp, clubsVec);
             }
 
@@ -142,8 +145,10 @@ void Game::season(){
 
         //lista transferowa
         for(int i = (clubsVec.size()-1); i < (clubsVec.size()-1)*2; i++){
+            clubsVec = clubHelper->chooseTacticsForClub(playerClubId, clubsVec);
             timetablesVecMatchweek = timetableDao->getTimetablesForMatchweek(i+1, 1); //na razie sezon = 1 - 3
             std::cout << "Kolejka: " << i << std::endl;
+            timetableViewVar->displayTimetableList(timetablesVecMatchweek);
             for(int j = 0; j < timetablesVecMatchweek.size(); j++){
                 Timetable tmp = timetablesVecMatchweek.at(j);
                 //timetableViewVar->displayTimetable(tmp);
@@ -200,6 +205,10 @@ void Game::season(){
         std::sort(clubsSortedByPoints.begin(), clubsSortedByPoints.end(), ClubComparator());
         clubViewVar->displayClubList(clubsSortedByPoints);
 
+        transferListHelper->transferWindow(playerClubId);
+
+        std::cout << "OFFICIAL SEASON STANDINGS" << std::endl;
+        clubViewVar->displayClubList(clubsSortedByPoints);
         //postarzanie zawodników
 
         playersVec = playersDao->getPlayers();
@@ -209,10 +218,15 @@ void Game::season(){
             playersDao->updatePlayer(tmpPlayer);
         }
 
-        transferListHelper->transferWindow(playerClubId);
+        for(int i = 0; i < clubsVec.size(); i++){
+            Club tmpClub = clubsVec.at(i);
+            tmpClub.setPoints(0);
+            tmpClub.setWins(0);
+            tmpClub.setDraws(0);
+            tmpClub.setLoses(0);
+            clubsDao->updateClub(tmpClub);
+        }
 
-        std::cout << "OFFICIAL SEASON STANDINGS" << std::endl;
-        clubViewVar->displayClubList(clubsSortedByPoints);
     }
 }
 

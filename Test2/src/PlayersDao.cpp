@@ -81,7 +81,7 @@ Player PlayersDao::getPlayer(int playerId){
 int PlayersDao::savePlayer(Player playerVar){
  int playerId;
  std::string sql =  "INSERT INTO PLAYERS(NAME, POSITION, MATCHSQUAD, AGE, NETT_WORTH, HANDLING, DIVING, KICKING, REFLEXES, TACKLING, HEADING, "
-                      "MARKING, INTERCEPTING, VISION, CROSSING, SHORT_PASS, LONG_PASS, FREE_KICKS, POSITIONING, FINISHING, POWER, VOLLEYS, LONG_SHOTS) "
+                      "MARKING, INTERCEPTING, VISION, CROSSING, SHORT_PASS, LONG_PASS, FREE_KICKS, POSITIONING, FINISHING, POWER, VOLLEYS, LONG_SHOTS, TRAINING_TYPE) "
                       "VALUES (\'" + playerVar.getName() + "\', \'" + playerVar.getPosition() + "\', " + std::to_string(playerVar.getMatchsquad())+
                       ", "+std::to_string(playerVar.getAge())+", "+std::to_string(playerVar.getNettWorth())+", "+std::to_string(playerVar.getHandling())+
                       ", "+std::to_string(playerVar.getDiving())+", "+std::to_string(playerVar.getKicking())+", "+std::to_string(playerVar.getReflexes())+
@@ -89,7 +89,7 @@ int PlayersDao::savePlayer(Player playerVar){
                       ", "+std::to_string(playerVar.getIntercepting())+", "+std::to_string(playerVar.getVision())+", "+std::to_string(playerVar.getCrossing())+
                       ", "+std::to_string(playerVar.getShortPasses())+", "+std::to_string(playerVar.getLongPasses())+", "+std::to_string(playerVar.getFreeKicks())+
                       ", "+std::to_string(playerVar.getPositioning())+", "+std::to_string(playerVar.getFinishing())+", "+std::to_string(playerVar.getPower())+
-                      ", "+std::to_string(playerVar.getVolleys())+", "+std::to_string(playerVar.getLongShots())+");";
+                      ", "+std::to_string(playerVar.getVolleys())+", "+std::to_string(playerVar.getLongShots())+", \'"+playerVar.getTrainingType()+"\');";
 
     exit = sqlite3_open("test.db", &DB);
     char* messaggeError;
@@ -132,6 +132,7 @@ void PlayersDao::updatePlayer(Player playerVar){
                     "FINISHING = "+std::to_string(playerVar.getFinishing())+", "
                     "POWER = "+std::to_string(playerVar.getPower())+", "
                     "VOLLEYS = "+std::to_string(playerVar.getVolleys())+", "
+                    "TRAINING_TYPE = \'"+playerVar.getTrainingType()+"\', "
                     "LONG_SHOTS = "+std::to_string(playerVar.getLongShots())+" "
                     "WHERE PLAYER_ID = "+std::to_string(playerVar.getPlayerId())+";";
 
@@ -275,6 +276,7 @@ void PlayersDao::playerFromStatement(sqlite3_stmt* stmt){
     power  = sqlite3_column_text(stmt, 22);
     volleys  = sqlite3_column_text(stmt, 23);
     longShots  = sqlite3_column_text(stmt, 24);
+    trainingType  = sqlite3_column_text(stmt, 25);
 
     idString = std::string(reinterpret_cast<const char*>(id));
     nameString = std::string(reinterpret_cast<const char*>(name));
@@ -303,6 +305,7 @@ void PlayersDao::playerFromStatement(sqlite3_stmt* stmt){
     powerString = std::string(reinterpret_cast<const char*>(power));
     volleysString = std::string(reinterpret_cast<const char*>(volleys));
     longShotsString = std::string(reinterpret_cast<const char*>(longShots));
+    trainingTypeString = std::string(reinterpret_cast<const char*>(trainingType));
 
     playerTmp->setPlayerId(std::stoi(idString));
     playerTmp->setName(nameString);
@@ -331,4 +334,5 @@ void PlayersDao::playerFromStatement(sqlite3_stmt* stmt){
     playerTmp->setPower(std::stoi(powerString));
     playerTmp->setVolleys(std::stoi(volleysString));
     playerTmp->setLongShots(std::stoi(longShotsString));
+    playerTmp->setTrainingType(trainingTypeString);
 }

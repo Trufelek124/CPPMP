@@ -86,6 +86,7 @@ void PlayerView::playerDetails(Player tmpPlayer){
 
 void PlayerView::simpleStatsView(Player tmpPlayer){
     std::cout << tmpPlayer.getPlayerId() << " " << tmpPlayer.getName() << " " << tmpPlayer.getPosition() << std::endl;
+    std::cout << "Current training type: " << tmpPlayer.getTrainingType() << std::endl;
     std::cout << "    GK    " << "   | CB   " << "   | MF   " << "   | ST   "  << std::endl;
     std::cout << "__________" << "__________" << "__________" << "_____________"  << std::endl;
     std::cout << "    DIV   " << tmpPlayer.getDiving() << " |" << " TAC  " << tmpPlayer.getTackling() << " |" << " VIS  " << tmpPlayer.getVision() << " |" << " FIN   " << tmpPlayer.getFinishing() << std::endl;

@@ -56,6 +56,7 @@ class PlayersDao
         const unsigned char* power;
         const unsigned char* volleys;
         const unsigned char* longShots;
+        const unsigned char* trainingType;
 
         std::string idString;
         std::string nameString;
@@ -82,6 +83,7 @@ class PlayersDao
         std::string powerString;
         std::string volleysString;
         std::string longShotsString;
+        std::string trainingTypeString;
 
         void playerFromStatement(sqlite3_stmt* stmt);
 };

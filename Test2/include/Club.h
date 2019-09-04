@@ -41,6 +41,20 @@ class Club
         void setDraws(int val) { draws = val; }
         int getLoses() { return loses; }
         void setLoses(int val) { loses = val; }
+        int getTactics() { return tactics; }
+        std::string getTacticsString() {
+            if(tactics == 1)
+                return "ultradeffensive";
+            else if(tactics == 2)
+                return "deffensive";
+            else if(tactics == 3)
+                return "balanced";
+            else if(tactics == 4)
+                return "offensive";
+            else
+                return "ultraoffensive";
+        }
+        void setTactics(int val) { tactics = val; }
 
     protected:
 
@@ -55,6 +69,7 @@ class Club
         int wins;
         int draws;
         int loses;
+        int tactics; //1 - 5: 1 - ultra deffensive, 5 - ultra offensive
 };
 
 struct ClubComparator

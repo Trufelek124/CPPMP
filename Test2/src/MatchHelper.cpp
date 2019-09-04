@@ -138,11 +138,57 @@ void MatchHelper::match(int homeClubId, int awayClubId, Timetable timetable, std
     awayTeamSTStrength = awayTeamSTStrength/(3.4*2);
 
     homeTeamChancesCreated = (int) (((homeTeamSTStrength/100)*8 + (homeTeamMFStrength/100)*3 + (homeTeamCBStrength/100) + 0.5 + homeFieldAdvantage) * (1/luckHomeTeam));
-    awayTeamChancesCreated = (int) (((awayTeamSTStrength/100)*8 + (awayTeamMFStrength/100)*3 + (awayTeamCBStrength/100) + 0.5) * (1/luckAwayTeam));
-
-    //Percent of saved shots
     homeTeamShotsSaved = ((homeTeamGKStrength/100)*0.7 + (awayTeamCBStrength/100)*0.25 + (homeFieldAdvantage/100) + (luckHomeTeam/100)*5);
+
+    awayTeamChancesCreated = (int) (((awayTeamSTStrength/100)*8 + (awayTeamMFStrength/100)*3 + (awayTeamCBStrength/100) + 0.5) * (1/luckAwayTeam));
     awayTeamShotsSaved = ((homeTeamGKStrength/100)*0.7 + (awayTeamCBStrength/100)*0.25 + (luckAwayTeam/100)*5);
+
+
+    switch(homeClub.getTactics()){
+    case 1:
+        homeTeamChancesCreated = homeTeamChancesCreated*0.5;
+        homeTeamShotsSaved = homeTeamShotsSaved*1.5;
+        break;
+    case 2:
+        homeTeamChancesCreated = homeTeamChancesCreated*0.75;
+        homeTeamShotsSaved = homeTeamShotsSaved*1.25;
+        break;
+    case 3:
+        //we do nothing
+        break;
+    case 4:
+        homeTeamShotsSaved = homeTeamShotsSaved*0.75;
+        homeTeamChancesCreated = homeTeamChancesCreated*1.25;
+        break;
+    default:
+        homeTeamShotsSaved = homeTeamShotsSaved*0.5;
+        homeTeamChancesCreated = homeTeamChancesCreated*1.5;
+        break;
+    }
+
+
+    switch(awayClub.getTactics()){
+    case 1:
+        awayTeamChancesCreated = awayTeamChancesCreated*0.5;
+        awayTeamShotsSaved = awayTeamShotsSaved*1.5;
+        break;
+    case 2:
+        awayTeamChancesCreated = awayTeamChancesCreated*0.75;
+        awayTeamShotsSaved = awayTeamShotsSaved*1.25;
+        break;
+    case 3:
+        //we do nothing
+        break;
+    case 4:
+        awayTeamShotsSaved = awayTeamShotsSaved*0.75;
+        awayTeamChancesCreated = awayTeamChancesCreated*1.25;
+        break;
+    default:
+        awayTeamShotsSaved = awayTeamShotsSaved*0.5;
+        awayTeamChancesCreated = awayTeamChancesCreated*1.5;
+        break;
+    }
+
 
     homeTeamGoals = (int) (homeTeamChancesCreated/(awayTeamShotsSaved*10));
     awayTeamGoals = (int) (awayTeamChancesCreated/(homeTeamShotsSaved*10));

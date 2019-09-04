@@ -60,13 +60,7 @@ class Player
         void setLongShots(int val) { longShots = val; }
         int getMatchsquad(){ return matchsquad; };
         void setMatchsquad(int val){ matchsquad = val; };
-        std::string getTrainingType(){
-            if(trainingType != "GK" && trainingType != "CB" && trainingType != "MF" && trainingType != "ST"){
-                return "A";
-            } else {
-                return trainingType;
-            }
-        };
+        std::string getTrainingType(){ return trainingType; };
         void setTrainingType(std::string val){ trainingType = val; };
 
     protected:
