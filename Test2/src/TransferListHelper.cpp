@@ -21,10 +21,10 @@ void TransferListHelper::transferWindow(int playerClubId){
         std::vector<Player> playersPlayersList = playersDao->getPlayersForClub(playerClubId); //for 0 it shows all players for player clubs
         std::vector<Player> freePlayersList = playersDao->getPlayersForClub(0); //for 0 it shows all players without clubs
         std::cout << "Team players list" << std::endl;
-        playerView->displayPlayersList(playersPlayersList);
+        playerView->displayPlayersListTransfer(playersPlayersList);
         std::cout << std::endl;
         std::cout << "Transfer list" << std::endl;
-        playerView->displayPlayersList(freePlayersList);
+        playerView->displayPlayersListTransfer(freePlayersList);
         std::cout << "Please type in player id from Your team to trade, or type 0 to exit: ";
         std::cin >> transferOutResponse;
 
@@ -65,8 +65,8 @@ void TransferListHelper::makeTransfer(int transferOutResponse, int transferInRes
         std::cout << "You can transfer in only players from transfer list!" << std::endl;
     } else {
 
-        transferOutValue = playersHelper->getPlayerWorth(transferOut);
-        transferInValue = playersHelper->getPlayerWorth(transferIn);
+        transferOutValue = transferOut.getNettWorth();
+        transferInValue = transferIn.getNettWorth();
 
         playerClub = clubsDao->getPlayerClub();
         clubBudget = playerClub.getBudget();

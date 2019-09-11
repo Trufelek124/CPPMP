@@ -14,14 +14,19 @@ ClubHelper::~ClubHelper()
 }
 
 int ClubHelper::setUserClub(std::vector<Club> clubsVec){
-    std::cout << "Choose Your club" << std::endl;
-    clubView->displayClubsInfo(clubsVec);
-    clubView->displayClubSetup();
-    int userOption = mainView->getUserInput();
-    clubVarTmp = clubsVec.at(userOption - 1);
-    clubVarTmp.setPlayerClub(1);
-    clubsDao->updateClub(clubVarTmp);
+    try{
+        std::cout << "Choose Your club" << std::endl;
+        clubView->displayClubsInfo(clubsVec);
+        clubView->displayClubSetup();
+        int userOption = mainView->getUserInput();
+        clubVarTmp = clubsVec.at(userOption - 1);
+        clubVarTmp.setPlayerClub(1);
+        clubsDao->updateClub(clubVarTmp);
     return clubVarTmp.getClubId();
+    } catch(std::out_of_range e){
+        std:: cerr << "Please choose one from the list" << std::endl;
+        setUserClub(clubsVec);
+    }
 }
 
 void ClubHelper::updateClubsPosition(std::vector<Club> clubsVec){

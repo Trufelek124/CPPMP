@@ -14,6 +14,8 @@
 #include "MainView.h"
 #include <random>
 #include <iostream>
+#include <boost/thread.hpp>
+#include <boost/chrono.hpp>
 
 class MatchHelper
 {
@@ -22,7 +24,7 @@ class MatchHelper
         virtual ~MatchHelper();
 
         void match(int homeClubId, int awayClubId, Timetable timetable, std::vector<Club> clubsVec);
-
+        void getPlayerStats(Player tmpPlayer, std::string homeAway);
     protected:
 
     private:
@@ -33,6 +35,17 @@ class MatchHelper
         PlayerView* playerView;
         MainView* mainView;
         PlayersHelper* playersHelper;
+        boost::mutex mutex;
+        boost::thread_group tgroup;
+        boost::thread_group tgroup2;
+        double homeTeamGKStrength = 0.0;
+        double awayTeamGKStrength = 0.0;
+        double homeTeamCBStrength = 0.0;
+        double awayTeamCBStrength = 0.0;
+        double homeTeamMFStrength = 0.0;
+        double awayTeamMFStrength = 0.0;
+        double homeTeamSTStrength = 0.0;
+        double awayTeamSTStrength = 0.0;
 };
 
 #endif // MATCHHELPER_H

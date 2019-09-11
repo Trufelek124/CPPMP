@@ -28,19 +28,20 @@ void MatchHelper::match(int homeClubId, int awayClubId, Timetable timetable, std
     double luckAwayTeam = 0.0;
     int homeTeamGoals = 0;
     int awayTeamGoals = 0;
-    double homeTeamGKStrength = 0.0;
-    double awayTeamGKStrength = 0.0;
-    double homeTeamCBStrength = 0.0;
-    double awayTeamCBStrength = 0.0;
-    double homeTeamMFStrength = 0.0;
-    double awayTeamMFStrength = 0.0;
-    double homeTeamSTStrength = 0.0;
-    double awayTeamSTStrength = 0.0;
     int homeTeamChancesCreated;
     double homeTeamShotsSaved;
     int awayTeamChancesCreated;
     double awayTeamShotsSaved;
     std::string resultString;
+
+    homeTeamGKStrength = 0.0;
+    awayTeamGKStrength = 0.0;
+    homeTeamCBStrength = 0.0;
+    awayTeamCBStrength = 0.0;
+    homeTeamMFStrength = 0.0;
+    awayTeamMFStrength = 0.0;
+    homeTeamSTStrength = 0.0;
+    awayTeamSTStrength = 0.0;
 
 
     homeClub = clubsDao->getClub(homeClubId);
@@ -68,70 +69,24 @@ void MatchHelper::match(int homeClubId, int awayClubId, Timetable timetable, std
 
     luckAwayTeam = ((double) dis3(gen3));
 
-    double cbStrength = 0.0;
-    double mfStrength = 0.0;
-    double stStrength = 0.0;
-
     //home team strength
     for(int i = 0; i < homeTeamPlayers.size(); i++){
        tmpPlayer = homeTeamPlayers.at(i);
 
-       if(tmpPlayer.getPosition() == "GK"){
-           //handling, diving, kicking, reflexes
-           homeTeamGKStrength = playersHelper->getGkStrength(tmpPlayer);
-       } else if(tmpPlayer.getPosition() == "CB"){
-           cbStrength = playersHelper->getCbStrength(tmpPlayer);
-           mfStrength = (playersHelper->getMfStrength(tmpPlayer)*0.25);
-           stStrength = (playersHelper->getStStrength(tmpPlayer)*0.1);
-       } else if(tmpPlayer.getPosition() == "MF"){
-           cbStrength = (playersHelper->getCbStrength(tmpPlayer)*0.25);
-           mfStrength = playersHelper->getMfStrength(tmpPlayer);
-           stStrength = (playersHelper->getStStrength(tmpPlayer)*0.25);
-       } else{
-           cbStrength = (playersHelper->getCbStrength(tmpPlayer)*0.1);
-           mfStrength = (playersHelper->getMfStrength(tmpPlayer)*0.1);
-           stStrength = playersHelper->getStStrength(tmpPlayer);
-       }
-
-    homeTeamCBStrength += cbStrength;
-    homeTeamMFStrength += mfStrength;
-    homeTeamSTStrength += stStrength;
+       tgroup.create_thread(boost::bind(&MatchHelper::getPlayerStats, this, tmpPlayer, "home"));
     }
+    tgroup.join_all();
 
     homeTeamCBStrength = homeTeamCBStrength/(5.4*4);
     homeTeamMFStrength = homeTeamMFStrength/(5.4*4);
     homeTeamSTStrength = homeTeamSTStrength/(3.4*2);
 
-    cbStrength = 0.0;
-    mfStrength = 0.0;
-    stStrength = 0.0;
-
     //away team strength
     for(int i = 0; i < awayTeamPlayers.size(); i++){
        tmpPlayer = awayTeamPlayers.at(i);
-
-
-       if(tmpPlayer.getPosition() == "GK"){
-           //handling, diving, kicking, reflexes
-           awayTeamGKStrength = playersHelper->getGkStrength(tmpPlayer);
-       } else if(tmpPlayer.getPosition() == "CB"){
-           cbStrength = playersHelper->getCbStrength(tmpPlayer);
-           mfStrength = (playersHelper->getMfStrength(tmpPlayer)*0.25);
-           stStrength = (playersHelper->getStStrength(tmpPlayer)*0.1);
-       } else if(tmpPlayer.getPosition() == "MF"){
-           cbStrength = (playersHelper->getCbStrength(tmpPlayer)*0.25);
-           mfStrength = playersHelper->getMfStrength(tmpPlayer);
-           stStrength = (playersHelper->getStStrength(tmpPlayer)*0.25);
-       } else{
-           cbStrength = (playersHelper->getCbStrength(tmpPlayer)*0.1);
-           mfStrength = (playersHelper->getMfStrength(tmpPlayer)*0.1);
-           stStrength = playersHelper->getStStrength(tmpPlayer);
-       }
-
-    awayTeamCBStrength += cbStrength;
-    awayTeamMFStrength += mfStrength;
-    awayTeamSTStrength += stStrength;
+       tgroup2.create_thread(boost::bind(&MatchHelper::getPlayerStats, this, tmpPlayer, "away"));
     }
+    tgroup2.join_all();
 
     awayTeamCBStrength = awayTeamCBStrength/(5.4*4);
     awayTeamMFStrength = awayTeamMFStrength/(5.4*4);
@@ -189,12 +144,10 @@ void MatchHelper::match(int homeClubId, int awayClubId, Timetable timetable, std
         break;
     }
 
-
     homeTeamGoals = (int) (homeTeamChancesCreated/(awayTeamShotsSaved*10));
     awayTeamGoals = (int) (awayTeamChancesCreated/(homeTeamShotsSaved*10));
 
     mainView->displayMatchScore(homeClubId, awayClubId, homeTeamGoals, awayTeamGoals);
-
     homeClub.setGoalsScored(homeClub.getGoalsScored()+homeTeamGoals);
     homeClub.setGoalsLost(homeClub.getGoalsLost()+awayTeamGoals);
     awayClub.setGoalsScored(awayClub.getGoalsScored()+awayTeamGoals);
@@ -240,4 +193,42 @@ void MatchHelper::match(int homeClubId, int awayClubId, Timetable timetable, std
     timetableDao->updateTimetable(timetable);
     clubsDao->updateClub(homeClub);
     clubsDao->updateClub(awayClub);
+}
+
+void MatchHelper::getPlayerStats(Player tmpPlayer, std::string homeAway){
+
+    double cbStrength = 0.0;
+    double mfStrength = 0.0;
+    double stStrength = 0.0;
+
+    if(tmpPlayer.getPosition() == "GK"){
+        //handling, diving, kicking, reflexes
+        homeTeamGKStrength = playersHelper->getGkStrength(tmpPlayer);
+    } else if(tmpPlayer.getPosition() == "CB"){
+        cbStrength = playersHelper->getCbStrength(tmpPlayer);
+        mfStrength = (playersHelper->getMfStrength(tmpPlayer)*0.25);
+        stStrength = (playersHelper->getStStrength(tmpPlayer)*0.1);
+    } else if(tmpPlayer.getPosition() == "MF"){
+        cbStrength = (playersHelper->getCbStrength(tmpPlayer)*0.25);
+        mfStrength = playersHelper->getMfStrength(tmpPlayer);
+    stStrength = (playersHelper->getStStrength(tmpPlayer)*0.25);
+    } else{
+        cbStrength = (playersHelper->getCbStrength(tmpPlayer)*0.1);
+        mfStrength = (playersHelper->getMfStrength(tmpPlayer)*0.1);
+        stStrength = playersHelper->getStStrength(tmpPlayer);
+    }
+
+    if(homeAway == "home"){
+        mutex.lock();
+        homeTeamCBStrength += cbStrength;
+        homeTeamMFStrength += mfStrength;
+        homeTeamSTStrength += stStrength;
+        mutex.unlock();
+    } else {
+        mutex.lock();
+        awayTeamCBStrength += cbStrength;
+        awayTeamMFStrength += mfStrength;
+        awayTeamSTStrength += stStrength;
+        mutex.unlock();
+    }
 }

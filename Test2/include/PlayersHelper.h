@@ -28,6 +28,8 @@ class PlayersHelper
         double getMfStrength(Player tmpPlayer);
         double getStStrength(Player tmpPlayer);
         void trainPlayer(Player tmpPlayer);
+        int getPlayerOverallScore(Player tmpPlayer);
+        std::vector<Player> updateOverallScoreForPlayers(std::vector<Player> players);
         std::vector<Player> playersClubPlayersTraining(std::vector<Player> playersVec, int playerClubId);
 
     protected:

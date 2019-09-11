@@ -22,11 +22,11 @@ void ClubView::displayClubInfo(Club club){
     std::cout << "Current tactics: " << club.getTacticsString() << std::endl;
     std::cout << "W:D:L: "<< club.getWins() << ":"<< club.getDraws() << ":"<< club.getLoses() << std::endl;
     std::cout << "Players:" << std::endl;
-    //playerViewVar->displayPlayersList(club.getPlayers());
-    for(int i = 0; i < club.getPlayers().size(); i++){
-        Player tmpPlayer = club.getPlayers().at(i);
-        playerViewVar->simpleStatsView(tmpPlayer);
-    }
+    playerViewVar->displayPlayersList(club.getPlayers());
+   // for(int i = 0; i < club.getPlayers().size(); i++){
+   //     Player tmpPlayer = club.getPlayers().at(i);
+   //     playerViewVar->simpleStatsView(tmpPlayer);
+  //  }
 };
 
 void ClubView::displayClubInfoInLine(Club club){

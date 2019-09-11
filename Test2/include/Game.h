@@ -37,6 +37,7 @@ class Game
         void match(int homeClubId, int awayClubId, int timetableId);
         int play();
         int handleMenu(int menuOption);
+        void exit();
 
         std::vector<Player> playersVec;
         std::vector<Club> clubsVec;
@@ -44,6 +45,7 @@ class Game
         std::vector<Season> seasonsVec;
         std::vector<Timetable> timetablesVec;
         std::vector<Timetable> timetablesVecMatchweek;
+        void kwadrat(int a);
 
     protected:
 

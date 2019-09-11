@@ -87,6 +87,7 @@ void ClubsDao::updateClub(Club clubVar){
                     "WHERE CLUB_ID = " + std::to_string(clubVar.getClubId()) + ";";
 
     exit = sqlite3_open("test.db", &DB);
+  sqlite3_mutex_enter(sqlite3_db_mutex(DB));
     char* messaggeError;
     exit = sqlite3_exec(DB, sql.c_str(), NULL, 0, &messaggeError);
 
@@ -95,6 +96,7 @@ void ClubsDao::updateClub(Club clubVar){
         std::cerr << messaggeError << std::endl;
         sqlite3_free(messaggeError);
     }
+  sqlite3_mutex_leave(sqlite3_db_mutex(DB));
     sqlite3_close(DB);
 };
 

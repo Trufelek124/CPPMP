@@ -40,7 +40,6 @@ class Timetable
         std::string result;
         int homeTeamGoals;
         int awayTeamGoals;
-        int a;
 };
 
 #endif // TIMETABLE_H

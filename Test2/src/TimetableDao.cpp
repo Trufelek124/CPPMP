@@ -81,6 +81,7 @@ void TimetableDao::updateTimetable(Timetable timetableVar){
 
                  //   std::cout << sql << std::endl;
     exit = sqlite3_open("test.db", &DB);
+  sqlite3_mutex_enter(sqlite3_db_mutex(DB));
     char* messaggeError;
     exit = sqlite3_exec(DB, sql.c_str(), NULL, 0, &messaggeError);
 
@@ -89,6 +90,7 @@ void TimetableDao::updateTimetable(Timetable timetableVar){
         std::cerr << messaggeError << std::endl;
         sqlite3_free(messaggeError);
     }
+  sqlite3_mutex_leave(sqlite3_db_mutex(DB));
     sqlite3_close(DB);
 };
 

@@ -79,10 +79,29 @@ int Game::handleMenu(int menuOption){
         system ("CLS");
         return 1;
     case 4:
+        mainViewVar->displayInstructions();
+        system("pause");
+        system ("CLS");
+        return 1;
+    case 5:
+        exit();
+        system("pause");
+        system ("CLS");
         return 0;
+    case 6:
+        mainViewVar->displayAbout();
+        system("pause");
+        system ("CLS");
+        return 1;
     default:
         return 0;
     }
+}
+
+void Game::exit(){
+    std::cout << "    ThankYou for playing :)" << std::endl;
+    std::cout << std::endl;
+    mainViewVar->displayAbout();
 }
 
 void Game::programSetup(){
@@ -94,6 +113,7 @@ void Game::programSetup(){
     timetablesVec = timetableDao->getTimetables();
 
     if(!playersVec.empty()){
+        playersHelperVar->updateOverallScoreForPlayers(playersVec);
         playersHelperVar->randommizeInitialSquads();
         clubsVecTmp = clubsDao->getClubs();
 
@@ -118,15 +138,18 @@ void Game::season(){
     if(timetablesVec.empty()){
         timetableHelperVar->createTimetableForSeason(seasonNumber, clubsVec);
         timetablesVec = timetableDao->getTimetablesForSeason(seasonNumber);
+        std::cout << "All season timetable" << std::endl;
         timetableViewVar->displayTimetableList(timetablesVec);
+        std::cout << std::endl;
     };
 
     clubsVec = clubsDao->getClubs();
     for(int i = 0; i < (clubsVec.size()-1); i++){ //kolejki - 12
+        system("CLS");
+        std::cout << "Matchweek: " << i+1 << std::endl;
         timetablesVecMatchweek = timetableDao->getTimetablesForMatchweek(i+1, seasonNumber); //na razie sezon = 1 - 3
         timetableViewVar->displayTimetableList(timetablesVecMatchweek);
         clubsVec = clubHelper->chooseTacticsForClub(playerClubId, clubsVec);
-        std::cout << "Matchweek: " << i << std::endl;
         std::cout << "Results: " << std::endl;
         for(int j = 0; j < timetablesVecMatchweek.size(); j++){
             Timetable tmp = timetablesVecMatchweek.at(j);
@@ -150,20 +173,23 @@ void Game::season(){
             Player tmpPlayer = playersVec.at(i);
             playersHelperVar->trainPlayer(tmpPlayer);
         };
+
+        playersHelperVar->updateOverallScoreForPlayers(playersVec);
     }
 
     transferListHelper->transferWindow(playerClubId);
 
     //lista transferowa
     for(int i = (clubsVec.size()-1); i < (clubsVec.size()-1)*2; i++){
+        system("CLS");
+        std::cout << "Matchweek: " << i+1 << std::endl;
         clubsVec = clubHelper->chooseTacticsForClub(playerClubId, clubsVec);
         timetablesVecMatchweek = timetableDao->getTimetablesForMatchweek(i+1, 1); //na razie sezon = 1 - 3
-        std::cout << "Matchweek: " << i << std::endl;
         timetableViewVar->displayTimetableList(timetablesVecMatchweek);
+        clubsVec = clubHelper->chooseTacticsForClub(playerClubId, clubsVec);
         std::cout << "Results: " << std::endl;
         for(int j = 0; j < timetablesVecMatchweek.size(); j++){
             Timetable tmp = timetablesVecMatchweek.at(j);
-            //timetableViewVar->displayTimetable(tmp);
             matchHelperVar->match(tmp.getHomeClub(), tmp.getAwayClub(), tmp, clubsVec);
         }
 
@@ -186,6 +212,7 @@ void Game::season(){
             playersHelperVar->trainPlayer(tmpPlayer);
         }
     }
+        playersHelperVar->updateOverallScoreForPlayers(playersVec);
 
     timetablesVec = timetableDao->getTimetables();
     timetableViewVar->displayTimetableList(timetablesVec);
@@ -235,4 +262,3 @@ void Game::season(){
         clubsDao->updateClub(tmpClub);
     }
 }
-

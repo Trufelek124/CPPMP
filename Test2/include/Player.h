@@ -60,6 +60,8 @@ class Player
         void setLongShots(int val) { longShots = val; }
         int getMatchsquad(){ return matchsquad; };
         void setMatchsquad(int val){ matchsquad = val; };
+        int getOverallScore(){ return overallScore; };
+        void setOverallScore(int val){ overallScore = val; };
         std::string getTrainingType(){ return trainingType; };
         void setTrainingType(std::string val){ trainingType = val; };
 
@@ -73,6 +75,7 @@ class Player
         int matchsquad;
         int age;
         int nettWorth;
+        int overallScore;
         int handling;
         int diving;
         int kicking;

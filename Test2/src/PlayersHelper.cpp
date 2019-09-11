@@ -89,17 +89,52 @@ double PlayersHelper::getStStrength(Player tmpPlayer){
 };
 
 
+int PlayersHelper::getPlayerOverallScore(Player tmpPlayer){
+    int overallScore;
+    double ghStrength = 0.0; //between 0 and 100
+    double cbStrength = 0.0;
+    double mfStrength = 0.0;
+    double stStrength = 0.0;
+
+    ghStrength = getGkStrength(tmpPlayer);
+    cbStrength = getCbStrength(tmpPlayer);
+    mfStrength = getMfStrength(tmpPlayer);
+    stStrength = getStStrength(tmpPlayer);
+
+    if(tmpPlayer.getPosition() == "GK"){
+        overallScore = (int) ghStrength; //for 100(max)
+    } else if(tmpPlayer.getPosition() == "CB"){
+        overallScore = (int) (cbStrength*0.8 + mfStrength * 0.15 + stStrength * 0.05);
+    } else if(tmpPlayer.getPosition() == "MF"){
+        overallScore = (int) (cbStrength*0.1 + mfStrength * 0.75 + stStrength * 0.15);
+    } else if(tmpPlayer.getPosition() == "ST"){
+        overallScore = (int) (cbStrength*0.05 + mfStrength * 0.15 + stStrength * 0.8);
+    }
+    return overallScore;
+};
+
+std::vector<Player> PlayersHelper::updateOverallScoreForPlayers(std::vector<Player> players){
+    for(int i = 0; i < players.size(); i++){
+        Player tmpPlayer = players.at(i);
+        tmpPlayer.setOverallScore(getPlayerOverallScore(tmpPlayer));
+        tmpPlayer.setNettWorth(getPlayerWorth(tmpPlayer));
+        playersDao->updatePlayer(tmpPlayer);
+    }
+    std::vector<Player> updatedPlayers = playersDao->getPlayers();
+    return updatedPlayers;
+}
+
 int PlayersHelper::getPlayerWorth(Player player){
     int playerWorth = 0;
 
     if(player.getPosition() == "GK"){
-        playerWorth = ((int) (sqrt(getGkStrength(player)) * 1000.0)); //for 100(max) - 10 million
+        playerWorth = ((int) ((getGkStrength(player)*getGkStrength(player)) * 500.0)); //for 100(max) - 10 million
     } else if(player.getPosition() == "CB"){
-        playerWorth = ((int) (sqrt(getCbStrength(player)) * 2500.0)); //for 100(max) - 25 million
+        playerWorth = ((int) ((getCbStrength(player)*getCbStrength(player)) * 1250.0)); //for 100(max) - 25 million
     } else if(player.getPosition() == "MF"){
-        playerWorth = ((int) (sqrt(getMfStrength(player)) * 10000.0)); //for 100(max) - 100 million
+        playerWorth = ((int) ((getMfStrength(player)*getMfStrength(player)) * 1500.0)); //for 100(max) - 100 million
     } else if(player.getPosition() == "ST"){
-        playerWorth = ((int) (sqrt(getStStrength(player)) * 7500.0)); //for 100(max) - 75 million
+        playerWorth = ((int) ((getStStrength(player)*getStStrength(player)) * 3750.0)); //for 100(max) - 75 million
     }
 
     return playerWorth;
