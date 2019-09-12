@@ -74,7 +74,12 @@ int Game::handleMenu(int menuOption){
         system ("CLS");
         return 1;
     case 3:
-        databaseHelperVar->dropTables();
+        try{
+            databaseHelperVar->dropTables();
+        } catch (DBException& ex)
+        {
+            std::cout << ex.what() << std::endl;
+        }
         system("pause");
         system ("CLS");
         return 1;

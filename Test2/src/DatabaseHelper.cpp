@@ -99,9 +99,10 @@ void DatabaseHelper::dropTables(){
     exit = sqlite3_exec(DB, sql.c_str(), NULL, 0, &messaggeError);
 
     if (exit != SQLITE_OK) {
-        std::cerr << "Error dropping tables" << std::endl;
-        std::cerr << messaggeError << std::endl;
-        sqlite3_free(messaggeError);
+        //std::cerr << "Error dropping tables" << std::endl;
+        //std::cerr << messaggeError << std::endl;
+        //sqlite3_free(messaggeError);
+        throw DBException();
     } else
         std::cout << "Tables dropped successfully" << std::endl;
     sqlite3_close(DB);

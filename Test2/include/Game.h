@@ -22,6 +22,7 @@
 #include "MatchHelper.h"
 #include "TransferListHelper.h"
 #include <vector>
+#include "DBException.h"
 
 class Game
 {

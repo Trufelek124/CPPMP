@@ -5,7 +5,7 @@
 		<Option title="Test2" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
-		<Option virtualFolders="Model\;Model\include\;Model\src\;Controller\;Controller\include\;Controller\src\;Model\include\databaseClasses\;Model\src\databaseClasses\;Libraries\;View\;View\include\;View\src\;Dao\;Dao\Include\;Dao\src\;Helper\;Helper\include\;Helper\src\;Exceptions\;" />
+		<Option virtualFolders="Model\;Model\include\;Model\src\;Controller\;Controller\include\;Controller\src\;Model\include\databaseClasses\;Model\src\databaseClasses\;Libraries\;View\;View\include\;View\src\;Dao\;Dao\Include\;Dao\src\;Helper\;Helper\include\;Helper\src\;Exceptions\;Exceptions\Include\;" />
 		<Build>
 			<Script file="lib_finder.script" />
 			<Target title="Debug">
@@ -64,6 +64,9 @@
 		</Unit>
 		<Unit filename="include/ClubsDao.h">
 			<Option virtualFolder="Dao/Include/" />
+		</Unit>
+		<Unit filename="include/DBException.h">
+			<Option virtualFolder="Exceptions/Include/" />
 		</Unit>
 		<Unit filename="include/DatabaseHelper.h">
 			<Option virtualFolder="Helper/include/" />
