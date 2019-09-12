@@ -60,9 +60,7 @@ int ClubsDao::saveClub(Club clubVar){
     exit = sqlite3_exec(DB, sql.c_str(), NULL, 0, &messaggeError);
 
     if (exit != SQLITE_OK) {
-        std::cerr << "Error inserting records" << std::endl;
-        std::cerr << messaggeError << std::endl;
-        sqlite3_free(messaggeError);
+        throw DBException();
     }
 
     clubId = sqlite3_last_insert_rowid(DB);
@@ -92,9 +90,7 @@ void ClubsDao::updateClub(Club clubVar){
     exit = sqlite3_exec(DB, sql.c_str(), NULL, 0, &messaggeError);
 
     if (exit != SQLITE_OK) {
-        std::cerr << "Error updating records" << std::endl;
-        std::cerr << messaggeError << std::endl;
-        sqlite3_free(messaggeError);
+        throw DBException();
     }
   sqlite3_mutex_leave(sqlite3_db_mutex(DB));
     sqlite3_close(DB);

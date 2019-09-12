@@ -77,9 +77,7 @@ void DatabaseHelper::createTables(){
     exit = sqlite3_exec(DB, sql.c_str(), NULL, 0, &messaggeError);
 
     if (exit != SQLITE_OK) {
-        std::cerr << "Error create tables" << std::endl;
-        std::cerr << messaggeError << std::endl;
-        sqlite3_free(messaggeError);
+        throw DBException();
     } else
         std::cout << "Tables created successfully" << std::endl;
     sqlite3_close(DB);
@@ -99,9 +97,6 @@ void DatabaseHelper::dropTables(){
     exit = sqlite3_exec(DB, sql.c_str(), NULL, 0, &messaggeError);
 
     if (exit != SQLITE_OK) {
-        //std::cerr << "Error dropping tables" << std::endl;
-        //std::cerr << messaggeError << std::endl;
-        //sqlite3_free(messaggeError);
         throw DBException();
     } else
         std::cout << "Tables dropped successfully" << std::endl;
@@ -381,9 +376,7 @@ void DatabaseHelper::insertInitialData(){
     exit = sqlite3_exec(DB, sql.c_str(), NULL, 0, &messaggeError);
 
     if (exit != SQLITE_OK) {
-        std::cerr << "Error inserting records" << std::endl;
-        std::cerr << messaggeError << std::endl;
-        sqlite3_free(messaggeError);
+        throw DBException();
     } else
         std::cout << "Records inserted successfully" << std::endl;
     sqlite3_close(DB);

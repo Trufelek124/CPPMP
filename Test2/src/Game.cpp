@@ -51,9 +51,17 @@ int Game::handleMenu(int menuOption){
     bool done = false;
     switch(menuOption){
     case 1:
-        programSetup();
+        try{
+            programSetup();
+        } catch (DBException& ex) {
+            std::cout << ex.what() << std::endl;
+        }
         while(!done){
-            season();
+            try{
+                season();
+            } catch (DBException& ex) {
+                std::cout << ex.what() << std::endl;
+            }
             std::cout << "Do You want to play another season (Y/N)? ";
             std::cin >> response;
             if(response == "N"){
@@ -68,16 +76,19 @@ int Game::handleMenu(int menuOption){
         system ("CLS");
         return 1;
     case 2:
-        databaseHelperVar->createTables();
-        databaseHelperVar->insertInitialData();
+        try{
+            databaseHelperVar->createTables();
+            databaseHelperVar->insertInitialData();
+        } catch (DBException& ex) {
+            std::cout << ex.what() << std::endl;
+        }
         system("pause");
         system ("CLS");
         return 1;
     case 3:
         try{
             databaseHelperVar->dropTables();
-        } catch (DBException& ex)
-        {
+        } catch (DBException& ex) {
             std::cout << ex.what() << std::endl;
         }
         system("pause");

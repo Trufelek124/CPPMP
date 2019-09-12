@@ -1,10 +1,11 @@
 #ifndef PLAYERSDAO_H
 #define PLAYERSDAO_H
 
-#include"Player.h"
-#include<vector>
+#include "Player.h"
+#include <vector>
 #include <sqlite3.h>
 #include <iostream>
+#include "DBException.h"
 
 class PlayersDao
 {

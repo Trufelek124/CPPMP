@@ -1,11 +1,12 @@
 #ifndef TIMETABLEDAO_H
 #define TIMETABLEDAO_H
 
-#include"Timetable.h"
-#include<vector>
+#include "Timetable.h"
+#include <vector>
 #include <sqlite3.h>
 #include <iostream>
 #include "TimetableView.h"
+#include "DBException.h"
 
 class TimetableDao
 {

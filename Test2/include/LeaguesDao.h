@@ -1,11 +1,12 @@
 #ifndef LEAGUESDAO_H
 #define LEAGUESDAO_H
 
-#include"League.h"
-#include<vector>
+#include "League.h"
+#include <vector>
 #include <sqlite3.h>
 #include <iostream>
 #include <string>
+#include "DBException.h"
 
 class LeaguesDao
 {

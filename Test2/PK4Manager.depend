@@ -292,31 +292,35 @@
 	<iostream>
 	"DBException.h"
 
-1567689049 c:\users\user\documents\studia\pk\menager2019\test2\include\playersdao.h
+1568298116 c:\users\user\documents\studia\pk\menager2019\test2\include\playersdao.h
 	"Player.h"
 	<vector>
 	<sqlite3.h>
 	<iostream>
+	"DBException.h"
 
-1567528207 c:\users\user\documents\studia\pk\menager2019\test2\include\leaguesdao.h
+1568298077 c:\users\user\documents\studia\pk\menager2019\test2\include\leaguesdao.h
 	"League.h"
 	<vector>
 	<sqlite3.h>
 	<iostream>
 	<string>
+	"DBException.h"
 
-1567592498 c:\users\user\documents\studia\pk\menager2019\test2\include\clubsdao.h
+1568298039 c:\users\user\documents\studia\pk\menager2019\test2\include\clubsdao.h
 	"Club.h"
 	<vector>
 	<sqlite3.h>
 	<iostream>
 	<string>
+	"DBException.h"
 
-1567528219 c:\users\user\documents\studia\pk\menager2019\test2\include\seasonsdao.h
+1568298162 c:\users\user\documents\studia\pk\menager2019\test2\include\seasonsdao.h
 	"Season.h"
 	<vector>
 	<sqlite3.h>
 	<iostream>
+	"DBException.h"
 
 1565793523 c:\users\user\documents\studia\pk\menager2019\test2\include\season.h
 	<vector>
@@ -325,12 +329,13 @@
 1567751559 c:\users\user\documents\studia\pk\menager2019\test2\include\timetable.h
 	<string>
 
-1567528509 c:\users\user\documents\studia\pk\menager2019\test2\include\timetabledao.h
+1568298199 c:\users\user\documents\studia\pk\menager2019\test2\include\timetabledao.h
 	"Timetable.h"
 	<vector>
 	<sqlite3.h>
 	<iostream>
 	"TimetableView.h"
+	"DBException.h"
 
 1567692085 c:\users\user\documents\studia\pk\menager2019\test2\include\playerview.h
 	<iostream>

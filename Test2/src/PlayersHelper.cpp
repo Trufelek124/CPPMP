@@ -398,8 +398,11 @@ std::vector<Player> PlayersHelper::playersClubPlayersTraining(std::vector<Player
                 if(playersClubPlayers.at(i).getPlayerId() == response){
                     std::cout << "Now type in training type for Your player (GK, CB, MF, ST, or anything different for general training: " << std::endl;
                     std::cin >> responseType;
-
-                    playersClubPlayers.at(i).setTrainingType(responseType);
+                    if(responseType == "GK" || responseType == "CB" || responseType == "MF" || responseType == "ST"){
+                        playersClubPlayers.at(i).setTrainingType(responseType);
+                    } else {
+                        std::cout << "chose one from the list: GK, CB, MF or ST" << std::endl;
+                    }
                 }
             }
         }

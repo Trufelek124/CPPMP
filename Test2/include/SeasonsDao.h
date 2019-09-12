@@ -1,10 +1,11 @@
 #ifndef SEASONSDAO_H
 #define SEASONSDAO_H
 
-#include"Season.h"
-#include<vector>
+#include "Season.h"
+#include <vector>
 #include <sqlite3.h>
 #include <iostream>
+#include "DBException.h"
 
 class SeasonsDao
 {
